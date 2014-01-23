@@ -9,7 +9,7 @@ $(function() {
 	        document.addEventListener('deviceready', function() {
 	        	 try {
 	        		 alert('Device is ready! Make sure you set your app_id below this alert.');
-	                 FB.init({ appId: "370101043065651", nativeInterface: CDV.FB, useCachedDialogs: false });
+	                 FB.init({ appId: "1399179707001858", nativeInterface: CDV.FB, useCachedDialogs: false });
 	                 $("#mainbox").html("Yey, facebook initad!");
 	        	 } catch (e) {
 	                 alert(e);

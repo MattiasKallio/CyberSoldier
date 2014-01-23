@@ -94,15 +94,16 @@
             function login() {
                 FB.login(
 					function(response) {
-					if (response.session) {
-                         alert('logged in');
-                         } else {
-                         alert('not logged in');
-                         }
-                         },
-                         { scope: "email" }
-                         );
-            }
+						if (response.session) {
+							alert('logged in');
+						}
+						else {
+							alert('not logged in');
+						}
+					},
+					{ scope: "email" }
+				);
+			}
                         
                         
                         function facebookWallPost() {
