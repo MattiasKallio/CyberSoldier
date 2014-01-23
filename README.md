@@ -1,4 +1,4 @@
-CyberSoldier
-============
+PetSalami
+=========
 
-Cool rap style battle app
+Just a test to create a phonegap app
