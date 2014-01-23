@@ -232,8 +232,8 @@ function handleStatusChange(response) {
 $(".facebook_login").on("click", function() {
 	FB.login(function(response) {
 		FB.api('/me', function(response) {
-			console.log('Good to see you, ' + response.name + '.');
-			doLogin(response.name, response.id, true);
+			 $("#mainbox").html('Good to see you, ' + response.name + '.');
+			//doLogin(response.name, response.id, true);
 		});
 	});
 });
