@@ -14,7 +14,7 @@ var app = {
 	},
 	onDeviceReady : function() {
 		app.receivedEvent('deviceready');
-		//FB.init({ appId: "428090103935727", nativeInterface: CDV.FB, useCachedDialogs: false });
+		FB.init({ appId: "1399179707001858", nativeInterface: CDV.FB, useCachedDialogs: false });
 		//app.receivedEvent('facebook initied');
 	},
 	receivedEvent : function(id) {
