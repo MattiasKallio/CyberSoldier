@@ -1,33 +1,34 @@
 var last_fetch_from = -99;
 var ad_platform_type = "";
+var ininrtipernt = "no";
 var path_to_process = "http://localhost/facebook_cs/app/";
 var path_to_process = "http://www.cybersoldier.com/app/";
 
-var app = {
-	// Application Constructor
-	initialize : function() {
-		this.bindEvents();
-	},
-	// 'load', 'deviceready', 'offline', and 'online'.
-	bindEvents : function() {
-		document.addEventListener('deviceready', this.onDeviceReady, false);
-	},
-	onDeviceReady : function() {
-		app.receivedEvent('deviceready');
-		FB.init({ appId: "1399179707001858", nativeInterface: CDV.FB, useCachedDialogs: false });
-		//app.receivedEvent('facebook initied');
-	},
-	receivedEvent : function(id) {
-		alert('Received Event: ' + id);
-		//document.getElementById('mainbox').innerHTML = 'Received Event: ' + id;
-		//ad_platform_type = device.platform != "undefined" ? device.platform : ad_platform_type;
-	}
-};
-
 $(function() {
 	$(document).ready(function() {
+	
+		$(".facebook_login").on("click", function(event){
+
+			if(event.handled !== true)    {
+			    var fb = FBConnect.install();
+			    var client_id = "370101043065651";
+			    var redir_url = "index.html"; 
+			    fb.connect(client_id,redir_url,"touch");
+			    event.handled = true;
+			 }
+			 return false;    
+			});
 		
-		app.initialize();
+	        document.addEventListener('deviceready', 
+	        	function() {
+	        		try{
+	        			alert('Device is ready! Make sure you set your app_id below this alert.');
+	        		}
+	        		catch(e){
+	        			alert(e);
+	        		}
+                }, false);			
+
 		var catname = $("#cliplist_bottom_category").val();
 
 		var data = {
@@ -38,7 +39,7 @@ $(function() {
 
 		$.ajax({
 			type : "POST",
-			url : path_to_process+"battles.php",
+			url : path_to_process + "battles.php",
 			data : data,
 			cache : false,
 			success : function(data) {
@@ -51,7 +52,7 @@ $(function() {
 				}
 			}
 		});
-		
+
 		/*$("#listbox").on("click", ".clickable", function(e) {
 			e.preventDefault();
 			var id = $(this).attr("id").split("_")[1];
@@ -80,34 +81,34 @@ $(function() {
 					}
 				}
 			});
-		});*/	
-		
+		});*/
+
 		$("#listbox, #mainbox").on("click", "a", function(e) {
 			e.preventDefault();
 			var id = $(this).attr("href").split("id=")[1];
 			var type = $(this).attr("href").split(".php")[0];
-			
+
 			var page = "battle.php";
 			//alert(id);
-			
-			switch(type){
+
+			switch (type) {
 				case "userinfo":
 					page = "userinfo.php";
 				break;
 				case "battle":
 					page = "battle.php";
-				break;				
+				break;
 			}
-			
+
 			var data = {
-					mega_secret_code : "0ed75fcaffd55c3326efccf12f3ae737",
-					id : id,
-					screen_w : window.innerWidth
+				mega_secret_code : "0ed75fcaffd55c3326efccf12f3ae737",
+				id : id,
+				screen_w : window.innerWidth
 			};
 
 			$.ajax({
 				type : "POST",
-				url : path_to_process+page,
+				url : path_to_process + page,
 				data : data,
 				cache : false,
 				success : function(data) {
@@ -124,64 +125,64 @@ $(function() {
 					}
 				}
 			});
-		});			
-
-	/*
-
-		$("#firstpanel").on("click", ".menu_button", function() {
-			var catid = $(this).attr("id").split("_")[1];
-			$("#cliplist_bottom_category").val(catid);
-
-			var data = {
-				mega_secret_code : "0ed75fcaffd55c3326efccf12f3ae737",
-				action : "clip_box",
-				catname : catid,
-				screen_w : window.innerWidth
-			};
-
-			$.ajax({
-				type : "POST",
-				url : "http://www.petsalami.com/app/getcontent.php",
-				data : data,
-				cache : false,
-				success : function(data) {
-					var response = JSON.parse(data);
-					if (response.result == "ok") {
-						$("#clipcontainer").html(response.html);
-					} else {
-						$("#clipcontainer").html(data);
-					}
-				}
-			});
-
-			var action = "get_latest_bottom";
-			var dataString = {
-				mega_secret_code : "0ed75fcaffd55c3326efccf12f3ae737",
-				action : action,
-				from : 0,
-				catname : catid,
-				num_clips : 10
-			};
-
-			$.ajax({
-				type : "POST",
-				url : "http://www.petsalami.com/app/getclips.php",
-				data : dataString,
-				cache : false,
-				success : function(data) {
-					var response = JSON.parse(data);
-					if (response.result == "ok") {
-						// $("#bottom_ad").appendTo("#cliplist_bottom");
-						$("#cliplist_bottom_from").val(response.top_from);
-						$("#cliplist").html(response.html);
-					} else
-						alert("error: ".response.msg);
-				}
-			});
-
-			$("#firstpanel").panel("close");
 		});
-*/
+
+		/*
+
+			$("#firstpanel").on("click", ".menu_button", function() {
+				var catid = $(this).attr("id").split("_")[1];
+				$("#cliplist_bottom_category").val(catid);
+
+				var data = {
+					mega_secret_code : "0ed75fcaffd55c3326efccf12f3ae737",
+					action : "clip_box",
+					catname : catid,
+					screen_w : window.innerWidth
+				};
+
+				$.ajax({
+					type : "POST",
+					url : "http://www.petsalami.com/app/getcontent.php",
+					data : data,
+					cache : false,
+					success : function(data) {
+						var response = JSON.parse(data);
+						if (response.result == "ok") {
+							$("#clipcontainer").html(response.html);
+						} else {
+							$("#clipcontainer").html(data);
+						}
+					}
+				});
+
+				var action = "get_latest_bottom";
+				var dataString = {
+					mega_secret_code : "0ed75fcaffd55c3326efccf12f3ae737",
+					action : action,
+					from : 0,
+					catname : catid,
+					num_clips : 10
+				};
+
+				$.ajax({
+					type : "POST",
+					url : "http://www.petsalami.com/app/getclips.php",
+					data : dataString,
+					cache : false,
+					success : function(data) {
+						var response = JSON.parse(data);
+						if (response.result == "ok") {
+							// $("#bottom_ad").appendTo("#cliplist_bottom");
+							$("#cliplist_bottom_from").val(response.top_from);
+							$("#cliplist").html(response.html);
+						} else
+							alert("error: ".response.msg);
+					}
+				});
+
+				$("#firstpanel").panel("close");
+			});
+		 */
 
 		$(window).scroll(function() {
 			if ($(window).scrollTop() + $(window).height() >= $(document).height() * 0.80) {

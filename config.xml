@@ -47,10 +47,10 @@
     
     <gap:plugin name="com.phonegap.plugins.childbrowser" />
     <gap:plugin name="com.phonegap.plugins.facebookconnect">
-    	<param name="APP_ID" value="1399179707001858" />
+    	<param name="APP_ID" value="370101043065651" />
     	<param name="APP_NAME" value="CyberSoldier" />
 	</gap:plugin>
-    
+
 <preference name="stay-in-webview" value="false" />
 <access origin="*" subdomains="true" browserOnly="true" />
 <preference name="ios-statusbarstyle" value="black-opaque" />   <!-- ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar -->
