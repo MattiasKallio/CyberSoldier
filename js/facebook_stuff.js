@@ -5,8 +5,9 @@ function logout() {
 }
 
 function login() {
+	alert("trying to login");
 	FB.login(function(response) {
-		document.getElementById('mainbox').innerHTML = JSON.stringify(response);
+		alert(response);
 		if (response.session) {
 			alert('logged in');
 		} else {
