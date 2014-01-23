@@ -19,6 +19,7 @@ var app = {
 	},
 	receivedEvent : function(id) {
 		console.log('Received Event: ' + id);
+		document.getElementById('mainbox').innerHTML = 'Received Event: ' + id;
 		//ad_platform_type = device.platform != "undefined" ? device.platform : ad_platform_type;
 	}
 };
