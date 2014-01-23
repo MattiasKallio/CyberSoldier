@@ -1,6 +1,7 @@
 var last_fetch_from = -99;
 var ad_platform_type = "";
 var path_to_process = "http://localhost/facebook_cs/app/";
+var path_to_process = "http://www.cybersoldier.com/app/";
 
 var app = {
 	// Application Constructor
