@@ -59,10 +59,10 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
-    <gap:plugin name="org.apache.cordova.facebook.Connect">
+    <gap:plugin name="com.phonegap.plugins.facebookconnect">
         <param name="APP_ID" value="370101043065651" />
         <param name="APP_NAME" value="CyberSoldier" />
-	</gap:plugin>
+</gap:plugin>
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
