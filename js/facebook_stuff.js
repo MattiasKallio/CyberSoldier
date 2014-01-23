@@ -12,7 +12,6 @@ function login() {
 		} else {
 			alert('not logged in');
 		}
-		console.log(response);
 	}, {
 		scope : "email"
 	});

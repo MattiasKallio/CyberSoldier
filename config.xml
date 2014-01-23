@@ -47,7 +47,7 @@
     
     <gap:plugin name="com.phonegap.plugins.childbrowser" />
     <gap:plugin name="com.phonegap.plugins.facebookconnect">
-    	<param name="APP_ID" value="428090103935727" />
+    	<param name="APP_ID" value="1399179707001858" />
     	<param name="APP_NAME" value="CyberSoldier" />
 	</gap:plugin>
     
