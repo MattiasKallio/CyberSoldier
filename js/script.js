@@ -7,7 +7,6 @@ var path_to_process = "http://www.cybersoldier.com/app/";
 $(function() {
 	$(document).ready(function() {
 	        document.addEventListener('deviceready', function() {
-	        	alert("Device ready\nTrying to login");
 	        	 try {
 	        		 alert('Device is ready! Make sure you set your app_id below this alert.');
 	                 FB.init({ appId: "370101043065651", nativeInterface: CDV.FB, useCachedDialogs: false });
@@ -17,6 +16,16 @@ $(function() {
 	        	 }
 	        }, false);			
 			
+	        $(".facebook_login").on("click", function() {
+	        	FB.login(function(response) {
+	        		FB.api('/me', function(response) {
+	        			 alert('Good to see you, ' + response.name + '.');
+	        			//doLogin(response.name, response.id, true);
+	        		});
+	        	},
+				{ scope: "email" }
+	        	);
+	        });	  	        
 
 		var catname = $("#cliplist_bottom_category").val();
 
@@ -228,12 +237,3 @@ function handleStatusChange(response) {
 		window.location.hash = '#login';
 	}
 }
-
-$(".facebook_login").on("click", function() {
-	FB.login(function(response) {
-		FB.api('/me', function(response) {
-			 $("#mainbox").html('Good to see you, ' + response.name + '.');
-			//doLogin(response.name, response.id, true);
-		});
-	});
-});
