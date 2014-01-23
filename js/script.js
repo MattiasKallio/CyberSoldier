@@ -14,12 +14,12 @@ var app = {
 	},
 	onDeviceReady : function() {
 		app.receivedEvent('deviceready');
-		FB.init({ appId: "428090103935727", nativeInterface: CDV.FB, useCachedDialogs: false });
-		app.receivedEvent('facebook initied');
+		//FB.init({ appId: "428090103935727", nativeInterface: CDV.FB, useCachedDialogs: false });
+		//app.receivedEvent('facebook initied');
 	},
 	receivedEvent : function(id) {
-		console.log('Received Event: ' + id);
-		document.getElementById('mainbox').innerHTML = 'Received Event: ' + id;
+		alert('Received Event: ' + id);
+		//document.getElementById('mainbox').innerHTML = 'Received Event: ' + id;
 		//ad_platform_type = device.platform != "undefined" ? device.platform : ad_platform_type;
 	}
 };
