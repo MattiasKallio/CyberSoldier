@@ -490,7 +490,7 @@ function doLogin(name, fbid){
 				$(".user_loggedin_button").slideDown();
 			}
 			else if(response.result=="newuser"){
-				alert("new user, get form: "+response.html);
+				alert("new user, get form: "+response.html+" "+fbid+" " +name );
 				//window.location = "user.php";
 				/*var formstr = "<h1>Welcome "+name+"!</h1><h4>Get a cool streetname</h4><input type='text' id='streetname' value='"+name+"' /><h4>Write something insanly ego about your self to terrify your enemies</h4><textarea id='description'></textarea><input type='button' id='new_user_button' value='Save user' />";
 				$("#new_user_box").html(formstr);
