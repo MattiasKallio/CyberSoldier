@@ -47,7 +47,7 @@ $(function() {
 	        		try{
 	        			FB.login(function(response) {
 	        				FB.api('/me', function(response) {
-	        			 		alert('Good to see you, ' + response.name + '.');
+	        			 		//alert('Good to see you, ' + response.name + '.');
 	        			 		fbname = response.name;
 	        			 		fbid = response.id;
 	        			 		doLogin(fbname, fbid, true);
@@ -477,7 +477,7 @@ function doLogin(name, fbid){
 		data : dataarr,
 		cache : false,
 		success : function(data) {
-			alert(data);
+			//alert(data);
 			var response = JSON.parse(data);
 			if(response.result == "ok"){
 				window.localStorage.setItem("user_id", response.user_id);
