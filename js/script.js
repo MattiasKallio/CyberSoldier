@@ -44,16 +44,22 @@ $(function() {
 	        $("body").on("click",".facebook_login", function() {
 	        	var lt = $(".facebook_login").html();
 	        	if(lt!="Logout"){
-	        		FB.login(function(response) {
-	        			FB.api('/me', function(response) {
-	        			 	alert('Good to see you, ' + response.name + '.');
-	        			 	fbname = response.name;
-	        			 	fbid = response.id;
-	        			});
-	        		},
-					{ scope: "email" }
-	        		);
-	        		doLogin(fbname, fbid, true);
+	        		try{
+	        			FB.login(function(response) {
+	        				FB.api('/me', function(response) {
+	        			 		alert('Good to see you, ' + response.name + '.');
+	        			 		fbname = response.name;
+	        			 		fbid = response.id;
+	        			 		doLogin(fbname, fbid, true);
+	        				});
+	        			},
+						{ scope: "email" }
+	        			);
+	        		}
+	        		catch(e) {
+		                alert(e);
+		        	}
+	        		
 	        	}
 	        	else{
 	        		doLogout();
