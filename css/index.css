@@ -34,11 +34,11 @@ body {
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
-	background-color: #000;
+	background-color: #FFF;
 	nbackground-image: url(../img/bigbg.jpg);
 	background-repeat: repeat-x;
 	color: #343434;
-	font-size:70%;
+	font-size: 100%;
 }
 
 /* Portrait layout (default) */
@@ -73,7 +73,7 @@ body {
 h1,h2,h3,h4 {
 	font-family: 'Oswald', sans-serif;
 	font-weight: 400;
-	margin-top:0px;
+	margin-top: 0px;
 }
 
 h1 {
@@ -85,13 +85,15 @@ h1 {
 	text-align: center;
 }
 
-h3{
+h3 {
+	margin-bottom: 5px;
 	font-family: 'Aguafina Script', cursive;
 	font-size: 24px;
-	color:black;
+	color: black;
 }
 
 h4 {
+	margin-bottom: 0px;
 	font-size: 14px;
 	color: #f7941e;
 	text-decoration: none;
@@ -100,7 +102,50 @@ h4 {
 a {
 	text-decoration: none;
 	text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-	color:#343434;
+	color: #343434;
+}
+input,textarea,select {
+	margin-top: 0px;
+	width: 100%;
+	-moz-border-radius: 0.2em;
+	border-radius: 0.2em;
+	border: 1px solid #b3b3b3;
+	padding: 2px;
+	color: #000;
+	font-size:1.2em;
+}
+
+input[type="button"],input[type="submit"],input[type="reset"],input[type="file"]::-webkit-file-upload-button,button
+	{
+	width: auto;
+	padding: 3px 8px;
+	cursor: pointer;
+	font-size:1.2em;
+}
+
+input[type="button"] {
+	margin: 1px;
+	text-transform: uppercase;
+	color: black;
+	font-weight: bolder;
+	background: #FD700F;
+}
+
+input[type="button"]:hover {
+	background: #b5fd2c;
+}
+
+input[type="text"] {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+input[type="checkbox"] {
+	width: auto;
+}
+
+.user_loggedin_button{
+	display:none;
 }
 
 .event {
@@ -124,7 +169,7 @@ a {
 .header {
 	text-align: center;
 	background: rgba(0, 0, 0, 0.8);
-	border-bottom:1px solid white;
+	border-bottom: 1px solid white;
 }
 
 .header img {
@@ -135,12 +180,23 @@ a {
 	padding: 0;
 }
 
+#firstpanel{
+	background:black;
+}
+
+#firstpanel h1{
+	color:#787878;
+	margin-top:20px;
+	margin-bottom:3px;
+}
+
 .menu_button {
-	font-weight: bold;
-	background: #000 url(../img/roundedbutton_bg.jpg);
-	padding: 1px 0px 6px 10px cursor :   pointer;
-	color: #777;
-	font-size: 150%
+	border-bottom: 1px dotted #343434;
+	background: #000;
+	padding: 8px 3px 7px 7px;
+	cursor: pointer;
+	color: #fff;
+	font-size: 125%;
 }
 
 .menu_button:hover {
@@ -149,23 +205,22 @@ a {
 }
 
 .blink {
-	
 	animation: fade 3000ms infinite;
 	-webkit-animation: fade 3000ms infinite;
 }
 
 .ui-content {
 	background-color: #FFF;
-	font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial,
+		sans-serif;
 	background-repeat: repeat-x;
 	color: #343434;
 	padding: 5px;
 }
 
 .ui-body-c,.ui-overlay-c {
-	background: #000;
+	background: #FFF;
 }
-
 
 .clickable {
 	cursor: pointer;
@@ -175,20 +230,20 @@ a {
 	border-color: #FD700F;
 }
 
-.whitebg{
-	background:white;
+.whitebg {
+	background: white;
 }
 
-#mainbox table{
-	width:100%;
+#mainbox table {
+	width: 100%;
 }
 
-#mainbox table td{
-	border-bottom:1px dotted #d3d3d3;
+#mainbox table td {
+	border-bottom: 1px dotted #d3d3d3;
 }
 
-#mainbox table td + td{
-	text-align:right;
+#mainbox table td+td {
+	text-align: right;
 }
 
 .round_box {
@@ -208,14 +263,17 @@ a {
 }
 
 .round_button {
-	width:80%;
-	display:inline-block;
+	width: auto;
+	color: white;
+	display: inline-block;
 	-moz-border-radius: 0.5em;
 	border-radius: 0.5em;
 	border: 1px solid #000;
 	background: #121212 url(../images/bigbuttonbg.png);
 	margin-bottom: 0.2em;
-	text-align:center;
+	padding: 4px 15px 4px 15px;
+	text-align: center;
+	cursor:pointer;
 }
 
 .round_button:hover {
@@ -226,24 +284,17 @@ a {
 	margin-bottom: 0.2em;
 }
 
-.thinking{
-	display:none;
-	float:right;
+.thinking {
+	display: none;
+	float: right;
 }
 
-
 .link_button a {
-	display: inline-block;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: white;
-	font-weight: bold;
-	background: #000;
-	border: 1px solid #454545;
-	-moz-border-radius: 0.2em;
-	border-radius: 0.2em;
-	padding: 2px 8px 2px 8px;
-	margin-top: 0.2em;
+display: inline-block;
+text-decoration: none;
+text-transform: uppercase;
+color: black;
+font-size: 10px;
 }
 
 .link_button a:hover {
@@ -254,20 +305,19 @@ a {
 	background: #E65C27;
 }
 
-
-.closebutton{
-	float:right;
-	display:inline;
+.closebutton {
+	float: right;
+	display: inline;
 	background: #343434;
-	color:white;
+	color: white;
 	border: 1px solid #454545;
 	-moz-border-radius: 0.2em;
 	border-radius: 0.2em;
-	cursor:pointer;
+	cursor: pointer;
 	padding: 2px 0.2em 2px 0.2em;
 }
 
-.closebutton:hover{
+.closebutton:hover {
 	border-color: #FF0000;
 }
 
@@ -288,6 +338,7 @@ a {
 }
 
 .small_user_box h4 {
+	
 }
 
 .small_user_box img {
@@ -305,8 +356,7 @@ a {
 	width: 100%;
 }
 
-
-.quote_box, .quote_box_right, .quote_box_left, .qoute_big_box{
+.quote_box,.quote_box_right,.quote_box_left,.qoute_big_box {
 	border: 1px solid #e5e5e5;
 	background: #fff;
 	margin-bottom: 0.2em;
@@ -328,30 +378,30 @@ a {
 }
 
 .quote_box_quote {
-	display:block;
+	display: block;
 	font-style: italic;
 	font-weight: lighter;
 	color: #000;
 }
 
-.qoute_big_box .quote_box_quote{
-	width:auto;
-	float:none;
+.qoute_big_box .quote_box_quote {
+	width: auto;
+	float: none;
 }
 
-.quote_tiny_box{
-	display:inline-block;
-	vertical-align:top;
+.quote_tiny_box {
+	display: inline-block;
+	vertical-align: top;
 }
 
-.quote_tiny_box a{
-	color:black;
-	font-weight:normal;
+.quote_tiny_box a {
+	color: black;
+	font-weight: normal;
 }
 
-.quote_box_quote a{
-	color:black;
-	font-weight:normal;
+.quote_box_quote a {
+	color: black;
+	font-weight: normal;
 }
 
 .quote_box_score {
@@ -362,19 +412,19 @@ a {
 	color: #B4B4B4;
 }
 
-.quote_user_info{
-	float:right;
-	text-align:right;
-	display:inline-block;
-	margin-top:0.2em;
+.quote_user_info {
+	float: right;
+	text-align: right;
+	display: inline-block;
+	margin-top: 0.2em;
 }
 
-.quote_battle_info{
-	display:inline-block;
+.quote_battle_info {
+	display: inline-block;
 }
 
-.quote_battle_info a{
-	color:#FD700F;
+.quote_battle_info a {
+	color: #FD700F;
 }
 
 .battle_score_button {
@@ -389,28 +439,26 @@ a {
 	color: #343434;
 }
 
-
-.admob{
-	color:#343434;
-	font-weight:bold;
-	font-size:70%;
+.admob {
+	color: #343434;
+	font-weight: bold;
+	font-size: 70%;
 }
 
-.admob a{
-	color:#343434;
+.admob a {
+	color: #343434;
 	text-transform: none;
 }
 
 .footer {
-	text-align:center;
-	background: rgba(0,0,0,0.8);
-	border-top:1px solid white;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.8);
+	border-top: 1px solid white;
 }
 
 .footer_content {
 	text-align: center;
 }
-
 
 .clearfix:after {
 	content: ".";
