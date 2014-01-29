@@ -43,6 +43,7 @@ $(function() {
 	        
 	        $("body").on("click",".facebook_login", function() {
 	        	var lt = $(".facebook_login").html();
+	        	alert(lt);
 	        	if(lt!="Logout"){
 	        		FB.login(function(response) {
 	        			FB.api('/me', function(response) {
