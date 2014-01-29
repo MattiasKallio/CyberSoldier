@@ -216,6 +216,9 @@ $(function() {
 
 		$("#mainbox").on("click", ".startbattle", function(e) {
 			//e.preventDefault();
+			
+			var logedin_user_id = window.localStorage.getItem("user_id");
+			if(logedin_user_id != null){
 			var user_id = $(this).attr("id").split("_")[1];
 			var page_name = "startbattle.php";
 			
@@ -247,6 +250,11 @@ $(function() {
 					}
 				}
 			});
+			
+			}
+			else{
+				alert("Sorry you are not logged in.");
+			}
 		});
 		
 		$("#listbox_startbattle").on("click", "#start_battle", function(e) {
