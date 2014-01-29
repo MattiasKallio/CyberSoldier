@@ -3,9 +3,10 @@ var ad_platform_type = "";
 var ininrtipernt = "no";
 var path_to_process = "http://localhost/facebook_cs/app/";
 var path_to_process = "http://www.cybersoldier.com/app/";
-var fbid = "633198662";
-var fbname = "Mattias Urbanus Kallio";
-var logedin_user_id = 0;
+//var fbid = "633198662";
+//var fbname = "Mattias Urbanus Kallio";
+var uid = window.localStorage.getItem("user_id");
+var logedin_user_id = uid != null ? uid : 1337;
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 
@@ -14,33 +15,51 @@ $(function() {
 		
 	        document.addEventListener('deviceready', function() {
 	        	try {
-	        		alert('Device is ready! Make sure you set your app_id below this alert.');
+	        		//alert('Device is ready! Make sure you set your app_id below this alert.');
 	                FB.init({ appId: "370101043065651", nativeInterface: CDV.FB, useCachedDialogs: false });
-	                $("#mainbox").html("Yey, facebook initad!");
+	                //$("#mainbox").html("Yey, facebook initad!");
 	        	} catch (e) {
 	                alert(e);
 	        	}
 	        	
-	    		navigator.notification.alert(
+	    		/*navigator.notification.alert(
 	    	            'You are the winner!',  // message
 	    	            alert("sweet..."),              // callback to invoke with index of button pressed
 	    	            'Game Over',            // title
 	    	            'Restart,Exit'          // buttonLabels
-	    	        );
+	    	        );*/
 	        	
 	        }, false);			
 			
-	        $(".facebook_login").on("click", function() {
-	        	FB.login(function(response) {
-	        		FB.api('/me', function(response) {
-	        			 alert('Good to see you, ' + response.name + '.');
-	        			 fbid = response.id;
-	        		});
-	        	},
-				{ scope: "email" }
-	        	);
-	        	doLogin(fbname, fbid, true);
+	        if(logedin_user_id != 0){
+	        	var name = window.localStorage.getItem("name");
+	        	var tfbid = window.localStorage.getItem("fbid");
+	        	var name_out = name != null ? name : "Hittade inget namn...";
+	        	//alert(name_out+logedin_user_id);
+	        	if(name != null){
+	        		doLogin(name, tfbid, true);
+	        	}
+	        }
+	        
+	        $("body").on("click",".facebook_login", function() {
+	        	var lt = $(".facebook_login").html();
+	        	if(lt!="Logout"){
+	        		FB.login(function(response) {
+	        			FB.api('/me', function(response) {
+	        			 	console.log('Good to see you, ' + response.name + '.');
+	        			 	fbid = response.id;
+	        			});
+	        		},
+					{ scope: "email" }
+	        		);
+	        		doLogin(fbname, fbid, true);
+	        	}
+	        	else{
+	        		doLogout();
+	        	}
 	        });	  	        
+	        
+	        
 
 		var catname = $("#cliplist_bottom_category").val();
 
@@ -67,14 +86,30 @@ $(function() {
 			}
 		});
 		
-		$("#firstpanel").on("click", ".menu_button", function(e){
+		$("body").on("click", ".menu_button", function(e){
 			e.preventDefault();
+			$.mobile.changePage('#home', {
+	            transition: 'slide',
+	            changeHash: true,
+	            role: 'page'
+	        });	
+			if(!$(this).hasClass("facebook_login")){
 			var ths = $(this).attr("id").split("_");
 			var menu_type = ths[0];
 			var menu_id = ths[1];
 			var order = "latest";
 			
-			if(menu_type == "user"){}
+			if(menu_type == "user"){
+				switch(menu_id){
+					case "settings":
+						$.mobile.changePage('#settings', {
+				            transition: 'slide',
+				            changeHash: true,
+				            role: 'page'
+				        });		
+					break;					
+				}
+			}
 			
 			else if(menu_type == "battles"){
 				switch(menu_id){
@@ -95,7 +130,7 @@ $(function() {
 						mega_secret_code : mega_secret_code,
 						action : "battles",
 						order : order,
-						logedin_user_id:logedin_user_id,
+						logedin_user_id:window.localStorage.getItem("user_id"),
 						screen_w : window.innerWidth
 					};
 
@@ -123,7 +158,7 @@ $(function() {
 				
 			}
 			
-			else if(menu_type == "quotes"){
+			else if(menu_type == "quotes"){				
 				switch(menu_id){
 					case "latest":
 						order = "latest";
@@ -142,7 +177,7 @@ $(function() {
 						mega_secret_code : mega_secret_code,
 						action : "quotes",
 						order : order,
-						logedin_user_id:logedin_user_id,
+						logedin_user_id:window.localStorage.getItem("user_id"),
 						screen_w : window.innerWidth
 					};
 
@@ -168,8 +203,8 @@ $(function() {
 						}
 					});
 				
+				}			
 			}			
-						
 		});		
 
 		$("#mainbox").on("click", ".startbattle", function(e) {
@@ -352,7 +387,7 @@ $(function() {
 				data : data,
 				cache : false,
 				success : function(response) {
-					alert(response);
+					//alert(response);
 					//Borde vara nåt som ändrar score, och markerar att man röstat på nåt sätt.
 				}
 			});			
@@ -395,7 +430,7 @@ function fetchInfo(id,page){
 	var data = {
 		mega_secret_code : mega_secret_code,
 		id : id,
-		logedin_user_id:logedin_user_id,
+		logedin_user_id:window.localStorage.getItem("user_id"),
 		screen_w : window.innerWidth
 	};
 
@@ -438,11 +473,14 @@ function doLogin(name, fbid){
 			//alert(data);
 			var response = JSON.parse(data);
 			if(response.result == "ok"){
-				//alert("loggedin, get info: "+response.html);
+				window.localStorage.setItem("user_id", response.user_id);
+				window.localStorage.setItem("name", response.csuserinfo.name);
+				window.localStorage.setItem("fbid", response.csuserinfo.fbid);
+				window.localStorage.setItem("language", response.csuserinfo.language);
+				
 				logedin_user_id = response.user_id;
+				$(".facebook_login").html("Logout");
 				$(".user_loggedin_button").slideDown();
-				//if user is back
-				//window.location.reload();
 			}
 			else if(response.result=="newuser"){
 				alert("new user, get form: "+response.html);
@@ -456,6 +494,15 @@ function doLogin(name, fbid){
 		}
 	});
 	return false;	
+}
+
+function doLogout(){
+	window.localStorage.removeItem("user_id");
+	window.localStorage.removeItem("name");
+	window.localStorage.removeItem("fbid");
+	window.localStorage.removeItem("language");
+	$(".facebook_login").html("Login");
+	$(".user_loggedin_button").slideUp();
 }
 
 function showAlert(message, title) {
