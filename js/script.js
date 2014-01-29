@@ -3,8 +3,8 @@ var ad_platform_type = "";
 var ininrtipernt = "no";
 //var path_to_process = "http://localhost/facebook_cs/app/";
 var path_to_process = "http://www.cybersoldier.com/app/";
-//var fbid = "633198662";
-//var fbname = "Mattias Urbanus Kallio";
+var fbid = ""; //"633198662";
+var fbname = ""; //"Mattias Urbanus Kallio";
 var uid = window.localStorage.getItem("user_id");
 var logedin_user_id = uid != null ? uid : 0;
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
@@ -44,10 +44,10 @@ $(function() {
 	        $("body").on("click",".facebook_login", function() {
 	        	var lt = $(".facebook_login").html();
 	        	if(lt!="Logout"){
-	        		alert(lt);
 	        		FB.login(function(response) {
 	        			FB.api('/me', function(response) {
 	        			 	alert('Good to see you, ' + response.name + '.');
+	        			 	fbname = response.name;
 	        			 	fbid = response.id;
 	        			});
 	        		},
