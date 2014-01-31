@@ -72,13 +72,14 @@ $(function() {
 							// and create a checkbox for each one.
 							
 							var somestring = "";
+							var somestring2 = "";
 							for ( var i = 0; i < Math.min(response.data.length); i++) {
 								somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
 								somestring += response.data[i].id;
 								if (i < Math.min(response.data.length) - 1)
 									somestring += ",";
 							}
-							alert(somestring);
+							//alert(somestring);
 							window.localStorage.setItem("friends_csv", somestring);
 							// getUsersThatAreFriends(somestring);
 						});
