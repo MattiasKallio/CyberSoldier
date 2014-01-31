@@ -3,12 +3,12 @@ var ad_platform_type = "";
 var ininrtipernt = "no";
 var last_is_fetched = false;
 var last_type_and_id = "";
- 
+/* 
 var fbid = ""; var fbname = ""; 
 var path_to_process = "http://www.cybersoldier.com/app/"; 
 var uid = window.localStorage.getItem("user_id"); 
 var logedin_user_id = uid != null ? uid : 0;
-/*
+*/
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
 var fbname = "Mattias Urbanus Kallio";
@@ -16,12 +16,11 @@ var logedin_user_id = 1337;
 window.localStorage.setItem("name", "Kaylooooo");
 window.localStorage.setItem("fbid", fbid);
 window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
-*/
+
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
 	$(document).ready(function() {
-
 		document.addEventListener('deviceready', function() {
 			try {
 				// alert('Device is ready! Make sure you set your app_id
@@ -70,7 +69,8 @@ $(function() {
 						FB.api('/me/friends', function(response) {
 							// Iterate through the array of friends object
 							// and create a checkbox for each one.
-							alert(response.data);
+							//alert(response.data);
+							var somestring = "";
 							for ( var i = 0; i < Math.min(response.data.length); i++) {
 								somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
 								somestring += response.data[i].id;
@@ -101,6 +101,9 @@ $(function() {
 			from : 0,
 			screen_w : window.innerWidth
 		};
+		
+		$("#morebutton").html("Loading page"); 
+		$("#morebutton").fadeIn();
 
 		$.ajax({
 			type : "POST",
@@ -113,6 +116,7 @@ $(function() {
 				if (response.result == "ok") {
 					$("#mainbox").html(response.html_mainbox);
 					$("#listbox").append(response.html);
+					$("#morebutton").html(" - Click for more - "); 
 				} else {
 					$("#listbox").html(data);
 				}
@@ -334,13 +338,23 @@ $(function() {
 
 		});
 
-		$(window).scroll(function() {
+		/*$(window).scroll(function() {
 			if ($(window).scrollTop() + $(window).height() >= $(document).height() * 0.80) {
 				var from = $("#list_from").val();
 				var list_type = $("#list_type").val();
 				var list_id = $("#list_id").val();
 				if (!last_is_fetched && from != 0)
 					setpage(list_type, list_id, from, true);
+			}
+		});*/
+		
+		$(".morebutton").on("click", function(){
+			var from = $("#list_from").val();
+			var list_type = $("#list_type").val();
+			var list_id = $("#list_id").val();
+			//alert(list_type+" "+from+" "+list_id+" ");
+			if (!last_is_fetched && from != 0){
+				setpage(list_type, list_id, from, true);
 			}
 		});
 
@@ -364,7 +378,8 @@ $(function() {
 		function setpage(menu_type, menu_id, from, append_list) {
 			var somestring = "";
 			var menu_type_and_id = menu_type + menu_id;
-
+			$("#morebutton").html("Loading page"); 
+			$("#morebutton").fadeIn();
 			if (menu_type == "user") {
 				switch (menu_id) {
 					case "settings":
@@ -412,6 +427,7 @@ $(function() {
 					success : function(data) {
 						// console.log(data);
 						$("#firstpanel").panel("close");
+						$("#morebutton").html(" - Click for More - ");
 						var response = JSON.parse(data);
 						if (response.result == "ok") {
 							$("#mainbox").html(response.html_mainbox);
@@ -419,10 +435,13 @@ $(function() {
 								$("#listbox").append(response.html);
 							else
 								$("#listbox").html(response.html);
-							if ("No more" != response.from)
+							if ("No more" != response.from){
 								$("#list_from").val(response.from);
-							else
+							}
+							else{
 								last_is_fetched = true;
+								$("#morebutton").fadeOut();
+							}
 							$("#list_type").val("battles");
 							$("#list_id").val(order);
 							setting_page = false;
@@ -467,6 +486,7 @@ $(function() {
 					success : function(data) {
 						// console.log(data);
 						$("#firstpanel").panel("close");
+						$("#morebutton").html(" - Click for More - ");
 						var response = JSON.parse(data);
 						if (response.result == "ok") {
 							$("#mainbox").html(response.html_mainbox);
@@ -474,10 +494,13 @@ $(function() {
 								$("#listbox").append(response.html);
 							else
 								$("#listbox").html(response.html);
-							if ("No more" != response.from)
+							if ("No more" != response.from){
 								$("#list_from").val(response.from);
-							else
+							}
+							else{
 								last_is_fetched = true;
+								$("#morebutton").fadeOut();
+							}
 							$("#list_type").val("quotes");
 							$("#list_id").val(order);
 							setting_page = false;

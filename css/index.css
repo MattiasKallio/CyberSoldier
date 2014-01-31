@@ -292,6 +292,10 @@ margin-bottom:5px;
 	margin-bottom: 0.2em;
 }
 
+.morebutton{
+	width:90%;
+}
+
 .thinking {
 	display: none;
 	float: right;
