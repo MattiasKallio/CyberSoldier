@@ -451,6 +451,10 @@ font-size: 10px;
 	color: #343434;
 }
 
+.battle_score_button_marked {
+	background: #ebba00;
+}
+
 .admob {
 	color: #343434;
 	font-weight: bold;

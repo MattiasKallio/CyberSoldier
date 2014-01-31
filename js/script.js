@@ -2,13 +2,14 @@ var last_fetch_from = -99;
 var ad_platform_type = "";
 var ininrtipernt = "no";
 var last_is_fetched = false;
+var page_is_loading = false;
 var last_type_and_id = "";
 
 var fbid = ""; var fbname = ""; 
 var path_to_process = "http://www.cybersoldier.com/app/"; 
 var uid = window.localStorage.getItem("user_id"); 
 var logedin_user_id = uid != null ? uid : 0;
-/* 
+/*
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
 var fbname = "Mattias Urbanus Kallio";
@@ -16,7 +17,7 @@ var logedin_user_id = 1337;
 window.localStorage.setItem("name", "Kaylooooo");
 window.localStorage.setItem("fbid", fbid);
 window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
-*/
+ */
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
@@ -103,6 +104,7 @@ $(function() {
 		};
 		
 		$("#morebutton").html("Loading page"); 
+		page_is_loading = false;
 		$("#morebutton").fadeIn();
 
 		$.ajax({
@@ -123,6 +125,12 @@ $(function() {
 				$("#list_from").val(response.from);
 				$("#list_type").val("battles");
 				$("#list_id").val("latest");
+				
+				page_is_loading = false;
+				
+			},
+			error: function(){
+				page_is_loading = false;
 			}
 		});
 
@@ -312,6 +320,7 @@ $(function() {
 
 		$("#listbox").on("click", ".battle_score_button", function(e) {
 			e.preventDefault();
+			var thiss = $(this);
 			var ths = $(this).attr("id").split("_");
 			var type = ths[0];
 			var parent_id = ths[1];
@@ -330,6 +339,7 @@ $(function() {
 				data : data,
 				cache : false,
 				success : function(response) {
+					thiss.addClass("battle_score_button_marked");
 				// alert(response);
 				// Borde vara nåt som ändrar score, och markerar att man
 				// röstat på nåt sätt.
@@ -376,6 +386,8 @@ $(function() {
 		}
 
 		function setpage(menu_type, menu_id, from, append_list) {
+			if(!page_is_loading){
+				page_is_loading = true;
 			var somestring = "";
 			var menu_type_and_id = menu_type + menu_id;
 			$("#morebutton").html("Loading page"); 
@@ -449,6 +461,10 @@ $(function() {
 						} else {
 							$("#listbox").html(data);
 						}
+						page_is_loading = false;
+					},
+					error: function(){
+						page_is_loading = false;
 					}
 				});
 
@@ -508,13 +524,17 @@ $(function() {
 						} else {
 							alert(data);
 						}
+						page_is_loading = false;
+					},
+					error: function(){
+						page_is_loading = false;
 					}
 				});
 
 			}
 			last_type_and_id = menu_type_and_id;
 		}
-
+		}
 	});
 });
 
