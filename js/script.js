@@ -264,15 +264,12 @@ $(function() {
 			return false;
 		});
 
-		$("#listbox, #mainbox").on("click", "a", function(e) {
+		$("#listbox, #mainbox, #listbox_battlefield, #mainbox_battlefield").on("click", "a", function(e) {
 			e.preventDefault();
 			$("#morebutton").fadeOut();
 			var id = $(this).attr("href").split("id=")[1];
 			var type = $(this).attr("href").split(".php")[0];
-			
 			var page = "battle.php";
-			// alert(id);
-
 			switch (type) {
 				case "userinfo":
 					page = "userinfo.php";
@@ -406,6 +403,11 @@ $(function() {
 			}
 
 			else if (menu_type == "battles") {
+				$.mobile.changePage('#home', {
+					transition : 'slide',
+					changeHash : true,
+					role : 'page'
+				});
 				switch (menu_id) {
 					case "latest":
 						order = "latest";
@@ -472,6 +474,12 @@ $(function() {
 			}
 
 			else if (menu_type == "quotes") {
+				$.mobile.changePage('#home', {
+					transition : 'slide',
+					changeHash : true,
+					role : 'page'
+				});
+				
 				switch (menu_id) {
 					case "latest":
 						order = "latest";
@@ -540,7 +548,11 @@ $(function() {
 });
 
 function fetchInfo(id, page) {
-
+	$.mobile.changePage('#battle_field', {
+		transition : 'slide',
+		changeHash : true,
+		role : 'page'
+	});
 	var data = {
 		mega_secret_code : mega_secret_code,
 		id : id,
@@ -554,18 +566,17 @@ function fetchInfo(id, page) {
 		data : data,
 		cache : false,
 		success : function(data) {
-			console.log(data);
+			//console.log(data);
 			var response = JSON.parse(data);
 			if (response.result == "ok") {
 				$("html, body").animate({
 					scrollTop : 0
 				}, "slow");
-				$("#listbox").html(response.html);
+				$("#listbox_battlefield").html(response.html);
 				var mb_str = response.html_mainbox != "" ? response.html_mainbox : "";
-				// alert(mb_str);
-				$("#mainbox").html(mb_str);
+				$("#mainbox_battlefield").html(mb_str);
 			} else {
-				$("#cliplist").html(data);
+				$("#mainbox_battlefield").html(data);
 			}
 		}
 	});

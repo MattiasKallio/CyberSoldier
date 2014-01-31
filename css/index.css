@@ -236,7 +236,7 @@ input[type="checkbox"] {
 	background: white;
 }
 
-#mainbox{
+#mainbox, #mainbox_battlefield{
 color: white;
 background: rgb(26, 26, 26);
 margin-bottom:5px;
