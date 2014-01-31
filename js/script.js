@@ -94,8 +94,6 @@ $(function() {
 			}
 		});
 
-		// var catname = $("#cliplist_bottom_category").val();
-
 		var data = {
 			mega_secret_code : mega_secret_code,
 			action : "battles",

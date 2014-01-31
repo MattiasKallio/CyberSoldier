@@ -455,6 +455,18 @@ font-size: 10px;
 	background: #ebba00;
 }
 
+.facebook_login{
+	text-align: center;
+	border: 1px solid rgb(77, 77, 168);
+	border-radius: 5px;
+	text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+	background:url(../img/fb_button_bg.jpg);
+}
+
+.facebook_login:hover{
+	background:url(../img/fb_button_bg.jpg);
+}
+
 .admob {
 	color: #343434;
 	font-weight: bold;
