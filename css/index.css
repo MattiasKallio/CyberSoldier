@@ -82,6 +82,7 @@ h1 {
 	font-weight: normal;
 	overflow: visible;
 	padding: 0px;
+	padding-top:5px;
 	text-align: center;
 }
 
@@ -187,7 +188,8 @@ input[type="checkbox"] {
 #firstpanel h1{
 	color:#787878;
 	margin-top:20px;
-	margin-bottom:3px;
+	padding:3px;
+	margin:0;
 }
 
 .menu_button {
@@ -232,6 +234,12 @@ input[type="checkbox"] {
 
 .whitebg {
 	background: white;
+}
+
+#mainbox{
+color: white;
+background: rgb(26, 26, 26);
+margin-bottom:5px;
 }
 
 #mainbox table {
