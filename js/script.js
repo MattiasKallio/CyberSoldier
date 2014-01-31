@@ -3,16 +3,12 @@ var ad_platform_type = "";
 var ininrtipernt = "no";
 var last_is_fetched = false;
 var last_type_and_id = "";
+ 
+var fbid = ""; var fbname = ""; 
+var path_to_process = "http://www.cybersoldier.com/app/"; 
+var uid = window.localStorage.getItem("user_id"); 
+var logedin_user_id = uid != null ? uid : 0;
 /*
- * 
- * Live
- * 
- * 
- * var fbid = ""; var fbname = ""; var path_to_process =
- * "http://www.cybersoldier.com/app/"; var uid =
- * window.localStorage.getItem("user_id"); var logedin_user_id = uid != null ?
- * uid : 0;
- */
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
 var fbname = "Mattias Urbanus Kallio";
@@ -20,7 +16,7 @@ var logedin_user_id = 1337;
 window.localStorage.setItem("name", "Kaylooooo");
 window.localStorage.setItem("fbid", fbid);
 window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
-
+*/
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
