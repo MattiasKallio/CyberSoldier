@@ -70,7 +70,7 @@ $(function() {
 						FB.api('/me/friends', function(response) {
 							// Iterate through the array of friends object
 							// and create a checkbox for each one.
-							//alert(response.data);
+							
 							var somestring = "";
 							for ( var i = 0; i < Math.min(response.data.length); i++) {
 								somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
@@ -78,6 +78,7 @@ $(function() {
 								if (i < Math.min(response.data.length) - 1)
 									somestring += ",";
 							}
+							alert(somestring);
 							window.localStorage.setItem("friends_csv", somestring);
 							// getUsersThatAreFriends(somestring);
 						});
