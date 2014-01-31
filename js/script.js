@@ -266,7 +266,7 @@ $(function() {
 
 		$("#listbox, #mainbox").on("click", "a", function(e) {
 			e.preventDefault();
-			$("#morebutton").fadeIn();
+			$("#morebutton").fadeOut();
 			var id = $(this).attr("href").split("id=")[1];
 			var type = $(this).attr("href").split(".php")[0];
 			
