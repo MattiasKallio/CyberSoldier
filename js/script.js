@@ -266,9 +266,10 @@ $(function() {
 
 		$("#listbox, #mainbox").on("click", "a", function(e) {
 			e.preventDefault();
+			$("#morebutton").fadeIn();
 			var id = $(this).attr("href").split("id=")[1];
 			var type = $(this).attr("href").split(".php")[0];
-
+			
 			var page = "battle.php";
 			// alert(id);
 
