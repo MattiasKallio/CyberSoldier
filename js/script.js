@@ -4,20 +4,22 @@ var ininrtipernt = "no";
 var last_is_fetched = false;
 var page_is_loading = false;
 var last_type_and_id = "";
+var db;
 
-var fbid = ""; var fbname = ""; 
-var path_to_process = "http://www.cybersoldier.com/app/"; 
-var uid = window.localStorage.getItem("user_id"); 
-var logedin_user_id = uid != null ? uid : 0;
+ var fbid = ""; var fbname = ""; 
+ var path_to_process = "http://www.cybersoldier.com/app/"; 
+ var uid = window.localStorage.getItem("user_id"); 
+ var logedin_user_id = uid != null ? uid : 0;
 /*
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
 var fbname = "Mattias Urbanus Kallio";
 var logedin_user_id = 1337;
+ */
 window.localStorage.setItem("name", "Kaylooooo");
 window.localStorage.setItem("fbid", fbid);
 window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
- */
+
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
@@ -31,6 +33,11 @@ $(function() {
 					nativeInterface : CDV.FB,
 					useCachedDialogs : false
 				});
+				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
+
+				updateCharacterItems();
+				
+
 				// $("#mainbox").html("Yey, facebook initad!");
 			} catch (e) {
 				alert(e);
@@ -70,7 +77,7 @@ $(function() {
 						FB.api('/me/friends', function(response) {
 							// Iterate through the array of friends object
 							// and create a checkbox for each one.
-							
+
 							var somestring = "";
 							var somestring2 = "";
 							for ( var i = 0; i < Math.min(response.data.length); i++) {
@@ -102,8 +109,8 @@ $(function() {
 			from : 0,
 			screen_w : window.innerWidth
 		};
-		
-		$("#morebutton").html("Loading page"); 
+
+		$("#morebutton").html("Loading page");
 		page_is_loading = false;
 		$("#morebutton").fadeIn();
 
@@ -118,18 +125,18 @@ $(function() {
 				if (response.result == "ok") {
 					$("#mainbox").html(response.html_mainbox);
 					$("#listbox").append(response.html);
-					$("#morebutton").html(" - Click for more - "); 
+					$("#morebutton").html(" - Click for more - ");
 				} else {
 					$("#listbox").html(data);
 				}
 				$("#list_from").val(response.from);
 				$("#list_type").val("battles");
 				$("#list_id").val("latest");
-				
+
 				page_is_loading = false;
-				
+
 			},
-			error: function(){
+			error : function() {
 				page_is_loading = false;
 			}
 		});
@@ -338,9 +345,9 @@ $(function() {
 				cache : false,
 				success : function(response) {
 					thiss.addClass("battle_score_button_marked");
-				// alert(response);
-				// Borde vara nåt som ändrar score, och markerar att man
-				// röstat på nåt sätt.
+					// alert(response);
+					// Borde vara nåt som ändrar score, och markerar att man
+					// röstat på nåt sätt.
 				}
 			});
 
@@ -355,13 +362,13 @@ $(function() {
 					setpage(list_type, list_id, from, true);
 			}
 		});*/
-		
-		$(".morebutton").on("click", function(){
+
+		$(".morebutton").on("click", function() {
 			var from = $("#list_from").val();
 			var list_type = $("#list_type").val();
 			var list_id = $("#list_id").val();
 			//alert(list_type+" "+from+" "+list_id+" ");
-			if (!last_is_fetched && from != 0){
+			if (!last_is_fetched && from != 0) {
 				setpage(list_type, list_id, from, true);
 			}
 		});
@@ -384,168 +391,255 @@ $(function() {
 		}
 
 		function setpage(menu_type, menu_id, from, append_list) {
-			if(!page_is_loading){
+			if (!page_is_loading) {
 				page_is_loading = true;
-			var somestring = "";
-			var menu_type_and_id = menu_type + menu_id;
-			$("#morebutton").html("Loading page"); 
-			$("#morebutton").fadeIn();
-			if (menu_type == "user") {
-				switch (menu_id) {
-					case "settings":
-						$.mobile.changePage('#settings', {
-							transition : 'slide',
-							changeHash : true,
-							role : 'page'
-						});
-					break;
-				}
-			}
-
-			else if (menu_type == "battles") {
-				$.mobile.changePage('#home', {
-					transition : 'slide',
-					changeHash : true,
-					role : 'page'
-				});
-				switch (menu_id) {
-					case "latest":
-						order = "latest";
-					break;
-					case "top":
-						order = "top";
-					break;
-					case "mine":
-						order = "mine";
-					break;
-					case "friends":
-						order = "friends";
-						somestring = window.localStorage.getItem("friends_csv");
-					break;
-				}
-
-				var data = {
-					mega_secret_code : mega_secret_code,
-					action : "battles",
-					order : order,
-					from : from,
-					friends_csv : somestring,
-					logedin_user_id : window.localStorage.getItem("user_id"),
-					screen_w : window.innerWidth
-				};
-
-				$.ajax({
-					type : "POST",
-					url : path_to_process + "battles.php",
-					data : data,
-					cache : false,
-					success : function(data) {
-						// console.log(data);
-						$("#firstpanel").panel("close");
-						$("#morebutton").html(" - Click for More - ");
-						var response = JSON.parse(data);
-						if (response.result == "ok") {
-							$("#mainbox").html(response.html_mainbox);
-							if (append_list)
-								$("#listbox").append(response.html);
-							else
-								$("#listbox").html(response.html);
-							if ("No more" != response.from){
-								$("#list_from").val(response.from);
-							}
-							else{
-								last_is_fetched = true;
-								$("#morebutton").fadeOut();
-							}
-							$("#list_type").val("battles");
-							$("#list_id").val(order);
-							setting_page = false;
-
-						} else {
-							$("#listbox").html(data);
-						}
-						page_is_loading = false;
-					},
-					error: function(){
-						page_is_loading = false;
+				var somestring = "";
+				var menu_type_and_id = menu_type + menu_id;
+				$("#morebutton").html("Loading page");
+				$("#morebutton").fadeIn();
+				if (menu_type == "user") {
+					switch (menu_id) {
+						case "settings":
+							$.mobile.changePage('#settings', {
+								transition : 'slide',
+								changeHash : true,
+								role : 'page'
+							});
+						break;
+						case "challe":
+							alert("yepp, challe");
+							$.mobile.changePage('user.html', {
+								transition : 'pop',
+								changeHash : true,
+								role : 'page'
+							});
+						break;
 					}
-				});
-
-			}
-
-			else if (menu_type == "quotes") {
-				$.mobile.changePage('#home', {
-					transition : 'slide',
-					changeHash : true,
-					role : 'page'
-				});
-				
-				switch (menu_id) {
-					case "latest":
-						order = "latest";
-					break;
-					case "top":
-						order = "top";
-					break;
-					case "friends":
-						order = "friends";
-						somestring = window.localStorage.getItem("friends_csv");
-					break;
 				}
 
-				var data = {
-					mega_secret_code : mega_secret_code,
-					action : "quotes",
-					order : order,
-					from : from,
-					logedin_user_id : window.localStorage.getItem("user_id"),
-					friends_csv : somestring,
-					screen_w : window.innerWidth
-				};
-
-				$.ajax({
-					type : "POST",
-					url : path_to_process + "quotes.php",
-					data : data,
-					cache : false,
-					success : function(data) {
-						// console.log(data);
-						$("#firstpanel").panel("close");
-						$("#morebutton").html(" - Click for More - ");
-						var response = JSON.parse(data);
-						if (response.result == "ok") {
-							$("#mainbox").html(response.html_mainbox);
-							if (append_list)
-								$("#listbox").append(response.html);
-							else
-								$("#listbox").html(response.html);
-							if ("No more" != response.from){
-								$("#list_from").val(response.from);
-							}
-							else{
-								last_is_fetched = true;
-								$("#morebutton").fadeOut();
-							}
-							$("#list_type").val("quotes");
-							$("#list_id").val(order);
-							setting_page = false;
-
-						} else {
-							alert(data);
-						}
-						page_is_loading = false;
-					},
-					error: function(){
-						page_is_loading = false;
+				else if (menu_type == "battles") {
+					$.mobile.changePage('#home', {
+						transition : 'slide',
+						changeHash : true,
+						role : 'page'
+					});
+					switch (menu_id) {
+						case "latest":
+							order = "latest";
+						break;
+						case "top":
+							order = "top";
+						break;
+						case "mine":
+							order = "mine";
+						break;
+						case "friends":
+							order = "friends";
+							somestring = window.localStorage.getItem("friends_csv");
+						break;
 					}
-				});
 
+					var data = {
+						mega_secret_code : mega_secret_code,
+						action : "battles",
+						order : order,
+						from : from,
+						friends_csv : somestring,
+						logedin_user_id : window.localStorage.getItem("user_id"),
+						screen_w : window.innerWidth
+					};
+
+					$.ajax({
+						type : "POST",
+						url : path_to_process + "battles.php",
+						data : data,
+						cache : false,
+						success : function(data) {
+							// console.log(data);
+							$("#firstpanel").panel("close");
+							$("#morebutton").html(" - Click for More - ");
+							var response = JSON.parse(data);
+							if (response.result == "ok") {
+								$("#mainbox").html(response.html_mainbox);
+								if (append_list)
+									$("#listbox").append(response.html);
+								else
+									$("#listbox").html(response.html);
+								if ("No more" != response.from) {
+									$("#list_from").val(response.from);
+								} else {
+									last_is_fetched = true;
+									$("#morebutton").fadeOut();
+								}
+								$("#list_type").val("battles");
+								$("#list_id").val(order);
+								setting_page = false;
+
+							} else {
+								$("#listbox").html(data);
+							}
+							page_is_loading = false;
+						},
+						error : function() {
+							page_is_loading = false;
+						}
+					});
+
+				}
+
+				else if (menu_type == "quotes") {
+					$.mobile.changePage('#home', {
+						transition : 'slide',
+						changeHash : true,
+						role : 'page'
+					});
+
+					switch (menu_id) {
+						case "latest":
+							order = "latest";
+						break;
+						case "top":
+							order = "top";
+						break;
+						case "friends":
+							order = "friends";
+							somestring = window.localStorage.getItem("friends_csv");
+						break;
+					}
+
+					var data = {
+						mega_secret_code : mega_secret_code,
+						action : "quotes",
+						order : order,
+						from : from,
+						logedin_user_id : window.localStorage.getItem("user_id"),
+						friends_csv : somestring,
+						screen_w : window.innerWidth
+					};
+
+					$.ajax({
+						type : "POST",
+						url : path_to_process + "quotes.php",
+						data : data,
+						cache : false,
+						success : function(data) {
+							// console.log(data);
+							$("#firstpanel").panel("close");
+							$("#morebutton").html(" - Click for More - ");
+							var response = JSON.parse(data);
+							if (response.result == "ok") {
+								$("#mainbox").html(response.html_mainbox);
+								if (append_list)
+									$("#listbox").append(response.html);
+								else
+									$("#listbox").html(response.html);
+								if ("No more" != response.from) {
+									$("#list_from").val(response.from);
+								} else {
+									last_is_fetched = true;
+									$("#morebutton").fadeOut();
+								}
+								$("#list_type").val("quotes");
+								$("#list_id").val(order);
+								setting_page = false;
+
+							} else {
+								alert(data);
+							}
+							page_is_loading = false;
+						},
+						error : function() {
+							page_is_loading = false;
+						}
+					});
+
+				}
+				last_type_and_id = menu_type_and_id;
 			}
-			last_type_and_id = menu_type_and_id;
-		}
 		}
 	});
 });
+/*
+function setTheIcons(tx, results) {
+	var len = results.rows.length;
+	console.log("character_items table: " + len + " rows found.");
+	for (var i=0; i<len; i++){
+	    console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Name =  " + results.rows.item(i).name + " Icon =  " + results.rows.item(i).icon);
+	    
+	}
+}
+*/
+function querySuccess(tx, results) {
+	var str_uuut = "DB query done";
+	console.log(str_uuut);
+}
+
+function queryFail(tx, err) {
+	console.log("Error processing SQL: " + err.code + " " + err.message);
+}
+/*
+function getCharacterItems(type) {
+	var type_str = type == null || type == undefined ? "" : ' AND type="' + type + '"';
+
+	if (db) {
+		db.transaction(function(tx) {
+			tx.executeSql('SELECT * FROM character_items', [], setTheIcons, queryFail);
+		}, queryFail);
+	}
+
+}
+*/
+function updateCharacterItems() {
+	var data = {
+		mega_secret_code : mega_secret_code,
+		action : "update_items",
+		logedin_user_id : window.localStorage.getItem("user_id")
+	};
+
+	$.ajax({
+		type : "POST",
+		url : path_to_process + "character_handler.php",
+		data : data,
+		cache : false,
+		success : function(data) {
+			//console.log(data);
+			var response = JSON.parse(data);
+			if (response.result == "ok") {
+				var db_done = false;
+				var clizt = response.char_list;
+				var str_ut = "";
+				if (db) {
+					db.transaction(function(tx) {
+						tx.executeSql('DROP TABLE IF EXISTS character_items');
+						tx.executeSql('CREATE TABLE IF NOT EXISTS character_items (id unique, type, name, icon, svg_info, date_added)');
+					}, queryFail, function() {});
+					db.transaction(txede, queryFail, querySuccess);
+				}
+				function txede(tx) {
+					//var svg_cl = clizt[i].svg_info.replace(/\"/g,'');
+					//str_ut += 'INSERT INTO character_items (id, type, name, icon, svg_info, date_added) VALUES ("'+clizt[i].id+'","'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+clizt[i].svg_info.replace(/\"/g,'')+'",,"'+clizt[i].date_added+'",)';
+					//tx.executeSql('INSERT INTO character_items (id, type, name, icon, svg_info, date_added) VALUES ('+clizt[i].id+',"'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+svg_cl+'","'+clizt[i].date_added+'")');
+					//tx.executeSql('INSERT INTO character_items (id, type) VALUES (2,"bla")');
+					
+						for ( var i in clizt) {
+							//str_ut += clizt[i].name+"\n";
+							//tx.executeSql("INSERT INTO character_items (id, type) VALUES (" + i + ",'bla')", [], querySuccess, queryFail);
+							var svg_cl = clizt[i].svg_info.replace(/\"/g,"'");
+							tx.executeSql('INSERT INTO character_items (id, type, name, icon, svg_info, date_added) VALUES ('+clizt[i].id+',"'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+svg_cl+'","'+clizt[i].date_added+'")');
+							//str_ut += " " + i;
+						}
+					//console.log(str_ut);
+					//console.log("Rows Affected = " + results.rowAffected);
+				}
+
+				//console.log(str_ut);
+
+			} else {
+				console.log(data);
+			}
+		}
+	});
+}
 
 function fetchInfo(id, page) {
 	$.mobile.changePage('#battle_field', {

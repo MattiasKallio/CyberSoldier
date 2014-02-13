@@ -478,6 +478,82 @@ font-size: 10px;
 	text-transform: none;
 }
 
+
+.soldier_table, #ci_table{
+	width:100%;
+}
+
+.soldier_table td{
+	text-align:center;
+}
+
+.soldier_table img{
+	width:100%;
+}
+
+#svgintro{
+	text-align:center;
+}
+
+.character_icons td{
+	vertical-align:top;
+	text-align:center;
+}
+
+.character_icons img{
+	width:100%;
+}
+
+div.color_picker {
+	display: inline-block;
+	height: 25px;
+	width: 100%;
+	padding: 0 !important;
+	border: 1px solid #ccc;
+	background: url(arrow.gif) no-repeat top right;
+	cursor: pointer;
+	line-height: 16px;
+}
+
+div#color_selector {
+	width: 100%;
+	position: absolute;
+	border: 1px solid #598FEF;
+	background-color: #EFEFEF;
+	padding: 2px;
+}
+
+div#color_custom {
+	width: 100%;
+	float: left
+}
+
+div#color_custom label {
+	font-size: 95%;
+	color: #2F2F2F;
+	margin: 5px 2px;
+	width: 25%
+}
+
+div#color_custom input {
+	margin: 5px 2px;
+	padding: 0;
+	font-size: 95%;
+	border: 1px solid #000;
+	width: 65%;
+}
+
+div.color_swatch {
+	height: 30px;
+	width: 5%;
+	border-radius: 5px;
+	border: 1px solid #000;
+	margin: 2px;
+	float: left;
+	cursor: pointer;
+	line-height: 12px;
+}
+
 .footer {
 	text-align: center;
 	background: rgba(0, 0, 0, 0.8);
