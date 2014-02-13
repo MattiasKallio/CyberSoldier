@@ -613,7 +613,7 @@ function updateCharacterItems() {
 					db.transaction(function(tx) {
 						tx.executeSql('DROP TABLE IF EXISTS character_items');
 						tx.executeSql('CREATE TABLE IF NOT EXISTS character_items (id unique, type, name, icon, svg_info, date_added)');
-					}, queryFail, function(err) {alert("error n shit"+err.code + " " + err.message + " ")});
+					}, queryFail, function(err) {alert("error n shit"+ err.message + " ")});
 					db.transaction(txede, queryFail, querySuccess);
 				}
 				function txede(tx) {
