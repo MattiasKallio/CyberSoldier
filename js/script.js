@@ -11,6 +11,7 @@ var db;
  var path_to_process = "http://www.cybersoldier.com/app/"; 
  var uid = window.localStorage.getItem("user_id"); 
  var logedin_user_id = uid != null ? uid : 0;
+
 /*
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
@@ -21,7 +22,7 @@ var logedin_user_id = 1337;
 window.localStorage.setItem("name", "Kaylooooo");
 window.localStorage.setItem("fbid", fbid);
 window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
- */
+*/ 
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
@@ -36,8 +37,8 @@ $(function() {
 					useCachedDialogs : false
 				});
 				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
-
-				updateCharacterItems();
+				
+				setCharacterBaseItems();
 				
 
 				// $("#mainbox").html("Yey, facebook initad!");
@@ -410,7 +411,7 @@ $(function() {
 						break;
 						case "challe":
 							$.mobile.changePage('user.html', {
-								transition : 'slide',
+								transition : 'pop',
 								changeHash : true,
 								role : 'page'
 							});
@@ -590,7 +591,30 @@ function getCharacterItems(type) {
 
 }
 */
+function setCharacterBaseItems(){
+	//TODO: check if they're set in local db.
+	$.getScript("js/base_items.js", function(){
+		   var clizt = base_items_data.char_list;
+	
+	if (db) {
+		db.transaction(function(tx) {
+			tx.executeSql('DROP TABLE IF EXISTS character_items');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS character_items (id unique, type, name, icon, svg_info, date_added)');
+		}, queryFail, function(){});
+		db.transaction(txede_first, queryFail, querySuccess);
+	}
+	function txede_first(tx) {
+		for ( var i in clizt) {
+			var svg_cl = clizt[i].svg_info.replace(/\"/g,"'");
+			tx.executeSql('INSERT INTO character_items (id, type, name, icon, svg_info, date_added) VALUES ('+clizt[i].id+',"'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+svg_cl+'","'+clizt[i].date_added+'")');
+		}
+		console.log("character items loaded");
+	}
+	});
+}
+
 function updateCharacterItems() {
+	//TODO:[needs ids from current]
 	var data = {
 		mega_secret_code : mega_secret_code,
 		action : "update_items",
@@ -603,7 +627,7 @@ function updateCharacterItems() {
 		data : data,
 		cache : false,
 		success : function(data) {
-			alert(data);
+			//alert(data);
 			var response = JSON.parse(data);
 			if (response.result == "ok") {
 				var db_done = false;
@@ -690,7 +714,7 @@ function doLogin(name, fbid) {
 		data : dataarr,
 		cache : false,
 		success : function(data) {
-			alert(data);
+			//alert(data);
 			var response = JSON.parse(data);
 			if (response.result == "ok") {
 				window.localStorage.setItem("user_id", response.user_id);

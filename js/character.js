@@ -6,7 +6,7 @@ var images_path = "http://localhost/facebook_cs/images/";
 var process_path = "http://cybersoldier.com/app/";
 var images_path = "http://cybersoldier.com/images/";
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
-
+var db;
 $(document).ready(function() {
 	
 	db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
@@ -126,7 +126,7 @@ function getCharacterItem(id) {
 
 function setTheIcons(tx, results) {	
 	var len = results.rows.length;
-	//console.log("character_items table: " + len + " rows found.");
+	console.log("character_items table: " + len + " rows found.");
 	var append_str = "<tr><td><h4>Accs</h4>";
 	var last_type = "";
 	for (var i=0; i<len; i++){
@@ -139,13 +139,12 @@ function setTheIcons(tx, results) {
 		last_type = type;
 	}
 	append_str += "<img src='"+images_path+"character_icons/remove.png' id='"+last_type+"_0'/></td></tr>";
-	//console.log(append_str);
+	
 	$("#character_icons").append("<table id='ci_table'>"+append_str+"</table>");
 }
 
 function getCharacterItems(type) {
 	var type_str = type == null || type == undefined ? "" : ' AND type="' + type + '"';
-
 	if (db) {
 		db.transaction(function(tx) {
 			tx.executeSql('SELECT * FROM character_items ORDER BY type ASC', [], setTheIcons, queryFail);
