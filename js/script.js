@@ -408,8 +408,8 @@ $(function() {
 							});
 						break;
 						case "challe":
-							$.mobile.changePage('http://cybersoldier.com/app_test/user.html', {
-								transition : 'pop',
+							$.mobile.changePage('user.html', {
+								transition : 'slide',
 								changeHash : true,
 								role : 'page'
 							});
