@@ -133,12 +133,12 @@ function setTheIcons(tx, results) {
 		var type = results.rows.item(i).type;
 		if(type != last_type && append_str != "<tr><td><h4>Accs</h4>"){
 			console.log(last_type + " is not "+type);
-			append_str += "<img src='http://localhost/facebook_cs/images/character_icons/remove.png' id='"+last_type+"_0'/></td><td><h4>"+type+"</h4>";
+			append_str += "<img src='"+images_path+"character_icons/remove.png' id='"+last_type+"_0'/></td><td><h4>"+type+"</h4>";
 		}
 		append_str += "<img src='"+images_path+"character_icons/"+results.rows.item(i).icon+"' id='"+results.rows.item(i).type+"_"+results.rows.item(i).id+"' />"
 		last_type = type;
 	}
-	append_str += "<img src='http://localhost/facebook_cs/images/character_icons/remove.png' id='"+last_type+"_0'/></td></tr>";
+	append_str += "<img src='"+images_path+"character_icons/remove.png' id='"+last_type+"_0'/></td></tr>";
 	//console.log(append_str);
 	$("#character_icons").append("<table id='ci_table'>"+append_str+"</table>");
 }
