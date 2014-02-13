@@ -408,7 +408,7 @@ $(function() {
 							});
 						break;
 						case "challe":
-							$.mobile.changePage('user.html', {
+							$.mobile.changePage('http://cybersoldier.com/app_test/user.html', {
 								transition : 'pop',
 								changeHash : true,
 								role : 'page'
