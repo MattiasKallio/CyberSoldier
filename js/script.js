@@ -612,7 +612,7 @@ function updateCharacterItems() {
 					db.transaction(function(tx) {
 						tx.executeSql('DROP TABLE IF EXISTS character_items');
 						tx.executeSql('CREATE TABLE IF NOT EXISTS character_items (id unique, type, name, icon, svg_info, date_added)');
-					}, queryFail, function() {});
+					}, queryFail, function() {alert("error n shit")});
 					db.transaction(txede, queryFail, querySuccess);
 				}
 				function txede(tx) {
@@ -689,7 +689,7 @@ function doLogin(name, fbid) {
 		data : dataarr,
 		cache : false,
 		success : function(data) {
-			// alert(data);
+			alert(data);
 			var response = JSON.parse(data);
 			if (response.result == "ok") {
 				window.localStorage.setItem("user_id", response.user_id);
