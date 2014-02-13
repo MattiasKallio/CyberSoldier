@@ -6,7 +6,8 @@ var page_is_loading = false;
 var last_type_and_id = "";
 var db;
 
- var fbid = ""; var fbname = ""; 
+ var fbid = ""; 
+ var fbname = ""; 
  var path_to_process = "http://www.cybersoldier.com/app/"; 
  var uid = window.localStorage.getItem("user_id"); 
  var logedin_user_id = uid != null ? uid : 0;
@@ -612,7 +613,7 @@ function updateCharacterItems() {
 					db.transaction(function(tx) {
 						tx.executeSql('DROP TABLE IF EXISTS character_items');
 						tx.executeSql('CREATE TABLE IF NOT EXISTS character_items (id unique, type, name, icon, svg_info, date_added)');
-					}, queryFail, function() {alert("error n shit")});
+					}, queryFail, function(err) {alert("error n shit"+err.code + " " + err.message + " ")});
 					db.transaction(txede, queryFail, querySuccess);
 				}
 				function txede(tx) {
