@@ -15,6 +15,7 @@ $(document).ready(function() {
 		$('#body_1').colorPicker();
 		$('#top_1').colorPicker();
 		$('#eyes_1').colorPicker();
+		$('#mouth_1').colorPicker();
 		$('#shirt_1').colorPicker();
 		$('#accessories_1').colorPicker();
 		$('#pants_1').colorPicker();
@@ -25,6 +26,7 @@ $(document).ready(function() {
 	$('#body_1').val("#"+window.localStorage.getItem("c_color"));
 	$('#top_1').val("#"+window.localStorage.getItem("c_top_color"));
 	$('#eyes_1').val("#"+window.localStorage.getItem("c_eyes_color"));
+	$('#mouth_1').val("#"+window.localStorage.getItem("c_mouth_color"));
 	$('#shirt_1').val("#"+window.localStorage.getItem("c_body_color"));
 	$('#accessories_1').val("#"+window.localStorage.getItem("c_accessories_color"));
 	$('#pants_1').val("#"+window.localStorage.getItem("c_pants_color"));
@@ -40,9 +42,6 @@ $(document).ready(function() {
 	cuser_items["c_shoes"] = window.localStorage.getItem("c_shoes");
 	
 	db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);	
-	
-	
-
 
 	/*$.get('/vectorimage.svg', function(svg) {
 		console.log(svg);
