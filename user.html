@@ -52,13 +52,14 @@
 	<input type="hidden" id="list_id" value="latest" />
 	<div data-role="page" id="home">
 
-	<script type="text/javascript" src="js/jquery.svg.js"></script>
-	<script type="text/javascript" src="js/jquery.colorPicker.js"></script>	
-	<script type="text/javascript" src="js/jquery-ui-1.10.1.custom.min.js"></script>
-	<script type="text/javascript" src="js/rgbcolor.js"></script> 
-	<script type="text/javascript" src="js/StackBlur.js"></script>
-	<script type="text/javascript" src="js/canvg.js"></script>  
-	<script type="text/javascript" src="js/character.js"></script>
+		<script type="text/javascript" src="js/jquery.svg.js"></script>
+		
+		<script type="text/javascript" src="js/jquery-ui-1.10.1.custom.min.js"></script>
+		<script type="text/javascript" src="js/StackBlur.js"></script>
+		<script type="text/javascript" src="js/canvg.js"></script>  
+		<script type="text/javascript" src="js/rgbcolor.js"></script>
+		<script type="text/javascript" src="js/jquery.colorPicker.js"></script>	
+		<script type="text/javascript" src="js/character.js"></script>
 		
 		<div data-role="panel" id="firstpanel" data-display="push">
 			<h1>User stuff</h1>
@@ -85,48 +86,47 @@
 		</div>
 
 		<div data-role="content">
-				<div class="round_box">
-		<div class="content">
-	<h4>Colors</h4>
+			<div class="round_box">
+			<div class="content">
  			<table class="soldier_table">
 				<tr>
-					<td><img src="http://cybersoldier.com/images/character_icons/body1.png" /><br />
+					<td><img src="http://cybersoldier.com/images/character_icons/body1.png" id="pickimage_color" /><br />
 					<input id="body_1" type="text" name="c_color"
 						value=""
 						class="color_changer" />
 					</td>
-					<td><img src="http://cybersoldier.com/images/character_icons/accessories1.png" /><br />
+					<td><img src="http://cybersoldier.com/images/character_icons/accessories1.png" id="pickimage_accessories" /><br />
 					<input id="accessories_1" type="text" name="c_accessories_color"
 						value=""
 						class="color_changer" />
 					</td>
-					<td><img src="http://cybersoldier.com/images/character_icons/eyes4.png" /><br />
+					<td><img src="http://cybersoldier.com/images/character_icons/eyes4.png" id="pickimage_eyes" /><br />
 					<input id="eyes_1" type="text" name="c_eyes_color"
 						value=""
 						class="color_changer" />
 					</td>
-					<td><img src="http://cybersoldier.com/images/character_icons/pants1.png" /><br />
+					<td><img src="http://cybersoldier.com/images/character_icons/pants1.png" id="pickimage_pants" /><br />
 					<input id="pants_1" type="text" name="c_pants_color"
 						value=""
 						class="color_changer" />
 					</td>					
-					<td><img src="http://cybersoldier.com/images/character_icons/shirt1.png" /><br />
+					<td><img src="http://cybersoldier.com/images/character_icons/shirt1.png" id="pickimage_shirt" /><br />
 					<input id="shirt_1" type="text" name="c_body_color"
 						value=""
 						class="color_changer" />
 					</td>
 
-					<td><img src="http://cybersoldier.com/images/character_icons/shoes1.png" /><br />
+					<td><img src="http://cybersoldier.com/images/character_icons/shoes1.png" id="pickimage_shoes" /><br />
 					<input id="shoes_1" type="text" name="c_shoes_color"
 						value=""
 						class="color_changer" />
 					</td>	
-					<td><img src="http://cybersoldier.com/images/character_icons/shoes1.png" /><br />
+					<td><img src="http://cybersoldier.com/images/character_icons/shoes1.png" id="pickimage_laces" /><br />
 					<input id="laces_1" type="text" name="c_shoes_color2"
 						value=""
 						class="color_changer" />
 					</td>									
-					<td><img src="http://cybersoldier.com/images/character_icons/top1.png" /><br />
+					<td><img src="http://cybersoldier.com/images/character_icons/top1.png" id="pickimage_top" /><br />
 					<input id="top_1" type="text" name="c_top_color"
 						value=""
 						class="color_changer" />
@@ -134,7 +134,11 @@
 				</tr>
 			</table>
 			</div>
-		</div>
+				<div class="content">
+					<div class="character_icons" id="character_icons">
+ 				</div>
+ 		</div>
+ 		</div>
 	<div id="svgintro" class="hasSVG">	
 		<object data="img/character/body1.svg" type="image/svg+xml" id="c_body1"></object>
 	</div>
@@ -142,14 +146,9 @@
 		<div class="content">
 			<input type="button" id="save_character_button" data-role="none" value="Save" />
 		</div>
-	</div>
+	</div> 		
+		</div>
 				
-<div class="round_box">
-	<div class="content">
-		<div class="character_icons" id="character_icons">
- 		</div>
- 	</div>
- </div>
 
 		<canvas id="canvas" width="250" height="400"></canvas>
  		<img id="user_image" />
@@ -159,7 +158,6 @@
 				
 			</div>
 		</div>
-
 	</div>
 	
 </body>
