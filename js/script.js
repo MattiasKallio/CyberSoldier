@@ -802,7 +802,7 @@ function doLogout() {
 	window.localStorage.removeItem("name");
 	window.localStorage.removeItem("fbid");
 	window.localStorage.removeItem("language");
-	logedin_user_id = null;
+	logedin_user_id = null;user_
 	$(".facebook_login").html("Login");
 	$(".user_loggedin_button").slideUp();
 }
