@@ -85,10 +85,9 @@ $(function() {
 				data : data,
 				cache : false,
 				success : function(data) {
-					alert(data);
 					var response = JSON.parse(data);
 					if (response.result == "ok") {
-						$.mobile.changePage('#home', {
+						$.mobile.changePage('index.html', {
 							transition : 'slide',
 							changeHash : true,
 							role : 'page'
