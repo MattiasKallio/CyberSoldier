@@ -404,6 +404,7 @@ $(function() {
 				if (menu_type == "user") {
 					switch (menu_id) {
 						case "settings":
+							page_is_loading = false;
 							$.mobile.changePage('#settings', {
 								transition : 'slide',
 								changeHash : true,
@@ -411,6 +412,7 @@ $(function() {
 							});
 						break;
 						case "challe":
+							page_is_loading = false;
 							$.mobile.changePage('user.html', {
 								transition : 'pop',
 								changeHash : true,
