@@ -82,7 +82,8 @@ $(document).ready(function() {
 		cuser_items["c_"+kname] = id_arr[1];
 		
 		if (id_arr[1] == 0) {
-			$("#character_" + id_arr[0]).html("");
+			alert("removing");
+			$("#character_" + id_arr[0]).text("");
 		} else {
 			getCharacterItem(id_arr[1]);
 		}
