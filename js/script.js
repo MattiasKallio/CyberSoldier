@@ -13,7 +13,7 @@ var db;
  var logedin_user_id = uid != null ? uid : 0;
 
  
- /*
+ /* 
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
 var fbname = "Mattias Urbanus Kallio";
@@ -149,9 +149,10 @@ $(function() {
 			mega_secret_code : mega_secret_code,
 			action : "battles",
 			from : 0,
-			screen_w : window.innerWidth
+			screen_w : window.innerWidth,
+			logedin_user_id : logedin_user_id
 		};
-
+		
 		$("#morebutton").html("Loading page, gif?");
 		page_is_loading = false;
 		$("#morebutton").fadeIn();
@@ -162,6 +163,7 @@ $(function() {
 			data : data,
 			cache : false,
 			success : function(data) {
+				//console.log(data);
 				var response = JSON.parse(data);
 				if (response.result == "ok") {
 					$("#mainbox").html(response.html_mainbox);
@@ -204,9 +206,8 @@ $(function() {
 			}
 		});
 
-		$("#mainbox").on("click", ".startbattle", function(e) {
+		$("#mainbox, #mainbox_battlefield").on("click", ".startbattle", function(e) {
 			// e.preventDefault();
-
 			var logedin_user_id = window.localStorage.getItem("user_id");
 			if (logedin_user_id != null) {
 				var user_id = $(this).attr("id").split("_")[1];
@@ -247,6 +248,7 @@ $(function() {
 		});
 
 		$("#listbox_startbattle").on("click", "#start_battle", function(e) {
+			alert("BOOM, start.");
 			var head = $("#head").val();
 			var tail = $("#tail").val();
 			var type = $("#type").val();
@@ -270,6 +272,7 @@ $(function() {
 					head : head,
 					tail : tail,
 					type : type,
+					logedin_user_id:logedin_user_id,
 					opponent_id : opponent_id,
 					clean_battle : clean_battle,
 					rhyme : rhyme,
@@ -282,6 +285,7 @@ $(function() {
 					data : data,
 					cache : false,
 					success : function(response) {
+						console.log(response);
 						var response = JSON.parse(response);
 						if (response.result == "ok") {
 							$.mobile.changePage('#home', {
@@ -330,7 +334,7 @@ $(function() {
 			}
 		});
 
-		$("#listbox").on("click", "#reply_button", function() {
+		$("#listbox, #listbox_battlefield").on("click", "#reply_button", function() {
 			var texten = $("#reply_texten").val();
 			var code = $("#reply_code").val();
 			var bid = $("#battles_id").val();
@@ -349,13 +353,13 @@ $(function() {
 				data : data,
 				cache : false,
 				success : function(response) {
-					// alert(response);
+					//alert(response);
 					var response = JSON.parse(response);
 					if (response.result == "ok") {
 						$("#reply_box").fadeOut();
-						$("#battle_field").fadeOut("slow", function() {
-							$("#battle_field").append(response.html);
-							$("#battle_field").fadeIn("slow");
+						$("#listbox_battlefield").fadeOut("slow", function() {
+							$("#listbox_battlefield").append(response.html);
+							$("#listbox_battlefield").fadeIn("slow");
 						});
 					} else
 						alert(response.msg);
