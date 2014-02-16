@@ -64,6 +64,40 @@ $(function() {
 				doLogin(name, tfbid, true);
 			}
 		}
+		
+		$("body").on("click", "#save_userinfo", function(){
+			var data = {
+				mega_secret_code : mega_secret_code,
+				action : "add",
+				user_id : window.localStorage.getItem("user_id"),
+				name : $("#name").val(),
+				description : $("#description").html(),
+				language : $("#language").val(),
+			};
+
+			$.ajax({
+				type : "POST",
+				url : path_to_process + "user_handler.php",
+				data : data,
+				cache : false,
+				success : function(data) {
+					var response = JSON.parse(data);
+					if (response.result == "ok") {
+						$.mobile.changePage('#home', {
+							transition : 'slide',
+							changeHash : true,
+							role : 'page'
+						});
+					} else {
+						//$("#listbox").html(data);
+					}
+					page_is_loading = false;
+				},
+				error : function() {
+					page_is_loading = false;
+				}
+			});
+		});
 
 		$("body").on("click", ".facebook_login", function() {
 			var lt = $(".facebook_login").html();
