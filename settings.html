@@ -51,7 +51,13 @@
 	<input type="hidden" id="list_type" value="battles" />
 	<input type="hidden" id="list_id" value="latest" />
 	<div data-role="page" id="home">
-
+		<script type="text/javascript">
+			$("#streetname").val(window.localStorage.getItem("name"));
+			$("#description").html(window.localStorage.getItem("description"));
+			$("#language_pref").val(window.localStorage.getItem("language"));
+		
+		
+		</script>	
 		<div data-role="panel" id="firstpanel" data-display="push">
 			<h1>User stuff</h1>
 			<div class="menu_button facebook_login">Login with Facebook</div>
@@ -69,7 +75,7 @@
 		</div>
 
 		<div class="header" data-role="header" data-position="fixed">
-			<a href="#firstpanel"><img src="img/menu.png" /></a>
+			<a href="index.html"><img src="img/menu.png" /></a>
 			<img src="img/cybers_logo.png" alt="cybersoldier mobile" />
 
 			<div id="admob_ad1" class="admob">
@@ -77,94 +83,36 @@
 		</div>
 
 		<div data-role="content">
-			<div id="mainbox"></div>
-			<div id="listbox"></div>
-			<div class="morebutton round_button" id="morebutton"></div>
+			<div class="round_box">
+			<div class="content">
+ 			
+			<h1>Settings</h1>
+			<h4>Cool streetname</h4>
+			<input type="text" id="streetname" value="" />
+			<h4>Terrifying description</h4>
+			<textarea id="description" style="height:70px;"></textarea>
+			<h4>Prefered language</h4>
+			<select id="language_pref">
+				<option value='0'>Not selected</option>
+				<option value='1'>English</option>
+				<option value='2'>Spanish</option>
+				<option value='3'>French</option>
+				<option value='4'>German</option>
+				<option value='5'>Swedish</option>
+				<option value='999'>Other</option>
+			</select>
+			<div class="thinking" id="thinking1"><img src="images/thinking.gif" alt='thinking' /></div>
+			<input type="button" data-role="none" id='save_userinfo' value="Save info" />
 		</div>
+				
+
+		
 		<div class="footer" data-role="footer" data-position="fixed">
 			<div id="admob_ad2" class="admob">
 				
 			</div>
 		</div>
-
 	</div>
-	
-	<div data-role="page" id="battle_field">
-
-		<div data-role="panel" id="firstpanel" data-display="push">
-			<h1>User stuff</h1>
-			<div class="menu_button facebook_login">Login with Facebook</div>
-			<div class="menu_button" id="user_challe">Character</div>
-			<div class="menu_button user_loggedin_button" id="user_settings">Settings</div>
-			<h1>Battles</h1>
-			<div class="menu_button" id="battles_latest">Latest Battles</div>
-			<div class="menu_button" id="battles_top">Top Battles</div>
-			<div class="menu_button user_loggedin_button" id="battles_mine">My Battles</div>
-			<div class="menu_button user_loggedin_button" id="battles_friends">Friends Battles</div>
-			<h1>Quotes</h1>
-			<div class="menu_button" id="quotes_latest">Latest Quotes</div>
-			<div class="menu_button" id="quotes_top">Top Quotes</div>
-			<div class="menu_button user_loggedin_button" id="quotes_friends">Friends Quotes</div>
-		</div>
-
-		<div class="header" data-role="header" data-position="fixed">
-			<a href="#firstpanel"><img src="img/menu.png" /></a>
-			<img src="img/cybers_logo.png" alt="cybersoldier mobile" />
-
-			<div id="admob_ad1" class="admob">
-			</div>
-		</div>
-
-		<div data-role="content">
-			<div id="mainbox_battlefield"></div>
-			<div id="listbox_battlefield"></div>
-		</div>
-		<div class="footer" data-role="footer" data-position="fixed">
-			<div id="admob_ad2" class="admob">
-				
-			</div>
-		</div>
-
-	</div>	
-	
-	<div data-role="page" id="start_battle">
-
-		<div data-role="panel" id="firstpanel" data-display="push">
-			<h1>User stuff</h1>
-			<div class="menu_button facebook_login">Login with Facebook</div>
-			<div class="menu_button" id="user_challe">Character</div>
-			<div class="menu_button user_loggedin_button" id="user_settings">Settings</div>
-			<h1>Battles</h1>
-			<div class="menu_button" id="battles_latest">Latest Battles</div>
-			<div class="menu_button" id="battles_top">Top Battles</div>
-			<div class="menu_button user_loggedin_button" id="battles_mine">My Battles</div>
-			<div class="menu_button user_loggedin_button" id="battles_friends">Friends Battles</div>
-			<h1>Quotes</h1>
-			<div class="menu_button" id="quotes_latest">Latest Quotes</div>
-			<div class="menu_button" id="quotes_top">Top Quotes</div>
-			<div class="menu_button user_loggedin_button" id="quotes_friends">Friends Quotes</div>
-		</div>
-
-		<div class="header" data-role="header" data-position="fixed">
-			<a href="#firstpanel"><img src="img/menu.png" /></a>
-			<img src="img/cybers_logo.png" alt="cybersoldier mobile" />
-
-			<div id="admob_ad1" class="admob">
-			</div>
-		</div>
-
-		<div data-role="content">
-			<div id="listbox_startbattle">
-				Loading form...
-			</div>
-		</div>
-		<div class="footer" data-role="footer" data-position="fixed">
-			<div id="admob_ad2" class="admob">
-				
-			</div>
-		</div>
-
-	</div>	
 	
 </body>
 </html>

@@ -5,15 +5,15 @@ var last_is_fetched = false;
 var page_is_loading = false;
 var last_type_and_id = "";
 var db;
-
+/*
  var fbid = ""; 
  var fbname = ""; 
  var path_to_process = "http://www.cybersoldier.com/app/"; 
  var uid = window.localStorage.getItem("user_id"); 
  var logedin_user_id = uid != null ? uid : 0;
 
+*/
 
-/*
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
 var fbname = "Mattias Urbanus Kallio";
@@ -23,7 +23,7 @@ var logedin_user_id = 1418;
 window.localStorage.setItem("name", "Kaylooooo");
 window.localStorage.setItem("fbid", fbid);
 window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
- */
+ 
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
@@ -114,7 +114,7 @@ $(function() {
 			screen_w : window.innerWidth
 		};
 
-		$("#morebutton").html("Loading page");
+		$("#morebutton").html("Loading page, gif?");
 		page_is_loading = false;
 		$("#morebutton").fadeIn();
 
@@ -124,7 +124,6 @@ $(function() {
 			data : data,
 			cache : false,
 			success : function(data) {
-				// console.log(data);
 				var response = JSON.parse(data);
 				if (response.result == "ok") {
 					$("#mainbox").html(response.html_mainbox);
@@ -405,7 +404,7 @@ $(function() {
 					switch (menu_id) {
 						case "settings":
 							page_is_loading = false;
-							$.mobile.changePage('#settings', {
+							$.mobile.changePage('settings.html', {
 								transition : 'slide',
 								changeHash : true,
 								role : 'page'
@@ -453,14 +452,14 @@ $(function() {
 						logedin_user_id : window.localStorage.getItem("user_id"),
 						screen_w : window.innerWidth
 					};
-
+					
 					$.ajax({
 						type : "POST",
 						url : path_to_process + "battles.php",
 						data : data,
 						cache : false,
 						success : function(data) {
-							// console.log(data);
+							console.log(data);
 							$("#firstpanel").panel("close");
 							$("#morebutton").html(" - Click for More - ");
 							var response = JSON.parse(data);
@@ -471,6 +470,7 @@ $(function() {
 								else
 									$("#listbox").html(response.html);
 								if ("No more" != response.from) {
+									console.log(response.from +"< from");
 									$("#list_from").val(response.from);
 								} else {
 									last_is_fetched = true;
@@ -722,6 +722,7 @@ function doLogin(name, fbid) {
 			if (response.result == "ok") {
 				window.localStorage.setItem("user_id", response.user_id);
 				window.localStorage.setItem("name", response.csuserinfo.name);
+				window.localStorage.setItem("description", response.csuserinfo.description);
 				window.localStorage.setItem("fbid", response.csuserinfo.fbid);
 				window.localStorage.setItem("language", response.csuserinfo.language);
 				
@@ -736,18 +737,17 @@ function doLogin(name, fbid) {
 				$(".facebook_login").html("Logout");
 				$(".user_loggedin_button").slideDown();
 			} else if (response.result == "newuser") {
-				alert("new user, get form: " + response.html + " " + fbid + " " + name);
-				// window.location = "user.php";
-				/*
-				 * var formstr = "<h1>Welcome "+name+"!</h1><h4>Get a cool
-				 * streetname</h4><input type='text' id='streetname'
-				 * value='"+name+"' /><h4>Write something insanly ego about
-				 * your self to terrify your enemies</h4><textarea
-				 * id='description'></textarea><input type='button'
-				 * id='new_user_button' value='Save user' />";
-				 * $("#new_user_box").html(formstr);
-				 * $("#new_user_box").slideDown();
-				 */
+				window.localStorage.setItem("user_id", response.user_id);
+				window.localStorage.setItem("name", response.csuserinfo.name);
+				window.localStorage.setItem("description", response.csuserinfo.description);
+				window.localStorage.setItem("fbid", response.csuserinfo.fbid);
+				window.localStorage.setItem("language", response.csuserinfo.language);
+				$.mobile.changePage('settings.html', {
+					transition : 'slide',
+					changeHash : true,
+					role : 'page'
+				});
+				
 			} else
 				alert("error" + data);
 		}

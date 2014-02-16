@@ -137,12 +137,24 @@ input[type="button"]:hover {
 }
 
 input[type="text"] {
+	
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
 
 input[type="checkbox"] {
 	width: auto;
+}
+
+div.ui-input-text input.ui-input-text {
+	-moz-border-radius: 0.2em;
+	border-radius: 0.2em;
+	border: 1px solid #b3b3b3;
+}
+.ui-select .ui-btn-icon-right .ui-btn-inner, .ui-select .ui-li-has-count .ui-btn-inner {
+	-moz-border-radius: 0.2em;
+	border-radius: 0.2em;
+	border: 1px solid #b3b3b3;
 }
 
 .user_loggedin_button{
