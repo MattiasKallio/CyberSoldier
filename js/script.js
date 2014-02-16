@@ -5,15 +5,15 @@ var last_is_fetched = false;
 var page_is_loading = false;
 var last_type_and_id = "";
 var db;
-
+/*
  var fbid = ""; 
  var fbname = ""; 
  var path_to_process = "http://www.cybersoldier.com/app/"; 
  var uid = window.localStorage.getItem("user_id"); 
  var logedin_user_id = uid != null ? uid : 0;
-
+*/
  
- /* 
+ 
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
 var fbname = "Mattias Urbanus Kallio";
@@ -23,7 +23,7 @@ var logedin_user_id = 1418;
 window.localStorage.setItem("name", "Kaylooooo");
 window.localStorage.setItem("fbid", fbid);
 window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
-*/
+
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
@@ -68,7 +68,7 @@ $(function() {
 		$("body").on("click", "#save_userinfo", function(){
 			window.localStorage.setItem("name",$("#streetname").val());
 			window.localStorage.setItem("description",$("#description").val());
-			window.localStorage.setItem("language",$("#language").val());
+			window.localStorage.setItem("language",$("#language_pref").val());
 			
 			var data = {
 				mega_secret_code : mega_secret_code,
@@ -76,7 +76,7 @@ $(function() {
 				user_id : window.localStorage.getItem("user_id"),
 				name : $("#streetname").val(),
 				description : $("#description").val(),
-				language : $("#language").val(),
+				language : $("#language_pref").val(),
 			};
 
 			$.ajax({
@@ -128,9 +128,7 @@ $(function() {
 								if (i < Math.min(response.data.length) - 1)
 									somestring += ",";
 							}
-							//alert(somestring);
 							window.localStorage.setItem("friends_csv", somestring);
-							// getUsersThatAreFriends(somestring);
 						});
 
 					}, {
@@ -139,7 +137,6 @@ $(function() {
 				} catch (e) {
 					alert(e);
 				}
-
 			} else {
 				doLogout();
 			}
@@ -150,7 +147,8 @@ $(function() {
 			action : "battles",
 			from : 0,
 			screen_w : window.innerWidth,
-			logedin_user_id : logedin_user_id
+			logedin_user_id : logedin_user_id,
+			language : window.localStorage.getItem("language")
 		};
 		
 		$("#morebutton").html("Loading page, gif?");
@@ -248,7 +246,7 @@ $(function() {
 		});
 
 		$("#listbox_startbattle").on("click", "#start_battle", function(e) {
-			alert("BOOM, start.");
+			//alert("BOOM, start.");
 			var head = $("#head").val();
 			var tail = $("#tail").val();
 			var type = $("#type").val();
@@ -298,7 +296,6 @@ $(function() {
 							fetchInfo(response.battle_id, page);
 						} else {
 							$("#thinking2").fadeOut();
-							alert(response.msg);
 						}
 					}
 				});
@@ -344,7 +341,8 @@ $(function() {
 				action : "add_item",
 				texten : texten,
 				code : code,
-				battles_id : bid
+				battles_id : bid,
+				language : window.localStorage.getItem("language")
 			};
 
 			$.ajax({
@@ -368,7 +366,7 @@ $(function() {
 			return false;
 		});
 
-		$("#listbox").on("click", ".battle_score_button", function(e) {
+		$("#listbox, #listbox_battlefield").on("click", ".battle_score_button", function(e) {
 			e.preventDefault();
 			var thiss = $(this);
 			var ths = $(this).attr("id").split("_");
@@ -390,7 +388,7 @@ $(function() {
 				cache : false,
 				success : function(response) {
 					thiss.addClass("battle_score_button_marked");
-					// alert(response);
+					//alert(response);
 					// Borde vara nåt som ändrar score, och markerar att man
 					// röstat på nåt sätt.
 				}
@@ -407,7 +405,7 @@ $(function() {
 					setpage(list_type, list_id, from, true);
 			}
 		});*/
-
+		
 		$(".morebutton").on("click", function() {
 			var from = $("#list_from").val();
 			var list_type = $("#list_type").val();
@@ -492,6 +490,7 @@ $(function() {
 						from : from,
 						friends_csv : somestring,
 						logedin_user_id : window.localStorage.getItem("user_id"),
+						language : window.localStorage.getItem("language"),
 						screen_w : window.innerWidth
 					};
 					
@@ -501,7 +500,7 @@ $(function() {
 						data : data,
 						cache : false,
 						success : function(data) {
-							console.log(data);
+							//console.log(data);
 							$("#firstpanel").panel("close");
 							$("#morebutton").html(" - Click for More - ");
 							var response = JSON.parse(data);
@@ -523,7 +522,7 @@ $(function() {
 								setting_page = false;
 
 							} else {
-								$("#listbox").html(data);
+								console.log(data);
 							}
 							page_is_loading = false;
 						},
@@ -561,7 +560,8 @@ $(function() {
 						from : from,
 						logedin_user_id : window.localStorage.getItem("user_id"),
 						friends_csv : somestring,
-						screen_w : window.innerWidth
+						screen_w : window.innerWidth,
+						language : window.localStorage.getItem("language")
 					};
 
 					$.ajax({
@@ -802,7 +802,7 @@ function doLogout() {
 	window.localStorage.removeItem("name");
 	window.localStorage.removeItem("fbid");
 	window.localStorage.removeItem("language");
-	logedin_user_id = null;user_
+	logedin_user_id = null;
 	$(".facebook_login").html("Login");
 	$(".user_loggedin_button").slideUp();
 }
