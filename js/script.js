@@ -66,6 +66,10 @@ $(function() {
 		}
 		
 		$("body").on("click", "#save_userinfo", function(){
+			window.localStorage.setItem("name",$("#streetname").val());
+			window.localStorage.setItem("description",$("#description").val());
+			window.localStorage.setItem("language",$("#language").val());
+			
 			var data = {
 				mega_secret_code : mega_secret_code,
 				action : "add",
@@ -81,7 +85,7 @@ $(function() {
 				data : data,
 				cache : false,
 				success : function(data) {
-					//alert(data);
+					alert(data);
 					var response = JSON.parse(data);
 					if (response.result == "ok") {
 						$.mobile.changePage('#home', {
