@@ -5,15 +5,15 @@ var last_is_fetched = false;
 var page_is_loading = false;
 var last_type_and_id = "";
 var db;
-
+/*
  var fbid = ""; 
  var fbname = ""; 
  var path_to_process = "http://www.cybersoldier.com/app/"; 
  var uid = window.localStorage.getItem("user_id"); 
  var logedin_user_id = uid != null ? uid : 0;
 
+ */
 
- /*
 var path_to_process = "http://localhost/facebook_cs/app/";
 var fbid = "633198662";
 var fbname = "Mattias Urbanus Kallio";
@@ -23,7 +23,7 @@ var logedin_user_id = 1418;
 window.localStorage.setItem("name", "Kaylooooo");
 window.localStorage.setItem("fbid", fbid);
 window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
- */
+
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
@@ -70,8 +70,8 @@ $(function() {
 				mega_secret_code : mega_secret_code,
 				action : "add",
 				user_id : window.localStorage.getItem("user_id"),
-				name : $("#name").val(),
-				description : $("#description").html(),
+				name : $("#streetname").val(),
+				description : $("#description").val(),
 				language : $("#language").val(),
 			};
 
@@ -81,6 +81,7 @@ $(function() {
 				data : data,
 				cache : false,
 				success : function(data) {
+					//alert(data);
 					var response = JSON.parse(data);
 					if (response.result == "ok") {
 						$.mobile.changePage('#home', {
