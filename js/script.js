@@ -30,9 +30,6 @@ $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
 			try {
-				
-				
-				
 				// alert('Device is ready! Make sure you set your app_id
 				// below this alert.');
 				FB.init({
