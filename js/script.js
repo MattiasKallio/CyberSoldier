@@ -30,6 +30,18 @@ $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
 			try {
+				
+				window.plugin.notification.local.add({
+				    id:         1,
+				    message:    'I love BlackBerry!',
+				   
+				});
+
+				window.plugin.notification.local.onclick = function (id, state, json) {
+				    console.log(id, JSON.parse(json).test);
+				}
+				
+				
 				// alert('Device is ready! Make sure you set your app_id
 				// below this alert.');
 				FB.init({
