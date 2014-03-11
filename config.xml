@@ -64,7 +64,6 @@
         <param name="APP_NAME" value="CyberSoldier" />
 	</gap:plugin>
 	<gap:plugin name="ihome.cordova.plugin.local-notification" />
-	<gap:plugin name="de.appplant.cordova.plugin.local-notification" />
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
