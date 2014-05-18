@@ -64,8 +64,6 @@ $(document).ready(function() {
 		var current_color = $(this);
 		var current_color_id = $(this).attr("id").split("_")[0];
 		$("." + current_color_id + "_color1").attr("fill", current_color.val());
-		
-		//console.log(current_color_id, current_color.val());
 	});
 	
 	$('.soldier_table').on("click", "img", function() {
@@ -202,7 +200,7 @@ function saveImage(){
 		}
 		data_arr[name_db] = cli.val().replace('#', '0x');
 		window.localStorage.setItem(name_db, cli.val().replace('#', ''));
-		console.log(">"+name_db + " " + cli.val().replace('0x', ''));
+		console.log(name_db + " " + cli.val().replace('#', '0x'));
 	});	
 	
 	//var color_list = $(".color_changer");
