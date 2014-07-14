@@ -48,8 +48,7 @@ var app = {
         /*
 		 * Push-test 1a
 		 */
-		var pushNotification = window.plugins.pushNotification;
-		pushNotification.register(app.pushSuccessHandler, app.pushErrorHandler,{"senderID":"305121912452","ecb":"app.onNotificationGCM"});
+		
 		
 		
 		//alert("Device platform: "+device.platform);
