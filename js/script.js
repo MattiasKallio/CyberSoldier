@@ -773,7 +773,6 @@ function doLogin(name, fbid) {
 		mega_secret_code : mega_secret_code,
 		name : name,
 		fbid : fbid,
-		gcm-regkeyen : gcm-regkeyen,
 		action : "login"
 	};
 	$.ajax({
