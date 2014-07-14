@@ -45,6 +45,12 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');*/
         console.log('Received Event: ' + id);
         
+        /*
+		 * Push-test 1a
+		 */
+		var pushNotification = window.plugins.pushNotification;
+		pushNotification.register(app.pushSuccessHandler, app.pushErrorHandler,{"senderID":"305121912452","ecb":"app.onNotificationGCM"});
+        
 		//alert("Device platform: "+device.platform);
 		ad_platform_type = device.platform != "undefined" ? device.platform : ad_platform_type;
 		switch(ad_platform_type){

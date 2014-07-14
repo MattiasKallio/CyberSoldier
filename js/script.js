@@ -54,7 +54,6 @@ function onNotificationGCM(e) {
 	    }
 
 
-// slut pushtest
 
 $(function() {
 	$(document).ready(function() {
@@ -70,12 +69,6 @@ $(function() {
 				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
 				
 				setCharacterBaseItems();
-				
-				/*
-				 * Push-test 1a
-				 */
-				var pushNotification = window.plugins.pushNotification;
-				pushNotification.register(app.pushSuccessHandler, app.pushErrorHandler,{"senderID":"305121912452","ecb":"app.onNotificationGCM"});
 				
 
 				// $("#mainbox").html("Yey, facebook initad!");
