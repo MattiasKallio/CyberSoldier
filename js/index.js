@@ -50,7 +50,8 @@ var app = {
 		 */
 		var pushNotification = window.plugins.pushNotification;
 		pushNotification.register(app.pushSuccessHandler, app.pushErrorHandler,{"senderID":"305121912452","ecb":"app.onNotificationGCM"});
-        
+		
+		
 		//alert("Device platform: "+device.platform);
 		ad_platform_type = device.platform != "undefined" ? device.platform : ad_platform_type;
 		switch(ad_platform_type){
@@ -71,5 +72,31 @@ var app = {
     },
     pushErrorHandler:function(error) {
         alert(error);
-    }
+    },
+    onNotificationGCM: function(e) {
+    	 switch( e.event )
+    	 {
+    	            case 'registered':
+    	                if ( e.regid.length > 0 )
+    	                {
+    	                    console.log("Regid " + e.regid);
+    	                    alert('registration id = '+e.regid);
+    	                }
+    	            break;
+    	 
+    	            case 'message':
+    	              // this is the actual push notification. its format depends on the data model from the push server
+    	              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+    	            break;
+    	 
+    	            case 'error':
+    	              alert('GCM error = '+e.msg);
+    	            break;
+    	 
+    	            default:
+    	              alert('An unknown GCM event has occurred');
+    	              break;
+    	        }
+    	    }
+
 };
