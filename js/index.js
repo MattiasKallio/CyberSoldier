@@ -44,11 +44,6 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');*/
         console.log('Received Event: ' + id);
-        
-        /*
-		 * Push-test 1a
-		 */
-		
 		
 		
 		//alert("Device platform: "+device.platform);
@@ -66,36 +61,6 @@ var app = {
 		}        
         
     },
-    pushSuccessHandler: function(result) {
-        alert('Callback Success! Result = '+result)
-    },
-    pushErrorHandler:function(error) {
-        alert(error);
-    },
-    onNotificationGCM: function(e) {
-    	 switch( e.event )
-    	 {
-    	            case 'registered':
-    	                if ( e.regid.length > 0 )
-    	                {
-    	                    console.log("Regid " + e.regid);
-    	                    alert('registration id = '+e.regid);
-    	                }
-    	            break;
-    	 
-    	            case 'message':
-    	              // this is the actual push notification. its format depends on the data model from the push server
-    	              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
-    	            break;
-    	 
-    	            case 'error':
-    	              alert('GCM error = '+e.msg);
-    	            break;
-    	 
-    	            default:
-    	              alert('An unknown GCM event has occurred');
-    	              break;
-    	        }
-    	    }
+
 
 };

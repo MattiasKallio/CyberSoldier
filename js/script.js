@@ -27,32 +27,18 @@ var db;
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 /*
-function onNotificationGCM(e) {
-	        switch( e.event )
-	        {
-	            case 'registered':
-	                if ( e.regid.length > 0 ){
-	                    console.log("Regid " + e.regid);
-	                    alert('registration id = '+e.regid);
-	                }
-	            break;
-	 
-	            case 'message':
-	              // this is the actual push notification. its format depends
-					// on the data model from the push server
-	              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
-	            break;
-	 
-	            case 'error':
-	              alert('GCM error = '+e.msg);
-	            break;
-	 
-	            default:
-	              alert('An unknown GCM event has occurred');
-	              break;
-	        }
-	    }
-*/
+ * function onNotificationGCM(e) {         switch( e.event )         {
+ *             case 'registered':                 if ( e.regid.length > 0 ){
+ *                     console.log("Regid " + e.regid);
+ *                     alert('registration id = '+e.regid);                 }
+ *             break;               case 'message':               // this is the
+ * actual push notification. its format depends // on the data model from the
+ * push server               alert('message = '+e.message+' msgcnt =
+ * '+e.msgcnt);             break;               case 'error':
+ *               alert('GCM error = '+e.msg);             break;  
+ *             default:               alert('An unknown GCM event has
+ * occurred');               break;         }     }
+ */
 
 
 
@@ -60,6 +46,31 @@ function onNotificationGCM(e) {
 $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
+			
+
+			/*
+			 * testar pupupush
+			 */
+		try{
+			pushNotification = window.plugins.pushNotification;
+	    	if (device.platform == 'android' || device.platform == 'Android') {
+				$("#app-status-ul").append('<li>registering android</li>');
+	        	pushNotification.register(app.pushSuccessHandler, app.pushErrorHandler, {"senderID":"305121912452","ecb":"app.onNotificationGCM"});		// required!
+			} else {
+				$("#app-status-ul").append('<li>registering iOS</li>');
+	        	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+	    	}
+	    }
+		catch(err) 
+		{ 
+			txt="There was an error on this page.\n\n"; 
+			txt+="Error description: " + err.message + "\n\n"; 
+			alert(txt); 
+		} 
+			
+			
+			
+			
 			try {
 				// alert('Device is ready! Make sure you set your app_id
 				// below this alert.');
@@ -72,28 +83,7 @@ $(function() {
 				
 				setCharacterBaseItems();
 				
-
-				/*
-				 * testar pupupush
-				 */
-			try{
-				pushNotification = window.plugins.pushNotification;
-            	if (device.platform == 'android' || device.platform == 'Android') {
-					$("#app-status-ul").append('<li>registering android</li>');
-                	pushNotification.register(app.pushSuccessHandler, app.pushErrorHandler, {"senderID":"305121912452","ecb":"app.onNotificationGCM"});		// required!
-				} else {
-					$("#app-status-ul").append('<li>registering iOS</li>');
-                	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
-            	}
-            }
-			catch(err) 
-			{ 
-				txt="There was an error on this page.\n\n"; 
-				txt+="Error description: " + err.message + "\n\n"; 
-				alert(txt); 
-			} 
-				
-				
+								
 				
 				
 				// $("#mainbox").html("Yey, facebook initad!");
@@ -663,8 +653,7 @@ $(function() {
  * console.log("character_items table: " + len + " rows found."); for (var i=0;
  * i<len; i++){ console.log("Row = " + i + " ID = " + results.rows.item(i).id + "
  * Name = " + results.rows.item(i).name + " Icon = " +
- * results.rows.item(i).icon);
- *  } }
+ * results.rows.item(i).icon); } }
  */
 function querySuccess(tx, results) {
 	var str_uuut = "DB query done";
@@ -679,8 +668,7 @@ function queryFail(tx, err) {
  * undefined ? "" : ' AND type="' + type + '"';
  * 
  * if (db) { db.transaction(function(tx) { tx.executeSql('SELECT * FROM
- * character_items', [], setTheIcons, queryFail); }, queryFail); }
- *  }
+ * character_items', [], setTheIcons, queryFail); }, queryFail); } }
  */
 function setCharacterBaseItems(){
 	// TODO: check if they're set in local db.
@@ -878,3 +866,37 @@ function handleStatusChange(response) {
 		// window.location.hash = '#login';
 	}
 }
+
+
+function pushSuccessHandler(result) {
+    alert('Callback Success! Result = '+result)
+}
+function pushErrorHandler(error) {
+    alert(error);
+}
+function onNotificationGCM(e) {
+	 switch( e.event )
+	 {
+	            case 'registered':
+	                if ( e.regid.length > 0 )
+	                {
+	                    console.log("Regid " + e.regid);
+	                    alert('registration id = '+e.regid);
+	                }
+	            break;
+	 
+	            case 'message':
+	              // this is the actual push notification. its format depends
+					// on the data model from the push server
+	              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+	            break;
+	 
+	            case 'error':
+	              alert('GCM error = '+e.msg);
+	            break;
+	 
+	            default:
+	              alert('An unknown GCM event has occurred');
+	              break;
+	        }
+	    }
