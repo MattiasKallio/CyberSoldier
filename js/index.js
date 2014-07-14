@@ -59,7 +59,7 @@ var app = {
 			break;	
 		}        
         
-    }
+    },
     pushSuccessHandler: function(result) {
         alert('Callback Success! Result = '+result)
     },
