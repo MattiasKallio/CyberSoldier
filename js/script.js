@@ -861,7 +861,7 @@ function onNotificationGCM(e) {
 	 {
 	            case 'registered':
 	                if ( e.regid.length > 0 ){
-						window.localStorage.setItem("gcm-regkeyen", e.regid);
+						//window.localStorage.setItem("gcm-regkeyen", e.regid);
 	                    console.log("Regid " + e.regid);
 	                    alert('registration id = '+e.regid);
 	                }
