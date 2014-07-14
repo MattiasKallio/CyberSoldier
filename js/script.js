@@ -26,7 +26,7 @@ var db;
 	 */
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
-
+/*
 function onNotificationGCM(e) {
 	        switch( e.event )
 	        {
@@ -52,6 +52,8 @@ function onNotificationGCM(e) {
 	              break;
 	        }
 	    }
+*/
+
 
 
 
@@ -71,6 +73,29 @@ $(function() {
 				setCharacterBaseItems();
 				
 
+				/*
+				 * testar pupupush
+				 */
+			try{
+				pushNotification = window.plugins.pushNotification;
+            	if (device.platform == 'android' || device.platform == 'Android') {
+					$("#app-status-ul").append('<li>registering android</li>');
+                	pushNotification.register(successHandler, errorHandler, {"senderID":"661780372179","ecb":"onNotificationGCM"});		// required!
+				} else {
+					$("#app-status-ul").append('<li>registering iOS</li>');
+                	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+            	}
+            }
+			catch(err) 
+			{ 
+				txt="There was an error on this page.\n\n"; 
+				txt+="Error description: " + err.message + "\n\n"; 
+				alert(txt); 
+			} 
+				
+				
+				
+				
 				// $("#mainbox").html("Yey, facebook initad!");
 			} catch (e) {
 				alert(e);
