@@ -865,7 +865,7 @@ function onNotificationGCM(e) {
 	                {
 						window.localStorage.setItem("regkeyen", e.regid);
 	                    console.log("Regid " + e.regid);
-	                    alert('registration id = '+e.regid + " " + getRegistrationId());
+	                    alert('registration id = '+e.regid);
 						$("#mainbox").append(e.regid);
 	                }
 	            break;
