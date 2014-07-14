@@ -11,6 +11,7 @@ var db;
  var path_to_process = "http://www.cybersoldier.com/app/"; 
  var uid = window.localStorage.getItem("user_id"); 
  var logedin_user_id = uid != null ? uid : 0;
+ var gmc_regkeyvar = 0000;
 
  
  /*
@@ -767,7 +768,8 @@ function fetchInfo(id, page) {
 
 function doLogin(name, fbid) {
 	
-	var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? false : window.localStorage.getItem("gcmregkeyen") ;
+	var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
+	alert(gcmregkeyen);
 	
 	var dataarr = {
 		mega_secret_code : mega_secret_code,
@@ -861,9 +863,10 @@ function onNotificationGCM(e) {
 	 {
 	            case 'registered':
 	                if ( e.regid.length > 0 ){
-						window.localStorage.setItem("gcmregkeyen", e.regid);
-	                    console.log("Regid " + e.regid);
-	                    alert('registration id = '+e.regid);
+						gmc_regkeyvar = e.regid;
+						window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
+	                    console.log("Regid " + gmc_regkeyvar);
+	                    alert('registration id = '+gmc_regkeyvare.regid);
 	                }
 	            break;
 	 
