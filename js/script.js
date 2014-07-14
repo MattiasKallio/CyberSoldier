@@ -769,7 +769,6 @@ function fetchInfo(id, page) {
 function doLogin(name, fbid) {
 	
 	var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
-	alert(gcmregkeyen);
 	
 	var dataarr = {
 		mega_secret_code : mega_secret_code,
