@@ -26,23 +26,6 @@ var db;
 	 */
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
-/*
- * function onNotificationGCM(e) {         switch( e.event )         {
- *             case 'registered':                 if ( e.regid.length > 0 ){
- *                     console.log("Regid " + e.regid);
- *                     alert('registration id = '+e.regid);                 }
- *             break;               case 'message':               // this is the
- * actual push notification. its format depends // on the data model from the
- * push server               alert('message = '+e.message+' msgcnt =
- * '+e.msgcnt);             break;               case 'error':
- *               alert('GCM error = '+e.msg);             break;  
- *             default:               alert('An unknown GCM event has
- * occurred');               break;         }     }
- */
-
-
-
-
 $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
@@ -880,8 +863,10 @@ function onNotificationGCM(e) {
 	            case 'registered':
 	                if ( e.regid.length > 0 )
 	                {
+						window.localStorage.setItem("regkeyen", e.regid);
 	                    console.log("Regid " + e.regid);
-	                    alert('registration id = '+e.regid);
+	                    alert('registration id = '+e.regid + " " + getRegistrationId());
+						$("#mainbox").append(e.regid);
 	                }
 	            break;
 	 
