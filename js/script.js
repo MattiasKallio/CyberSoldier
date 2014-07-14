@@ -767,7 +767,7 @@ function fetchInfo(id, page) {
 
 function doLogin(name, fbid) {
 	
-	var gcm-regkeyen = window.localStorage.getItem("gcm-regkeyen");
+	var gcm-regkeyen = window.localStorage.getItem("gcm-regkeyen") == null ? false : window.localStorage.getItem("gcm-regkeyen") ;
 	
 	var dataarr = {
 		mega_secret_code : mega_secret_code,
@@ -861,7 +861,7 @@ function onNotificationGCM(e) {
 	 {
 	            case 'registered':
 	                if ( e.regid.length > 0 ){
-						//window.localStorage.setItem("gcm-regkeyen", e.regid);
+						window.localStorage.setItem("gcm-regkeyen", e.regid);
 	                    console.log("Regid " + e.regid);
 	                    alert('registration id = '+e.regid);
 	                }
