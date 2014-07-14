@@ -30,30 +30,6 @@ $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
 			
-
-			/*
-			 * testar pupupush
-			 */
-		try{
-			pushNotification = window.plugins.pushNotification;
-	    	if (device.platform == 'android' || device.platform == 'Android') {
-				$("#app-status-ul").append('<li>registering android</li>');
-	        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
-			} else {
-				$("#app-status-ul").append('<li>registering iOS</li>');
-	        	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
-	    	}
-	    }
-		catch(err) 
-		{ 
-			txt="There was an error on this page.\n\n"; 
-			txt+="Error description: " + err.message + "\n\n"; 
-			alert(txt); 
-		} 
-			
-			
-			
-			
 			try {
 				// alert('Device is ready! Make sure you set your app_id
 				// below this alert.');
@@ -66,7 +42,26 @@ $(function() {
 				
 				setCharacterBaseItems();
 				
-								
+
+				/*
+				 * testar pupupush
+				 */
+			try{
+				pushNotification = window.plugins.pushNotification;
+		    	if (device.platform == 'android' || device.platform == 'Android') {
+					$("#app-status-ul").append('<li>registering android</li>');
+		        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
+				} else {
+					$("#app-status-ul").append('<li>registering iOS</li>');
+		        	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+		    	}
+		    }
+			catch(err) 
+			{ 
+				txt="There was an error on this page.\n\n"; 
+				txt+="Error description: " + err.message + "\n\n"; 
+				alert(txt); 
+			}				
 				
 				
 				// $("#mainbox").html("Yey, facebook initad!");
@@ -865,10 +860,9 @@ function onNotificationGCM(e) {
 	 switch( e.event )
 	 {
 	            case 'registered':
-	                if ( e.regid.length > 0 )
-	                {
+	                if ( e.regid.length > 0 ){
 						window.localStorage.setItem("gcm-regkeyen", e.regid);
-	                    //console.log("Regid " + e.regid);
+	                    console.log("Regid " + e.regid);
 	                    alert('registration id = '+e.regid);
 	                }
 	            break;
