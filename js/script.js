@@ -872,7 +872,7 @@ function pushSuccessHandler(result) {
     alert('Callback Success! Result = '+result)
 }
 function pushErrorHandler(error) {
-    alert(error);
+    alert("push error: "+error);
 }
 function onNotificationGCM(e) {
 	 switch( e.event )
