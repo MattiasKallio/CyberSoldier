@@ -14,17 +14,47 @@ var db;
 
  
  /*
-var path_to_process = "http://localhost/facebook_cs/app/";
-var fbid = "633198662";
-var fbname = "Mattias Urbanus Kallio";
-
-var logedin_user_id = 1418;
-
-window.localStorage.setItem("name", "Kaylooooo");
-window.localStorage.setItem("fbid", fbid);
-window.localStorage.setItem("friends_csv", "796045376,524929316,100003932599803,100000609515555,587005481");
-*/
+	 * var path_to_process = "http://localhost/facebook_cs/app/"; var fbid =
+	 * "633198662"; var fbname = "Mattias Urbanus Kallio";
+	 * 
+	 * var logedin_user_id = 1418;
+	 * 
+	 * window.localStorage.setItem("name", "Kaylooooo");
+	 * window.localStorage.setItem("fbid", fbid);
+	 * window.localStorage.setItem("friends_csv",
+	 * "796045376,524929316,100003932599803,100000609515555,587005481");
+	 */
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
+
+
+function onNotificationGCM(e) {
+	        switch( e.event )
+	        {
+	            case 'registered':
+	                if ( e.regid.length > 0 ){
+	                    console.log("Regid " + e.regid);
+	                    alert('registration id = '+e.regid);
+	                }
+	            break;
+	 
+	            case 'message':
+	              // this is the actual push notification. its format depends
+					// on the data model from the push server
+	              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+	            break;
+	 
+	            case 'error':
+	              alert('GCM error = '+e.msg);
+	            break;
+	 
+	            default:
+	              alert('An unknown GCM event has occurred');
+	              break;
+	        }
+	    }
+
+
+// slut pushtest
 
 $(function() {
 	$(document).ready(function() {
@@ -40,6 +70,12 @@ $(function() {
 				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
 				
 				setCharacterBaseItems();
+				
+				/*
+				 * Push-test 1a
+				 */
+				var pushNotification = window.plugins.pushNotification;
+				pushNotification.register(app.pushSuccessHandler, app.pushErrorHandler,{"senderID":"305121912452","ecb":"app.onNotificationGCM"});
 				
 
 				// $("#mainbox").html("Yey, facebook initad!");
@@ -93,7 +129,7 @@ $(function() {
 							role : 'page'
 						});
 					} else {
-						//$("#listbox").html(data);
+						// $("#listbox").html(data);
 					}
 					page_is_loading = false;
 				},
@@ -161,7 +197,7 @@ $(function() {
 			data : data,
 			cache : false,
 			success : function(data) {
-				//console.log(data);
+				// console.log(data);
 				var response = JSON.parse(data);
 				if (response.result == "ok") {
 					$("#mainbox").html(response.html_mainbox);
@@ -246,7 +282,7 @@ $(function() {
 		});
 
 		$("#listbox_startbattle").on("click", "#start_battle", function(e) {
-			//alert("BOOM, start.");
+			// alert("BOOM, start.");
 			var head = $("#head").val();
 			var tail = $("#tail").val();
 			var type = $("#type").val();
@@ -351,7 +387,7 @@ $(function() {
 				data : data,
 				cache : false,
 				success : function(response) {
-					//alert(response);
+					// alert(response);
 					var response = JSON.parse(response);
 					if (response.result == "ok") {
 						$("#reply_box").fadeOut();
@@ -388,29 +424,27 @@ $(function() {
 				cache : false,
 				success : function(response) {
 					thiss.addClass("battle_score_button_marked");
-					//alert(response);
-					// Borde vara n�t som �ndrar score, och markerar att man
-					// r�stat p� n�t s�tt.
+					// alert(response);
+					// Borde vara n�t som �ndrar score, och markerar att man
+					// r�stat p� n�t s�tt.
 				}
 			});
 
 		});
 
-		/*$(window).scroll(function() {
-			if ($(window).scrollTop() + $(window).height() >= $(document).height() * 0.80) {
-				var from = $("#list_from").val();
-				var list_type = $("#list_type").val();
-				var list_id = $("#list_id").val();
-				if (!last_is_fetched && from != 0)
-					setpage(list_type, list_id, from, true);
-			}
-		});*/
+		/*
+		 * $(window).scroll(function() { if ($(window).scrollTop() +
+		 * $(window).height() >= $(document).height() * 0.80) { var from =
+		 * $("#list_from").val(); var list_type = $("#list_type").val(); var
+		 * list_id = $("#list_id").val(); if (!last_is_fetched && from != 0)
+		 * setpage(list_type, list_id, from, true); } });
+		 */
 		
 		$(".morebutton").on("click", function() {
 			var from = $("#list_from").val();
 			var list_type = $("#list_type").val();
 			var list_id = $("#list_id").val();
-			//alert(list_type+" "+from+" "+list_id+" ");
+			// alert(list_type+" "+from+" "+list_id+" ");
 			if (!last_is_fetched && from != 0) {
 				setpage(list_type, list_id, from, true);
 			}
@@ -500,7 +534,7 @@ $(function() {
 						data : data,
 						cache : false,
 						success : function(data) {
-							//console.log(data);
+							// console.log(data);
 							$("#firstpanel").panel("close");
 							$("#morebutton").html(" - Click for More - ");
 							var response = JSON.parse(data);
@@ -607,15 +641,13 @@ $(function() {
 	});
 });
 /*
-function setTheIcons(tx, results) {
-	var len = results.rows.length;
-	console.log("character_items table: " + len + " rows found.");
-	for (var i=0; i<len; i++){
-	    console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Name =  " + results.rows.item(i).name + " Icon =  " + results.rows.item(i).icon);
-	    
-	}
-}
-*/
+ * function setTheIcons(tx, results) { var len = results.rows.length;
+ * console.log("character_items table: " + len + " rows found."); for (var i=0;
+ * i<len; i++){ console.log("Row = " + i + " ID = " + results.rows.item(i).id + "
+ * Name = " + results.rows.item(i).name + " Icon = " +
+ * results.rows.item(i).icon);
+ *  } }
+ */
 function querySuccess(tx, results) {
 	var str_uuut = "DB query done";
 	console.log(str_uuut);
@@ -625,19 +657,15 @@ function queryFail(tx, err) {
 	console.log("Error processing SQL: " + err.code + " " + err.message);
 }
 /*
-function getCharacterItems(type) {
-	var type_str = type == null || type == undefined ? "" : ' AND type="' + type + '"';
-
-	if (db) {
-		db.transaction(function(tx) {
-			tx.executeSql('SELECT * FROM character_items', [], setTheIcons, queryFail);
-		}, queryFail);
-	}
-
-}
-*/
+ * function getCharacterItems(type) { var type_str = type == null || type ==
+ * undefined ? "" : ' AND type="' + type + '"';
+ * 
+ * if (db) { db.transaction(function(tx) { tx.executeSql('SELECT * FROM
+ * character_items', [], setTheIcons, queryFail); }, queryFail); }
+ *  }
+ */
 function setCharacterBaseItems(){
-	//TODO: check if they're set in local db.
+	// TODO: check if they're set in local db.
 	$.getScript("js/base_items.js", function(){
 		   var clizt = base_items_data.char_list;
 	
@@ -659,7 +687,7 @@ function setCharacterBaseItems(){
 }
 
 function updateCharacterItems() {
-	//TODO:[needs ids from current]
+	// TODO:[needs ids from current]
 	var data = {
 		mega_secret_code : mega_secret_code,
 		action : "update_items",
@@ -672,7 +700,7 @@ function updateCharacterItems() {
 		data : data,
 		cache : false,
 		success : function(data) {
-			//alert(data);
+			// alert(data);
 			var response = JSON.parse(data);
 			if (response.result == "ok") {
 				var db_done = false;
@@ -686,23 +714,30 @@ function updateCharacterItems() {
 					db.transaction(txede, queryFail, querySuccess);
 				}
 				function txede(tx) {
-					//var svg_cl = clizt[i].svg_info.replace(/\"/g,'');
-					//str_ut += 'INSERT INTO character_items (id, type, name, icon, svg_info, date_added) VALUES ("'+clizt[i].id+'","'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+clizt[i].svg_info.replace(/\"/g,'')+'",,"'+clizt[i].date_added+'",)';
-					//tx.executeSql('INSERT INTO character_items (id, type, name, icon, svg_info, date_added) VALUES ('+clizt[i].id+',"'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+svg_cl+'","'+clizt[i].date_added+'")');
-					//tx.executeSql('INSERT INTO character_items (id, type) VALUES (2,"bla")');
+					// var svg_cl = clizt[i].svg_info.replace(/\"/g,'');
+					// str_ut += 'INSERT INTO character_items (id, type, name,
+					// icon, svg_info, date_added) VALUES
+					// ("'+clizt[i].id+'","'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+clizt[i].svg_info.replace(/\"/g,'')+'",,"'+clizt[i].date_added+'",)';
+					// tx.executeSql('INSERT INTO character_items (id, type,
+					// name, icon, svg_info, date_added) VALUES
+					// ('+clizt[i].id+',"'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+svg_cl+'","'+clizt[i].date_added+'")');
+					// tx.executeSql('INSERT INTO character_items (id, type)
+					// VALUES (2,"bla")');
 					
 						for ( var i in clizt) {
-							//str_ut += clizt[i].name+"\n";
-							//tx.executeSql("INSERT INTO character_items (id, type) VALUES (" + i + ",'bla')", [], querySuccess, queryFail);
+							// str_ut += clizt[i].name+"\n";
+							// tx.executeSql("INSERT INTO character_items (id,
+							// type) VALUES (" + i + ",'bla')", [],
+							// querySuccess, queryFail);
 							var svg_cl = clizt[i].svg_info.replace(/\"/g,"'");
 							tx.executeSql('INSERT INTO character_items (id, type, name, icon, svg_info, date_added) VALUES ('+clizt[i].id+',"'+clizt[i].type+'","'+clizt[i].name+'","'+clizt[i].icon+'","'+svg_cl+'","'+clizt[i].date_added+'")');
-							//str_ut += " " + i;
+							// str_ut += " " + i;
 						}
-					//console.log(str_ut);
-					//console.log("Rows Affected = " + results.rowAffected);
+					// console.log(str_ut);
+					// console.log("Rows Affected = " + results.rowAffected);
 				}
 
-				//console.log(str_ut);
+				// console.log(str_ut);
 
 			} else {
 				console.log(data);
@@ -730,7 +765,7 @@ function fetchInfo(id, page) {
 		data : data,
 		cache : false,
 		success : function(data) {
-			//console.log(data);
+			// console.log(data);
 			var response = JSON.parse(data);
 			if (response.result == "ok") {
 				$("html, body").animate({
@@ -759,7 +794,7 @@ function doLogin(name, fbid) {
 		data : dataarr,
 		cache : false,
 		success : function(data) {
-			//alert(data);
+			// alert(data);
 			var response = JSON.parse(data);
 			if (response.result == "ok") {
 				window.localStorage.setItem("user_id", response.user_id);

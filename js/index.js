@@ -60,4 +60,10 @@ var app = {
 		}        
         
     }
+    pushSuccessHandler: function(result) {
+        alert('Callback Success! Result = '+result)
+    },
+    pushErrorHandler:function(error) {
+        alert(error);
+    }
 };
