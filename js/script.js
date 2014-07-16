@@ -868,7 +868,7 @@ function onNotificationGCM(e) {
 				gmc_regkeyvar = e.regid;
 				window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
 	            console.log("Regid " + gmc_regkeyvar);
-	            alert('registration id = '+gmc_regkeyvar);
+	            //alert('registration id = '+gmc_regkeyvar);
 			}
 		break;
 		case 'message':
