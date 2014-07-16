@@ -874,7 +874,7 @@ function onNotificationGCM(e) {
 		case 'message':
 	    	// this is the actual push notification. its format depends
 			// on the data model from the push server
-	        alert('message = '+e.message + 'message count = '+e.msgcnt);
+	        alert('message = '+e.message + 'message count = '+e.msgcnt + 'battle_id = '+e.battle_id);
 			var page = "battle.php";
 			fetchInfo(e.battle_id, page);
 			
