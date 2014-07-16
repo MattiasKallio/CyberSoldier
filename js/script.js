@@ -860,29 +860,30 @@ function pushErrorHandler(error) {
     alert("push error: "+error);
 }
 function onNotificationGCM(e) {
+	alert(e.event);
 	 switch( e.event )
 	 {
-	            case 'registered':
-	                if ( e.regid.length > 0 ){
-						gmc_regkeyvar = e.regid;
-						window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
-	                    console.log("Regid " + gmc_regkeyvar);
-	                    alert('registration id = '+gmc_regkeyvar);
-	                }
-	            break;
+		case 'registered':
+	    	if ( e.regid.length > 0 ){
+				gmc_regkeyvar = e.regid;
+				window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
+	            console.log("Regid " + gmc_regkeyvar);
+	            alert('registration id = '+gmc_regkeyvar);
+			}
+		break;
+		case 'message':
+	    	// this is the actual push notification. its format depends
+			// on the data model from the push server
+	        alert('message = '+e.message);
+			
+		break;
 	 
-	            case 'message':
-	              // this is the actual push notification. its format depends
-					// on the data model from the push server
-	              alert('message = '+e.message);
-	            break;
+	    case 'error':
+	    	alert('GCM error = '+e.msg);
+		break;
 	 
-	            case 'error':
-	              alert('GCM error = '+e.msg);
-	            break;
-	 
-	            default:
-	              alert('An unknown GCM event has occurred');
-	              break;
-	        }
-	    }
+		default:
+	    	alert('An unknown GCM event has occurred');
+		break;
+	}
+}
