@@ -791,6 +791,7 @@ function doLogin(name, fbid) {
 				window.localStorage.setItem("description", response.csuserinfo.description);
 				window.localStorage.setItem("fbid", response.csuserinfo.fbid);
 				window.localStorage.setItem("language", response.csuserinfo.language);
+				window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
 				
 				for(var i in response.csuser_colors){
 					window.localStorage.setItem(i, response.csuser_colors[i]);
@@ -808,6 +809,7 @@ function doLogin(name, fbid) {
 				window.localStorage.setItem("description", response.csuserinfo.description);
 				window.localStorage.setItem("fbid", response.csuserinfo.fbid);
 				window.localStorage.setItem("language", response.csuserinfo.language);
+				window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
 				$.mobile.changePage('settings.html', {
 					transition : 'slide',
 					changeHash : true,
@@ -872,7 +874,7 @@ function onNotificationGCM(e) {
 	            case 'message':
 	              // this is the actual push notification. its format depends
 					// on the data model from the push server
-	              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+	              alert('message = '+e.message+');
 	            break;
 	 
 	            case 'error':
