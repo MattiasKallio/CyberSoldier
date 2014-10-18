@@ -82,7 +82,7 @@ $(function() {
 			var name = window.localStorage.getItem("name");
 			var tfbid = window.localStorage.getItem("fbid");
 			var name_out = name != null ? name : "Hittade inget namn...";
-			// alert(name_out+" "+logedin_user_id);
+			alert(name_out+" "+logedin_user_id);
 			if (name != null) {
 				doLogin(name, tfbid, true);
 			}
@@ -132,8 +132,7 @@ $(function() {
 				try {
 					FB.login(function(response) {
 						FB.api('/me', function(response) {
-							// alert('Good to see you, ' + response.name +
-							// '.');
+							alert('Good to see you, ' + response.name + '.');
 							fbname = response.name;
 							fbid = response.id;
 							doLogin(fbname, fbid, true);
