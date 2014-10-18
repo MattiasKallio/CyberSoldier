@@ -32,7 +32,8 @@ $(function() {
 		document.addEventListener('deviceready', function() {
 			
 			try {
-				 alert('Device is ready! Make sure you set your app_id below this alert.');
+				// alert('Device is ready! Make sure you set your app_id
+				// below this alert.');
 				FB.init({
 					appId : "370101043065651",
 					nativeInterface : CDV.FB,
@@ -66,8 +67,7 @@ $(function() {
 				
 				// $("#mainbox").html("Yey, facebook initad!");
 			} catch (e) {
-				alert("daffak? Inte inloggad");
-				//alert(e);
+				alert(e);
 			}
 
 			/*
@@ -82,7 +82,7 @@ $(function() {
 			var name = window.localStorage.getItem("name");
 			var tfbid = window.localStorage.getItem("fbid");
 			var name_out = name != null ? name : "Hittade inget namn...";
-			alert(name_out+" "+logedin_user_id);
+			// alert(name_out+" "+logedin_user_id);
 			if (name != null) {
 				doLogin(name, tfbid, true);
 			}
@@ -132,7 +132,8 @@ $(function() {
 				try {
 					FB.login(function(response) {
 						FB.api('/me', function(response) {
-							alert('Good to see you, ' + response.name + '.');
+							// alert('Good to see you, ' + response.name +
+							// '.');
 							fbname = response.name;
 							fbid = response.id;
 							doLogin(fbname, fbid, true);
