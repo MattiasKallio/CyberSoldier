@@ -46,7 +46,7 @@ $(function() {
 
 				/*
 				 * testar pupupush
-				 */
+				
 			try{
 				pushNotification = window.plugins.pushNotification;
 		    	if (device.platform == 'android' || device.platform == 'Android') {
@@ -62,7 +62,7 @@ $(function() {
 				txt="There was an error on this page.\n\n"; 
 				txt+="Error description: " + err.message + "\n\n"; 
 				alert(txt); 
-			}				
+			}	 */			
 				
 				
 				// $("#mainbox").html("Yey, facebook initad!");
