@@ -66,7 +66,8 @@ $(function() {
 				
 				// $("#mainbox").html("Yey, facebook initad!");
 			} catch (e) {
-				alert("Login failed... "+e);
+				alert("daffak? Inte inloggad");
+				//alert(e);
 			}
 
 			/*
