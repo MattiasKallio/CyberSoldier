@@ -44,8 +44,6 @@ $(function() {
 				setCharacterBaseItems();
 				
 
-				/*
-				 * testar pupupush
 				
 			try{
 				pushNotification = window.plugins.pushNotification;
@@ -53,8 +51,10 @@ $(function() {
 					$("#app-status-ul").append('<li>registering android</li>');
 		        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
 				} else {
+					/*Do some iphone magic
 					$("#app-status-ul").append('<li>registering iOS</li>');
 		        	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+		        	*/
 		    	}
 		    }
 			catch(err) 
@@ -62,7 +62,7 @@ $(function() {
 				txt="There was an error on this page.\n\n"; 
 				txt+="Error description: " + err.message + "\n\n"; 
 				alert(txt); 
-			}	 */			
+			}	 		
 				
 				
 				// $("#mainbox").html("Yey, facebook initad!");
@@ -791,7 +791,7 @@ function doLogin(name, fbid) {
 				window.localStorage.setItem("description", response.csuserinfo.description);
 				window.localStorage.setItem("fbid", response.csuserinfo.fbid);
 				window.localStorage.setItem("language", response.csuserinfo.language);
-				window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
+				window.localStorage.setItem("gcmregkeyen", gcmregkeyen);
 				
 				for(var i in response.csuser_colors){
 					window.localStorage.setItem(i, response.csuser_colors[i]);

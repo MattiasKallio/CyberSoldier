@@ -50,7 +50,7 @@
         <param name="APP_ID" value="370101043065651" />
         <param name="APP_NAME" value="CyberSoldier" />
 	</gap:plugin>
-	<gap:plugin name="com.phonegap.plugins.pushplugin" version="2.1.1" />
+	<gap:plugin name="com.phonegap.plugins.pushplugin" />
 	
 	<!-- 
 	<gap:plugin name="org.apache.cordova.battery-status" />

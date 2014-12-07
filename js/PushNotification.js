@@ -4,7 +4,9 @@ var PushNotification = function() {
 
 // Call this to register for push notifications. Content of [options] depends on whether we are working with APNS (iOS) or GCM (Android)
 PushNotification.prototype.register = function(successCallback, errorCallback, options) {
-    if (errorCallback == null) { errorCallback = function() {}}
+    if (errorCallback == null) { 
+    	errorCallback = function(){}
+    }
 
     if (typeof errorCallback != "function")  {
         console.log("PushNotification.register failure: failure parameter not a function");
@@ -21,7 +23,9 @@ PushNotification.prototype.register = function(successCallback, errorCallback, o
 
 // Call this to unregister for push notifications
 PushNotification.prototype.unregister = function(successCallback, errorCallback) {
-    if (errorCallback == null) { errorCallback = function() {}}
+    if (errorCallback == null) {
+    	errorCallback = function() {}
+    }
 
     if (typeof errorCallback != "function")  {
         console.log("PushNotification.unregister failure: failure parameter not a function");
@@ -39,11 +43,13 @@ PushNotification.prototype.unregister = function(successCallback, errorCallback)
  
 // Call this to set the application icon badge
 PushNotification.prototype.setApplicationIconBadgeNumber = function(successCallback, errorCallback, badge) {
-    if (errorCallback == null) { errorCallback = function() {}}
+    if (errorCallback == null) {
+    	errorCallback = function() {}
+    }
 
     if (typeof errorCallback != "function")  {
-        console.log("PushNotification.setApplicationIconBadgeNumber failure: failure parameter not a function");
-        return
+    	console.log("PushNotification.setApplicationIconBadgeNumber failure: failure parameter not a function");
+    	return
     }
 
     if (typeof successCallback != "function") {
