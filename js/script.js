@@ -12,6 +12,7 @@ var db;
  var uid = window.localStorage.getItem("user_id"); 
  var logedin_user_id = uid != null ? uid : 0;
  var gmc_regkeyvar = 0000;
+ var apnregkeyen = 000;
 
  
  /*
@@ -48,13 +49,13 @@ $(function() {
 			try{
 				pushNotification = window.plugins.pushNotification;
 		    	if (device.platform == 'android' || device.platform == 'Android') {
-					$("#app-status-ul").append('<li>registering android</li>');
+					//$("#app-status-ul").append('<li>registering android</li>');
 		        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
 				} else {
-					/*Do some iphone magic
-					$("#app-status-ul").append('<li>registering iOS</li>');
-		        	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
-		        	*/
+					//Do some iphone magic
+					//$("#app-status-ul").append('<li>registering iOS</li>');
+		        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+
 		    	}
 		    }
 			catch(err) 
@@ -99,7 +100,7 @@ $(function() {
 				user_id : window.localStorage.getItem("user_id"),
 				name : $("#streetname").val(),
 				description : $("#description").val(),
-				language : $("#language_pref").val(),
+				language : $("#language_pref").val()
 			};
 
 			$.ajax({
@@ -768,13 +769,19 @@ function fetchInfo(id, page) {
 
 function doLogin(name, fbid) {
 	
-	var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
+	if (device.platform == 'android' || device.platform == 'Android') {
+		var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
+	}
+	else{
+		var apnregkeyen = window.localStorage.getItem("apnregkeyen") == null ? apn_regkeyvar : window.localStorage.getItem("apnregkeyen") ;
+	}
 	
 	var dataarr = {
 		mega_secret_code : mega_secret_code,
 		name : name,
 		fbid : fbid,
 		gcmregkeyen : gcmregkeyen,
+		apnregkeyen : apnregkeyen,
 		action : "login"
 	};
 	$.ajax({
@@ -792,6 +799,7 @@ function doLogin(name, fbid) {
 				window.localStorage.setItem("fbid", response.csuserinfo.fbid);
 				window.localStorage.setItem("language", response.csuserinfo.language);
 				window.localStorage.setItem("gcmregkeyen", gcmregkeyen);
+				window.localStorage.setItem("apnregkeyen", apnregkeyen);
 				
 				for(var i in response.csuser_colors){
 					window.localStorage.setItem(i, response.csuser_colors[i]);
@@ -809,7 +817,8 @@ function doLogin(name, fbid) {
 				window.localStorage.setItem("description", response.csuserinfo.description);
 				window.localStorage.setItem("fbid", response.csuserinfo.fbid);
 				window.localStorage.setItem("language", response.csuserinfo.language);
-				window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
+				window.localStorage.setItem("gcmregkeyen", gcmregkeyen);
+				window.localStorage.setItem("apnregkeyen", apnregkeyen);
 				$.mobile.changePage('settings.html', {
 					transition : 'slide',
 					changeHash : true,
@@ -855,10 +864,19 @@ function handleStatusChange(response) {
 
 function pushSuccessHandler(result) {
     //alert('Callback Success! Result = '+result)
+	if (device.platform == 'android' || device.platform == 'Android') {
+		//Do android stuff, but key i set in onNotificationGCM.
+	}
+	else{
+		apnregkeyen = result;
+		window.localStorage.setItem("apnregkeyen", apnregkeyen);
+		alert(apnregkeyen);
+	}
 }
 function pushErrorHandler(error) {
     alert("push error: "+error);
 }
+
 function onNotificationGCM(e) {
 	//alert(e.event);
 	 switch( e.event )
@@ -888,4 +906,19 @@ function onNotificationGCM(e) {
 	    	alert('An unknown GCM event has occurred');
 		break;
 	}
+}
+
+function onNotificationAPN(e){
+	var pushNotification = window.plugins.pushNotification;
+    if (e.alert) {
+        navigator.notification.alert(e.alert);
+    }
+    if (e.badge) {
+        console.log("Set badge on  " + pushNotification);
+        pushNotification.setApplicationIconBadgeNumber(this.successHandler, e.badge);
+    }
+    if (e.sound) {
+        var snd = new Media(e.sound);
+        snd.play();
+    }	
 }
