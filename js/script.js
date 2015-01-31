@@ -37,8 +37,8 @@ $(function() {
 				alert('Device is ready! Make sure you set your app_id below this alert.'+"\nplatform: "+device.platform);
 				FB.init({
 					appId : "370101043065651",
-					nativeInterface : CDV.FB,
-					useCachedDialogs : false
+					xfbml      : true,
+			        version    : 'v2.1'
 				});
 				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
 				
