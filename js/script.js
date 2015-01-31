@@ -119,10 +119,10 @@ $(function() {
 									
 									//alert(JSON.stringify(response));
 									//var resp = JSON.parse(JSON.stringify(response));
-									alert("Name : " +  resp.name);
+									alert("Name : " +  response.name);
 							
-									fbname = resp.name;
-									fbid = resp.id;
+									fbname = response.name;
+									fbid = response.id;
 									//doLogin(fbname, fbid, true);
 							  
 								},
