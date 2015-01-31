@@ -768,6 +768,7 @@ function fetchInfo(id, page) {
 }
 
 function doLogin(name, fbid) {
+	alert("login!");
 	
 	if (device.platform == 'android' || device.platform == 'Android') {
 		var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
@@ -775,8 +776,6 @@ function doLogin(name, fbid) {
 	else{
 		var apnregkeyen = window.localStorage.getItem("apnregkeyen") == null ? apn_regkeyvar : window.localStorage.getItem("apnregkeyen") ;
 	}
-	
-	alert("key!"+apnregkeyen);
 	
 	var dataarr = {
 		mega_secret_code : mega_secret_code,
