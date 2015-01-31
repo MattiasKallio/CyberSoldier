@@ -35,13 +35,13 @@ $(function() {
 			try {				
 				var appId = "370101043065651";
                 facebookConnectPlugin.browserInit(appId);
-                
-                db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
-				setCharacterBaseItems();
 
 			} catch (e) {
-				alert(e);
+				//alert(e);
 			}
+			
+			 db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
+			setCharacterBaseItems();
 
 			/*
 			 * navigator.notification.alert( 'You are the winner!', // message
@@ -108,7 +108,7 @@ $(function() {
 					 facebookConnectPlugin.login( ["email"], 
 						//success
 					function (response) {
-						alert("loginfo: " + JSON.stringify(response));
+						//alert("loginfo: " + JSON.stringify(response));
 						
 						/**
 						 * Get login information
@@ -135,7 +135,7 @@ $(function() {
 						/**
 						 * Get friends list.
 						*/
-						facebookConnectPlugin.api( "/me/friends",[],
+						facebookConnectPlugin.api( "/me/friends",[""],
 								//success
 								function (response) { 
 							
@@ -830,7 +830,9 @@ function fetchInfo(id, page) {
 }
 
 function doLogin(name, fbid) {
-	alert("login " + name);
+	alert("login " + name + " " + fbid );
+	
+	var gcmregkeyen = apnregkeyen = "";
 	
 	if (device.platform == 'android' || device.platform == 'Android') {
 		var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
