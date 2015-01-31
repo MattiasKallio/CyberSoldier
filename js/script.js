@@ -139,7 +139,7 @@ $(function() {
 								//success
 								function (response) { 
 							
-									alert(JSON.stringify(response));
+									//alert("Friends firststring: "+JSON.stringify(response));
 							
 									// Iterate through the array of friends object
 									// and create a checkbox for each one.
@@ -160,7 +160,7 @@ $(function() {
 								},
 								//fail
 								function (response) { 
-									alert(JSON.stringify(response))
+									alert("Error2"+JSON.stringify(response))
 								}
 						);						
 						 
