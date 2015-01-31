@@ -164,7 +164,7 @@ $(function() {
 						
 						
 						 
-						 /*
+						 
 						 
 						 //save push info n stuff.
 							try{
@@ -185,7 +185,7 @@ $(function() {
 								txt+="Error description: " + err.message + "\n\n"; 
 								alert(txt); 
 							}
-						  */
+						  
 					 
 					 },
 					 	//fail
