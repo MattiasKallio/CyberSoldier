@@ -235,6 +235,7 @@ function saveImage(){
             } else {
                 alert('Uncaught Error.\n' + jqXHR.responseText);
             }
+            
             $("#send_thinking").fadeOut();
         }
     });

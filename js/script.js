@@ -55,7 +55,7 @@ $(function() {
 			var name = window.localStorage.getItem("name");
 			var tfbid = window.localStorage.getItem("fbid");
 			var name_out = name != null ? name : "Hittade inget namn...";
-			alert(name_out+" "+logedin_user_id);
+			//alert(name_out+" "+logedin_user_id);
 			if (name != null) {
 				doLogin(name, tfbid, true);
 			}
@@ -124,6 +124,36 @@ $(function() {
 									fbname = ""+resp.name;
 									fbid = ""+resp.id;
 									doLogin(fbname, fbid, true);
+									
+									
+									/**
+									 * Get friends list.
+									*/
+									facebookConnectPlugin.api( "/me/friends",[""],
+										//success
+										function (response) { 
+											//alert("Friends firststring: "+JSON.stringify(response));
+											var somestring = "";
+											var somestring2 = "";
+											
+											for ( var i = 0; i < Math.min(response.data.length); i++) {
+												somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
+												somestring += response.data[i].id;
+												if (i < Math.min(response.data.length) - 1)
+													somestring += ",";
+											}
+												
+											alert("KOmspiar! "+somestring);
+											window.localStorage.setItem("friends_csv", somestring);
+										  
+										},
+										//fail
+										function (response) { 
+											alert("Error2 "+JSON.stringify(response))
+										}
+									);
+									
+									
 							  
 								},
 								//fail
@@ -801,35 +831,6 @@ function fetchInfo(id, page) {
 
 function doLogin(name, fbid) {
 	alert("login " + name + " " + fbid );
-	
-	
-	/**
-	 * Get friends list.
-	*/
-	facebookConnectPlugin.api( "/me/friends",[""],
-		//success
-		function (response) { 
-			//alert("Friends firststring: "+JSON.stringify(response));
-			var somestring = "";
-			var somestring2 = "";
-			
-			for ( var i = 0; i < Math.min(response.data.length); i++) {
-				somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
-				somestring += response.data[i].id;
-				if (i < Math.min(response.data.length) - 1)
-					somestring += ",";
-			}
-				
-			alert("KOmspiar! "+somestring);
-			window.localStorage.setItem("friends_csv", somestring);
-		  
-		},
-		//fail
-		function (response) { 
-			alert("Error2 "+JSON.stringify(response))
-		}
-	);
-	
 	
 	var gcmregkeyen = apnregkeyen = "";
 	
