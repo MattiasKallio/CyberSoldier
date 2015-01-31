@@ -116,14 +116,14 @@ $(function() {
 						facebookConnectPlugin.api( "me/?fields=id,name",["email"],
 								//success
 								function (response) { 
-							
-									alert(JSON.stringify(response));
+									
+									//alert(JSON.stringify(response));
 									var resp = JSON.parse(JSON.stringify(response));
 									alert("Name : " +  resp.name);
 							
 									fbname = resp.name;
 									fbid = resp.id;
-									doLogin(fbname, fbid, true);
+									//doLogin(fbname, fbid, true);
 							  
 								},
 								//fail
