@@ -14,18 +14,18 @@ var db;
  var gmc_regkeyvar = 0000;
  var apnregkeyen = 000;
 
-
+ 
  /*
-	 var path_to_process = "http://localhost/facebook_cs/app/"; var fbid =
-	 "633198662"; var fbname = "Mattias Urbanus Kallio";
-	 
-	 var logedin_user_id = 1418;
-	 
-	 window.localStorage.setItem("name", "Kaylooooo");
-	 window.localStorage.setItem("fbid", fbid);
-	 window.localStorage.setItem("friends_csv",
-	 "796045376,524929316,100003932599803,100000609515555,587005481");
-	 */ 
+	 * var path_to_process = "http://localhost/facebook_cs/app/"; var fbid =
+	 * "633198662"; var fbname = "Mattias Urbanus Kallio";
+	 * 
+	 * var logedin_user_id = 1418;
+	 * 
+	 * window.localStorage.setItem("name", "Kaylooooo");
+	 * window.localStorage.setItem("fbid", fbid);
+	 * window.localStorage.setItem("friends_csv",
+	 * "796045376,524929316,100003932599803,100000609515555,587005481");
+	 */
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
@@ -33,50 +33,46 @@ $(function() {
 		document.addEventListener('deviceready', function() {
 			
 			try {
-				 alert('Device is ready! Make sure you set your app_id below this alert.');
-				/*FB.init({
-					appId : "370101043065651",
-					nativeInterface : CDV.FB,
-					useCachedDialogs : false
-				});*/
-				 
-				 if (!window.cordova) {
-						var appId = "370101043065651" ; //prompt("370101043065651", "");
-		                facebookConnectPlugin.browserInit(appId);
-	                }
-
+				// alert('Device is ready! Make sure you set your app_id
+				// below this alert.');
+				
+				var appId = "370101043065651";
+                facebookConnectPlugin.browserInit(appId);
+                
+                facebookConnectPlugin.login( ["email"], 
+                        function (response) { alert(JSON.stringify(response)) },
+                        function (response) { alert(JSON.stringify(response)) });
                 
 				 
 				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
+				
 				setCharacterBaseItems();
 				
 
-				/*
-				try{
-					pushNotification = window.plugins.pushNotification;
-					alert("platform: "+device.platform);
-					if(device.platform != undefined){
-						if (device.platform == 'android' || device.platform == 'Android') {
-							//$("#app-status-ul").append('<li>registering android</li>');
-							pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
-						} else {
-							//Do some iphone magic
-							//$("#app-status-ul").append('<li>registering iOS</li>');
-							pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+				
+			try{
+				pushNotification = window.plugins.pushNotification;
+		    	if (device.platform == 'android' || device.platform == 'Android') {
+					//$("#app-status-ul").append('<li>registering android</li>');
+		        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
+				} else {
+					//Do some iphone magic
+					//$("#app-status-ul").append('<li>registering iOS</li>');
+		        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
 
-						}
-					}
-				}
-				catch(err) { 
-					txt="There was an error on this page, notification failed..\n\n"; 
-					txt+="Error description: " + err.message + "\n\n"; 
-					alert(txt); 
-				}*/	 		
+		    	}
+		    }
+			catch(err) 
+			{ 
+				txt="There was an error on this page.\n\n"; 
+				txt+="Error description: " + err.message + "\n\n"; 
+				alert(txt); 
+			}	 		
 				
 				
 				// $("#mainbox").html("Yey, facebook initad!");
 			} catch (e) {
-				alert("init stuff failing: "+e);
+				alert(e);
 			}
 
 			/*
@@ -91,7 +87,7 @@ $(function() {
 			var name = window.localStorage.getItem("name");
 			var tfbid = window.localStorage.getItem("fbid");
 			var name_out = name != null ? name : "Hittade inget namn...";
-			alert(name_out+" "+logedin_user_id);
+			// alert(name_out+" "+logedin_user_id);
 			if (name != null) {
 				doLogin(name, tfbid, true);
 			}
@@ -135,23 +131,14 @@ $(function() {
 			});
 		});
 
-
 		$("body").on("click", ".facebook_login", function() {
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
-				facebookConnectPlugin.login("", 
-					function(info){
-						alert(JSON.stringify(info));
-					}, 
-					function(info){
-						alert(JSON.stringify(info));
-					}
-				);
-				
-				/*try {
+				try {
 					FB.login(function(response) {
 						FB.api('/me', function(response) {
-							alert('Good to see you, ' + response.name + '.');
+							// alert('Good to see you, ' + response.name +
+							// '.');
 							fbname = response.name;
 							fbid = response.id;
 							doLogin(fbname, fbid, true);
@@ -160,7 +147,7 @@ $(function() {
 						FB.api('/me/friends', function(response) {
 							// Iterate through the array of friends object
 							// and create a checkbox for each one.
-							alert("Yey, friends");
+								
 							var somestring = "";
 							var somestring2 = "";
 							for ( var i = 0; i < Math.min(response.data.length); i++) {
@@ -177,7 +164,7 @@ $(function() {
 					});
 				} catch (e) {
 					alert(e);
-				}*/
+				}
 			} else {
 				doLogout();
 			}

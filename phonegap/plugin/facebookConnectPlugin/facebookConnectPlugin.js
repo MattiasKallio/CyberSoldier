@@ -1,6 +1,5 @@
-
 cordova.define("com.phonegap.plugins.facebookconnect.FacebookConnectPlugin", function(require, exports, module) {
-	
+
     "use strict";
 
     /*
@@ -12,8 +11,8 @@ cordova.define("com.phonegap.plugins.facebookconnect.FacebookConnectPlugin", fun
      *
      */
 
-    if (true || cordova.platformId == "browser") {
-    	
+    if (cordova.platformId == "browser") {
+
         var facebookConnectPlugin = {
 
             getLoginStatus: function (s, f) {
