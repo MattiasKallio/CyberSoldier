@@ -5,6 +5,7 @@ var last_is_fetched = false;
 var page_is_loading = false;
 var last_type_and_id = "";
 var db;
+var pushNotification;
 
  var fbid = ""; 
  var fbname = ""; 
@@ -43,11 +44,9 @@ $(function() {
 				
 				setCharacterBaseItems();
 				
-
-				
 				try{
 					pushNotification = window.plugins.pushNotification;
-					alert("platform: "+device.platform);
+					alert("platform!: "+device.platform);
 					if(device.platform != undefined){
 						if (device.platform == 'android' || device.platform == 'Android') {
 							//$("#app-status-ul").append('<li>registering android</li>');
