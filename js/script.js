@@ -117,7 +117,7 @@ $(function() {
 								//success
 								function (response) { 
 							
-									alert(JSON.stringify(response));
+									alert(JSON.stringify(response) + "Name : " +  response.name);
 							
 									fbname = response.name;
 									fbid = response.id;
@@ -828,7 +828,7 @@ function fetchInfo(id, page) {
 }
 
 function doLogin(name, fbid) {
-	alert("login!");
+	alert("login " + name);
 	
 	if (device.platform == 'android' || device.platform == 'Android') {
 		var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
@@ -851,7 +851,7 @@ function doLogin(name, fbid) {
 		data : dataarr,
 		cache : false,
 		success : function(data) {
-			// alert(data);
+			alert(data);
 			var response = JSON.parse(data);
 			if (response.result == "ok") {
 				window.localStorage.setItem("user_id", response.user_id);
