@@ -32,22 +32,13 @@ $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
 			
-			try {
-				// alert('Device is ready! Make sure you set your app_id
-				// below this alert.');
-				
-			
-			
+			try {				
 				var appId = "370101043065651";
                 facebookConnectPlugin.browserInit(appId);
                 
                 db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
-				
 				setCharacterBaseItems();
-				
-				
-				
-				// $("#mainbox").html("Yey, facebook initad!");
+
 			} catch (e) {
 				alert(e);
 			}
@@ -118,8 +109,7 @@ $(function() {
 						//success
 					function (response) {
 						alert(JSON.stringify(response));
-						var username = 
-						 
+						
 						/**
 						 * Get login information
 						 */
