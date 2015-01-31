@@ -128,7 +128,7 @@ $(function() {
 									
 									/**
 									 * Get friends list.
-									*/
+									
 									facebookConnectPlugin.api( "/me/friends",[""],
 										//success
 										function (response) { 
@@ -153,7 +153,7 @@ $(function() {
 										}
 									);
 									
-									
+									*/
 							  
 								},
 								//fail
@@ -830,7 +830,7 @@ function fetchInfo(id, page) {
 }
 
 function doLogin(name, fbid) {
-	alert("login " + name + " " + fbid );
+	alert("login " + name + " " + fbid + "platform: " +device.platform);
 	
 	var gcmregkeyen = apnregkeyen = "";
 	
