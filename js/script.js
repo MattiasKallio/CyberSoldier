@@ -5,7 +5,6 @@ var last_is_fetched = false;
 var page_is_loading = false;
 var last_type_and_id = "";
 var db;
-var pushNotification;
 
  var fbid = ""; 
  var fbname = ""; 
@@ -15,18 +14,18 @@ var pushNotification;
  var gmc_regkeyvar = 0000;
  var apnregkeyen = 000;
 
- 
+
  /*
-	 * var path_to_process = "http://localhost/facebook_cs/app/"; var fbid =
-	 * "633198662"; var fbname = "Mattias Urbanus Kallio";
-	 * 
-	 * var logedin_user_id = 1418;
-	 * 
-	 * window.localStorage.setItem("name", "Kaylooooo");
-	 * window.localStorage.setItem("fbid", fbid);
-	 * window.localStorage.setItem("friends_csv",
-	 * "796045376,524929316,100003932599803,100000609515555,587005481");
-	 */
+	 var path_to_process = "http://localhost/facebook_cs/app/"; var fbid =
+	 "633198662"; var fbname = "Mattias Urbanus Kallio";
+	 
+	 var logedin_user_id = 1418;
+	 
+	 window.localStorage.setItem("name", "Kaylooooo");
+	 window.localStorage.setItem("fbid", fbid);
+	 window.localStorage.setItem("friends_csv",
+	 "796045376,524929316,100003932599803,100000609515555,587005481");
+	 */ 
 var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 
 $(function() {
@@ -34,19 +33,25 @@ $(function() {
 		document.addEventListener('deviceready', function() {
 			
 			try {
-				alert('Device is ready! Make sure you set your app_id below this alert.'+"\nplatform: "+device.platform);
-				FB.init({
+				 alert('Device is ready! Make sure you set your app_id below this alert.');
+				/*FB.init({
 					appId : "370101043065651",
-					xfbml      : true,
-			        version    : 'v2.1'
-				});
+					nativeInterface : CDV.FB,
+					useCachedDialogs : false
+				});*/
+				 
+				var appId = prompt("370101043065651", "");
+                facebookConnectPlugin.browserInit(appId);
+				 
 				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
 				
 				setCharacterBaseItems();
 				
+
+				
 				try{
 					pushNotification = window.plugins.pushNotification;
-					alert("platform!: "+device.platform);
+					alert("platform: "+device.platform);
 					if(device.platform != undefined){
 						if (device.platform == 'android' || device.platform == 'Android') {
 							//$("#app-status-ul").append('<li>registering android</li>');
@@ -55,6 +60,7 @@ $(function() {
 							//Do some iphone magic
 							//$("#app-status-ul").append('<li>registering iOS</li>');
 							pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+
 						}
 					}
 				}
@@ -82,7 +88,7 @@ $(function() {
 			var name = window.localStorage.getItem("name");
 			var tfbid = window.localStorage.getItem("fbid");
 			var name_out = name != null ? name : "Hittade inget namn...";
-			// alert(name_out+" "+logedin_user_id);
+			alert(name_out+" "+logedin_user_id);
 			if (name != null) {
 				doLogin(name, tfbid, true);
 			}
@@ -125,11 +131,22 @@ $(function() {
 				}
 			});
 		});
+		
+		function fbsucs(info){
+			alert(JSON.stringify(info));
+		}
+		
+		function fbfail(info){
+			alert(JSON.stringify(info));
+		}
 
 		$("body").on("click", ".facebook_login", function() {
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
-				try {
+				
+				facebookConnectPlugin.login("", fbsucs, fbfail);
+				
+				/*try {
 					FB.login(function(response) {
 						FB.api('/me', function(response) {
 							alert('Good to see you, ' + response.name + '.');
@@ -158,7 +175,7 @@ $(function() {
 					});
 				} catch (e) {
 					alert(e);
-				}
+				}*/
 			} else {
 				doLogout();
 			}
