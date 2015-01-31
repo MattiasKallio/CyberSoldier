@@ -132,37 +132,7 @@ $(function() {
 								}
 						);
 						
-						/**
-						 * Get friends list.
-						*/
-						facebookConnectPlugin.api( "/me/friends",[""],
-								//success
-								function (response) { 
-							
-									//alert("Friends firststring: "+JSON.stringify(response));
-							
-									// Iterate through the array of friends object
-									// and create a checkbox for each one.
-										
-									var somestring = "";
-									var somestring2 = "";
-									for ( var i = 0; i < Math.min(response.data.length); i++) {
-										somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
-										somestring += response.data[i].id;
-										if (i < Math.min(response.data.length) - 1)
-											somestring += ",";
-									}
-									
-									alert("KOmspiar! "+somestring);
-									
-									window.localStorage.setItem("friends_csv", somestring);
-							  
-								},
-								//fail
-								function (response) { 
-									alert("Error2 "+JSON.stringify(response))
-								}
-						);						
+						
 						 
 						 /*
 						 
@@ -831,6 +801,35 @@ function fetchInfo(id, page) {
 
 function doLogin(name, fbid) {
 	alert("login " + name + " " + fbid );
+	
+	
+	/**
+	 * Get friends list.
+	*/
+	facebookConnectPlugin.api( "/me/friends",[""],
+		//success
+		function (response) { 
+			//alert("Friends firststring: "+JSON.stringify(response));
+			var somestring = "";
+			var somestring2 = "";
+			
+			for ( var i = 0; i < Math.min(response.data.length); i++) {
+				somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
+				somestring += response.data[i].id;
+				if (i < Math.min(response.data.length) - 1)
+					somestring += ",";
+			}
+				
+			alert("KOmspiar! "+somestring);
+			window.localStorage.setItem("friends_csv", somestring);
+		  
+		},
+		//fail
+		function (response) { 
+			alert("Error2 "+JSON.stringify(response))
+		}
+	);
+	
 	
 	var gcmregkeyen = apnregkeyen = "";
 	
