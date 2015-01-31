@@ -776,6 +776,8 @@ function doLogin(name, fbid) {
 		var apnregkeyen = window.localStorage.getItem("apnregkeyen") == null ? apn_regkeyvar : window.localStorage.getItem("apnregkeyen") ;
 	}
 	
+	alert("key!"+apnregkeyen);
+	
 	var dataarr = {
 		mega_secret_code : mega_secret_code,
 		name : name,
