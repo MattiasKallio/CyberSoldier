@@ -33,7 +33,7 @@ $(function() {
 		document.addEventListener('deviceready', function() {
 			
 			try {
-				 alert('Device is ready! Make sure you set your app_id below this alert.');
+				alert('Device is ready! Make sure you set your app_id below this alert.'+"\nplatform: "+device.platform);
 				FB.init({
 					appId : "370101043065651",
 					nativeInterface : CDV.FB,
@@ -44,6 +44,27 @@ $(function() {
 				setCharacterBaseItems();
 				
 
+				
+				try{
+					pushNotification = window.plugins.pushNotification;
+					alert("platform: "+device.platform);
+					if(device.platform != undefined){
+						if (device.platform == 'android' || device.platform == 'Android') {
+							//$("#app-status-ul").append('<li>registering android</li>');
+							pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
+						} else {
+							//Do some iphone magic
+							//$("#app-status-ul").append('<li>registering iOS</li>');
+							pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+						}
+					}
+				}
+				catch(err) { 
+					txt="There was an error on this page, notification failed..\n\n"; 
+					txt+="Error description: " + err.message + "\n\n"; 
+					alert(txt); 
+				}	 		
+				
 				
 				// $("#mainbox").html("Yey, facebook initad!");
 			} catch (e) {
@@ -107,27 +128,6 @@ $(function() {
 		});
 
 		$("body").on("click", ".facebook_login", function() {
-			try{
-				pushNotification = window.plugins.pushNotification;
-				alert("Platform: "+device.platform);
-				if(device.platform != undefined){
-					if (device.platform == 'android' || device.platform == 'Android') {
-						//$("#app-status-ul").append('<li>registering android</li>');
-						pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
-					} else {
-						//Do some iphone magic
-						//$("#app-status-ul").append('<li>registering iOS</li>');
-						pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
-					}
-				}
-			}
-			catch(err) { 
-				txt="There was an error on this page, notification failed..\n\n"; 
-				txt+="Error description: " + err.message + "\n\n"; 
-				alert(txt); 
-			}	 		
-			
-			
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
 				try {
