@@ -117,7 +117,8 @@ $(function() {
 								//success
 								function (response) { 
 							
-									alert(JSON.stringify(response) + "Name : " +  response.name);
+									alert(JSON.stringify(response));
+									alert("Name : " +  response.name);
 							
 									fbname = response.name;
 									fbid = response.id;
