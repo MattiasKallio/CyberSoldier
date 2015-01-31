@@ -134,19 +134,12 @@ $(function() {
 				}
 			});
 		});
-		
-		function fbsucs(info){
-			alert(JSON.stringify(info));
-		}
-		
-		function fbfail(info){
-			alert(JSON.stringify(info));
-		}
+
 
 		$("body").on("click", ".facebook_login", function() {
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
-				facebookConnectPlugin.login("", fbsucs(), fbfail());
+				facebookConnectPlugin.login("", alert(JSON.stringify(info));, alert(JSON.stringify(info)););
 				
 				/*try {
 					FB.login(function(response) {
