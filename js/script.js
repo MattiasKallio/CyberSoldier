@@ -55,7 +55,7 @@ $(function() {
 			var name = window.localStorage.getItem("name");
 			var tfbid = window.localStorage.getItem("fbid");
 			var name_out = name != null ? name : "Hittade inget namn...";
-			//alert(name_out+" "+logedin_user_id);
+			alert(name_out+" "+logedin_user_id);
 			if (name != null) {
 				doLogin(name, tfbid, true);
 			}
@@ -832,13 +832,14 @@ function fetchInfo(id, page) {
 function doLogin(name, fbid) {
 	alert("login " + name + " " + fbid + "platform: " +device.platform);
 	
-	var gcmregkeyen = apnregkeyen = "";
+	var gcmregkeyen = ""
+	var apnregkeyen = "";
 	
 	if (device.platform == 'android' || device.platform == 'Android') {
-		var gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
+		gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
 	}
 	else{
-		var apnregkeyen = window.localStorage.getItem("apnregkeyen") == null ? apn_regkeyvar : window.localStorage.getItem("apnregkeyen") ;
+		apnregkeyen = window.localStorage.getItem("apnregkeyen") == null ? apn_regkeyvar : window.localStorage.getItem("apnregkeyen") ;
 	}
 	
 	var dataarr = {
@@ -849,6 +850,7 @@ function doLogin(name, fbid) {
 		apnregkeyen : apnregkeyen,
 		action : "login"
 	};
+	
 	$.ajax({
 		type : "POST",
 		url : path_to_process + "user_handler.php",
