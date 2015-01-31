@@ -128,7 +128,7 @@ $(function() {
 								},
 								//fail
 								function (response) { 
-									alert(JSON.stringify(response))
+									alert("Error: "+JSON.stringify(response))
 								}
 						);
 						
