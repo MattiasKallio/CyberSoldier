@@ -119,11 +119,11 @@ $(function() {
 									
 									//alert(JSON.stringify(response));
 									var resp = JSON.parse(JSON.stringify(response));
-									alert("Name : " +  resp.name);
+									//alert("Name : " +  resp.name);
 							
 									fbname = ""+resp.name;
 									fbid = ""+resp.id;
-									//doLogin(fbname, fbid, true);
+									doLogin(fbname, fbid, true);
 							  
 								},
 								//fail
@@ -134,7 +134,7 @@ $(function() {
 						
 						/**
 						 * Get friends list.
-						
+						*/
 						facebookConnectPlugin.api( "/me/friends",[],
 								//success
 								function (response) { 
@@ -164,7 +164,7 @@ $(function() {
 								}
 						);						
 						 
-						 
+						 /*
 						 
 						 //save push info n stuff.
 							try{
