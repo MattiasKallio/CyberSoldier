@@ -37,7 +37,6 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -46,22 +45,5 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-				
-		alert("Device platform: "+device.platform);
-		ad_platform_type = device.platform != "undefined" ? device.platform : ad_platform_type;
-		switch(ad_platform_type){
-			case "Android":
-				$(".admob").html('<html><body style="margin:0;padding:0;"><script type="text/javascript" src="http://ad.leadboltads.net/show_app_ad.js?section_id=137183462"></script></body></html>');
-			break;
-			case "iOS":
-				$(".admob").html('<html><body style="margin:0;padding:0;"><script type="text/javascript" src="http://ad.leadboltads.net/show_app_ad.js?section_id=164023920"></script></body></html>');
-			break;	
-			default:
-				$(".admob").html("<a href='http://www.webbigt.se'><b>Webbigt.se</b> - it's only one single guy, but he is one darn good web developer. And yes ladies, he is single.</a>");
-			break;	
-		}        
-        
-    },
-
-
+    }
 };

@@ -36,38 +36,15 @@ $(function() {
 				// alert('Device is ready! Make sure you set your app_id
 				// below this alert.');
 				
+			
+			
 				var appId = "370101043065651";
                 facebookConnectPlugin.browserInit(appId);
                 
-                facebookConnectPlugin.login( ["email"], 
-                        function (response) { alert(JSON.stringify(response)) },
-                        function (response) { alert(JSON.stringify(response)) });
-                
-				 
-				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
+                db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
 				
 				setCharacterBaseItems();
 				
-
-				
-			try{
-				pushNotification = window.plugins.pushNotification;
-		    	if (device.platform == 'android' || device.platform == 'Android') {
-					//$("#app-status-ul").append('<li>registering android</li>');
-		        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
-				} else {
-					//Do some iphone magic
-					//$("#app-status-ul").append('<li>registering iOS</li>');
-		        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
-
-		    	}
-		    }
-			catch(err) 
-			{ 
-				txt="There was an error on this page.\n\n"; 
-				txt+="Error description: " + err.message + "\n\n"; 
-				alert(txt); 
-			}	 		
 				
 				
 				// $("#mainbox").html("Yey, facebook initad!");
@@ -87,7 +64,7 @@ $(function() {
 			var name = window.localStorage.getItem("name");
 			var tfbid = window.localStorage.getItem("fbid");
 			var name_out = name != null ? name : "Hittade inget namn...";
-			// alert(name_out+" "+logedin_user_id);
+			alert(name_out+" "+logedin_user_id);
 			if (name != null) {
 				doLogin(name, tfbid, true);
 			}
@@ -132,10 +109,44 @@ $(function() {
 		});
 
 		$("body").on("click", ".facebook_login", function() {
+			
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
 				try {
-					FB.login(function(response) {
+					
+					 facebookConnectPlugin.login( ["email"], 
+						//success
+					 function (response) {
+						 alert(JSON.stringify(response));
+						 
+						 //save push info n stuff.
+							try{
+								pushNotification = window.plugins.pushNotification;
+						    	if (device.platform == 'android' || device.platform == 'Android') {
+									//$("#app-status-ul").append('<li>registering android</li>');
+						        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
+								} else {
+									//Do some iphone magic
+									//$("#app-status-ul").append('<li>registering iOS</li>');
+						        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+
+						    	}
+						    }
+							catch(err) 
+							{ 
+								txt="There was an error on this page.\n\n"; 
+								txt+="Error description: " + err.message + "\n\n"; 
+								alert(txt); 
+							}
+						 
+					 
+					 },
+					 	//fail
+					function (response) { alert(JSON.stringify(response)) });
+		                
+					
+					
+					/*FB.login(function(response) {
 						FB.api('/me', function(response) {
 							// alert('Good to see you, ' + response.name +
 							// '.');
@@ -161,7 +172,7 @@ $(function() {
 
 					}, {
 						scope : "email"
-					});
+					});*/
 				} catch (e) {
 					alert(e);
 				}

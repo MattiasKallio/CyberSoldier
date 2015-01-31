@@ -114,10 +114,16 @@
 
         Otherwise, you can specify specific domains:
     -->
+    
+    
     <feature name="http://api.phonegap.com/1.0/geolocation"/>
-    <feature name="http://api.phonegap.com/1.0/notification"/>    
+    <feature name="http://api.phonegap.com/1.0/notification"/>  
+     <feature name="FacebookConnectPlugin">
+        <param name="android-package" value="org.apache.cordova.facebook.ConnectPlugin" />
+    </feature>  
     
     <access origin="*" subdomains="true" browserOnly="true" />
+        
     <!--
         <access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
         <access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
