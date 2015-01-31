@@ -118,7 +118,7 @@ $(function() {
 								function (response) { 
 									
 									//alert(JSON.stringify(response));
-									var resp = JSON.parse(JSON.stringify(response));
+									//var resp = JSON.parse(JSON.stringify(response));
 									alert("Name : " +  resp.name);
 							
 									fbname = resp.name;
