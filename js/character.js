@@ -11,6 +11,8 @@ var cuser_items = {};
 
 $(document).ready(function() {
 	
+	db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);	
+	
 	$.getScript("js/jquery.colorPicker.js", function(){
 		$('#body_1').colorPicker();
 		$('#top_1').colorPicker();
@@ -40,8 +42,6 @@ $(document).ready(function() {
 	cuser_items["c_accessories"] = window.localStorage.getItem("c_accessories");
 	cuser_items["c_pants"] = window.localStorage.getItem("c_pants");
 	cuser_items["c_shoes"] = window.localStorage.getItem("c_shoes");
-	
-	db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);	
 
 	/*$.get('/vectorimage.svg', function(svg) {
 		console.log(svg);
@@ -206,6 +206,7 @@ function saveImage(){
 	//var color_list = $(".color_changer");
 	
 	for(var i in cuser_items){
+		window.localStorage.setItem(i, cuser_items[i]);		
 		data_arr[i] =cuser_items[i];
 		console.log(i + " " + cuser_items[i]);
 	}		
