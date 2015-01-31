@@ -46,7 +46,7 @@ var app = {
         console.log('Received Event: ' + id);
 		
 		
-		//alert("Device platform: "+device.platform);
+		alert("Device platform: "+device.platform);
 		ad_platform_type = device.platform != "undefined" ? device.platform : ad_platform_type;
 		switch(ad_platform_type){
 			case "Android":
