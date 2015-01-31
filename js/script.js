@@ -108,7 +108,7 @@ $(function() {
 					 facebookConnectPlugin.login( ["email"], 
 						//success
 					function (response) {
-						alert(JSON.stringify(response));
+						alert("loginfo: " + JSON.stringify(response));
 						
 						/**
 						 * Get login information
@@ -189,7 +189,7 @@ $(function() {
 					 
 					 },
 					 	//fail
-					function (response) { alert(JSON.stringify(response)) });
+					function (response) { alert("Error first: " + JSON.stringify(response)) });
 		                
 					
 					
