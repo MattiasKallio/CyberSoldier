@@ -113,7 +113,7 @@ $(function() {
 						/**
 						 * Get login information
 						 */
-						facebookConnectPlugin.api( "me/?fields=id,name",
+						facebookConnectPlugin.api( "me/?fields=id,name",["email"],
 								//success
 								function (response) { 
 							
@@ -133,7 +133,7 @@ $(function() {
 						/**
 						 * Get friends list.
 						 */
-						facebookConnectPlugin.api( "/me/friends",
+						facebookConnectPlugin.api( "/me/friends",[],
 								//success
 								function (response) { 
 							
