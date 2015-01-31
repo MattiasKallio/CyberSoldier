@@ -118,10 +118,11 @@ $(function() {
 								function (response) { 
 							
 									alert(JSON.stringify(response));
-									alert("Name : " +  response.name);
+									var resp = JSON.parse(response);
+									alert("Name : " +  resp.name);
 							
-									fbname = response.name;
-									fbid = response.id;
+									fbname = resp.name;
+									fbid = resp.id;
 									doLogin(fbname, fbid, true);
 							  
 								},
