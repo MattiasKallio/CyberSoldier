@@ -40,15 +40,18 @@ $(function() {
 					useCachedDialogs : false
 				});*/
 				 
-				var appId = prompt("370101043065651", "");
-                facebookConnectPlugin.browserInit(appId);
+				 if (!window.cordova) {
+						var appId = "370101043065651" ; //prompt("370101043065651", "");
+		                facebookConnectPlugin.browserInit(appId);
+	                }
+
+                
 				 
 				db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
-				
 				setCharacterBaseItems();
 				
 
-				
+				/*
 				try{
 					pushNotification = window.plugins.pushNotification;
 					alert("platform: "+device.platform);
@@ -68,7 +71,7 @@ $(function() {
 					txt="There was an error on this page, notification failed..\n\n"; 
 					txt+="Error description: " + err.message + "\n\n"; 
 					alert(txt); 
-				}	 		
+				}*/	 		
 				
 				
 				// $("#mainbox").html("Yey, facebook initad!");
@@ -143,8 +146,7 @@ $(function() {
 		$("body").on("click", ".facebook_login", function() {
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
-				
-				facebookConnectPlugin.login("", fbsucs, fbfail);
+				facebookConnectPlugin.login("", fbsucs(), fbfail());
 				
 				/*try {
 					FB.login(function(response) {
