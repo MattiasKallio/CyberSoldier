@@ -134,7 +134,7 @@ $(function() {
 						
 						/**
 						 * Get friends list.
-						 */
+						
 						facebookConnectPlugin.api( "/me/friends",[],
 								//success
 								function (response) { 
@@ -185,7 +185,7 @@ $(function() {
 								txt+="Error description: " + err.message + "\n\n"; 
 								alert(txt); 
 							}
-						 
+						  */
 					 
 					 },
 					 	//fail
