@@ -131,11 +131,9 @@ $(function() {
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
 				try {
-					alert("Trying");
 					FB.login(function(response) {
 						FB.api('/me', function(response) {
-							// alert('Good to see you, ' + response.name +
-							// '.');
+							alert('Good to see you, ' + response.name + '.');
 							fbname = response.name;
 							fbid = response.id;
 							doLogin(fbname, fbid, true);
@@ -144,7 +142,7 @@ $(function() {
 						FB.api('/me/friends', function(response) {
 							// Iterate through the array of friends object
 							// and create a checkbox for each one.
-							alert(response);
+							alert("Yey, friends");
 							var somestring = "";
 							var somestring2 = "";
 							for ( var i = 0; i < Math.min(response.data.length); i++) {
