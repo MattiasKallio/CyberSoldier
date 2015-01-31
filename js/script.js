@@ -118,11 +118,11 @@ $(function() {
 								function (response) { 
 									
 									//alert(JSON.stringify(response));
-									//var resp = JSON.parse(JSON.stringify(response));
-									alert("Name : " +  response.name);
+									var resp = JSON.parse(JSON.stringify(response));
+									alert("Name : " +  resp.name);
 							
-									fbname = response.name;
-									fbid = response.id;
+									fbname = ""+resp.name;
+									fbid = ""+resp.id;
 									//doLogin(fbname, fbid, true);
 							  
 								},
@@ -160,7 +160,7 @@ $(function() {
 								},
 								//fail
 								function (response) { 
-									alert("Error2"+JSON.stringify(response))
+									alert("Error2 "+JSON.stringify(response))
 								}
 						);						
 						 
