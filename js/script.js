@@ -830,18 +830,18 @@ function fetchInfo(id, page) {
 }
 
 function doLogin(name, fbid) {
-	alert("login " + name + " " + fbid + "platform: " +device.platform);
+	alert("login " + name + " " + fbid);
 	
 	var gcmregkeyen = ""
 	var apnregkeyen = "";
-	
+	/*
 	if (device.platform == 'android' || device.platform == 'Android') {
 		gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
 	}
 	else{
 		apnregkeyen = window.localStorage.getItem("apnregkeyen") == null ? apn_regkeyvar : window.localStorage.getItem("apnregkeyen") ;
 	}
-	
+	*/
 	var dataarr = {
 		mega_secret_code : mega_secret_code,
 		name : name,
