@@ -116,8 +116,63 @@ $(function() {
 					
 					 facebookConnectPlugin.login( ["email"], 
 						//success
-					 function (response) {
-						 alert(JSON.stringify(response));
+					function (response) {
+						alert(JSON.stringify(response));
+						var username = 
+						 
+						/**
+						 * Get login information
+						 */
+						facebookConnectPlugin.api( "me/?fields=id,name",
+								//success
+								function (response) { 
+							
+									alert(JSON.stringify(response));
+							
+									fbname = response.name;
+									fbid = response.id;
+									doLogin(fbname, fbid, true);
+							  
+								},
+								//fail
+								function (response) { 
+									alert(JSON.stringify(response))
+								}
+						);
+						
+						/**
+						 * Get friends list.
+						 */
+						facebookConnectPlugin.api( "/me/friends",
+								//success
+								function (response) { 
+							
+									alert(JSON.stringify(response));
+							
+									// Iterate through the array of friends object
+									// and create a checkbox for each one.
+										
+									var somestring = "";
+									var somestring2 = "";
+									for ( var i = 0; i < Math.min(response.data.length); i++) {
+										somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
+										somestring += response.data[i].id;
+										if (i < Math.min(response.data.length) - 1)
+											somestring += ",";
+									}
+									
+									alert("KOmspiar! "+somestring);
+									
+									window.localStorage.setItem("friends_csv", somestring);
+							  
+								},
+								//fail
+								function (response) { 
+									alert(JSON.stringify(response))
+								}
+						);						
+						 
+						 
 						 
 						 //save push info n stuff.
 							try{
