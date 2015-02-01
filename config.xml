@@ -121,6 +121,7 @@
     <feature name="http://api.phonegap.com/1.0/notification"/>  
      <feature name="FacebookConnectPlugin">
         <param name="android-package" value="org.apache.cordova.facebook.ConnectPlugin" />
+        <param name="ios-package" value="FacebookConnectPlugin" />
     </feature>  
     
         

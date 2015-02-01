@@ -105,10 +105,11 @@ $(function() {
 			if (lt != "Logout") {
 				
 				try {
-						alert("fb login status"+facebookConnectPlugin.getLoginStatus());
+					alert("fb login status"+facebookConnectPlugin.getLoginStatus());
 					 facebookConnectPlugin.login( ["email"], 
 						//success
 					function (response) {
+						 alert(JSON.stringify(response));
 						//Just to set anything because iPhone es mundu dumbo.
 							window.localStorage.setItem("user_id", 1234);
 						 
