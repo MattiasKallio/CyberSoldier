@@ -103,13 +103,15 @@ $(function() {
 			
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
+				
 				try {
 					
 					 facebookConnectPlugin.login( ["email"], 
 						//success
 					function (response) {
-						//alert("loginfo: " + JSON.stringify(response));
-						
+						//Just to set anything because iPhone es mundu dumbo.
+							window.localStorage.setItem("user_id", 1234);
+						 
 						/**
 						 * Get login information
 						 */
@@ -117,13 +119,12 @@ $(function() {
 								//success
 								function (response) { 
 									
+									window.localStorage.setItem("user_id", 0);
+							
 									var resp = JSON.parse(JSON.stringify(response));
 							
 									fbname = ""+resp.name;
 									fbid = ""+resp.id;
-									
-									//Just to set anything because iPhone es mundu dumbo.
-									window.localStorage.setItem("user_id", fbid);
 									
 									doLogin(fbname, fbid, true);
 									
