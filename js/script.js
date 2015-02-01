@@ -33,15 +33,8 @@ $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
 			
-			try {				
-				var appId = "370101043065651";
-                facebookConnectPlugin.browserInit(appId);
-
-			} catch (e) {
-				//alert(e);
-			}
 			
-			 db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
+			db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
 			setCharacterBaseItems();
 
 			/*
@@ -106,13 +99,21 @@ $(function() {
 			if (lt != "Logout") {
 				
 				try {
-					
+					try {				
+						var appId = "370101043065651";
+		                facebookConnectPlugin.browserInit(appId);
+
+					} catch (e) {
+						alert(e);
+					}
 					var loggedin = false;
 					facebookConnectPlugin.getLoginStatus(
 						function(response){
+							loggedin = true;
 							alert("wokz: "+JSON.stringify(response));
 						},
 						function(response){
+							loggedin = false;
 							alert("wokz, not: "+JSON.stringify(response));
 						}
 					);
