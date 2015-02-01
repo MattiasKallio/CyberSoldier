@@ -10,8 +10,8 @@ var device;
  var fbid = ""; 
  var fbname = ""; 
  var path_to_process = "http://www.cybersoldier.com/app/"; 
- var uid = window.localStorage.getItem("user_id"); 
- var logedin_user_id = uid != null ? uid : 0;
+ var uid;
+ var logedin_user_id;
  var gmc_regkeyvar = 000;
  var apnregkeyen = 000;
 
@@ -32,26 +32,19 @@ var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
+
+			db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
+			uid = window.localStorage.getItem("user_id"); 
+			var logedin_user_id = uid != null ? uid : 0;
+			setCharacterBaseItems();
 			
 			try {				
 				var appId = "370101043065651";
                 facebookConnectPlugin.browserInit(appId);
-                
-                facebookConnectPlugin.logout(
-                	function(response){
-						alert("logout: "+JSON.stringify(response));
-					},
-					function(response){
-						alert("logout fejl : "+JSON.stringify(response));
-					}
-				);
 
 			} catch (e) {
 				alert(e);
 			}
-			
-			db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
-			setCharacterBaseItems();
 
 			/*
 			 * navigator.notification.alert( 'You are the winner!', // message
@@ -59,7 +52,7 @@ $(function() {
 			 * pressed 'Game Over', // title 'Restart,Exit' // buttonLabels );
 			 */
 
-		}, false);
+		
 
 		if (logedin_user_id != 0) {
 			var name = window.localStorage.getItem("name");
@@ -683,6 +676,7 @@ $(function() {
 				last_type_and_id = menu_type_and_id;
 			}
 		}
+		}, false);
 	});
 });
 /*
@@ -896,6 +890,16 @@ function doLogout() {
 	window.localStorage.removeItem("fbid");
 	window.localStorage.removeItem("language");
 	logedin_user_id = null;
+	
+    /*facebookConnectPlugin.logout(
+        function(response){
+			alert("logout: "+JSON.stringify(response));
+		},
+		function(response){
+			alert("logout fejl : "+JSON.stringify(response));
+		}
+	);*/
+	
 	$(".facebook_login").html("Login");
 	$(".user_loggedin_button").slideUp();
 }
