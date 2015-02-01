@@ -105,7 +105,7 @@ $(function() {
 			if (lt != "Logout") {
 				
 				try {
-					
+						alert("fb login status"+facebookConnectPlugin.getLoginStatus());
 					 facebookConnectPlugin.login( ["email"], 
 						//success
 					function (response) {
