@@ -121,6 +121,10 @@ $(function() {
 							
 									fbname = ""+resp.name;
 									fbid = ""+resp.id;
+									
+									//Just to set anything because iPhone es mundu dumbo.
+									window.localStorage.setItem("user_id", fbid);
+									
 									doLogin(fbname, fbid, true);
 									
 									
