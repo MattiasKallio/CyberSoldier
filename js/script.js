@@ -33,6 +33,13 @@ $(function() {
 	$(document).ready(function() {
 		document.addEventListener('deviceready', function() {
 			
+			try {				
+				var appId = "370101043065651";
+                facebookConnectPlugin.browserInit(appId);
+
+			} catch (e) {
+				alert(e);
+			}
 			
 			db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);
 			setCharacterBaseItems();
@@ -98,14 +105,7 @@ $(function() {
 			var lt = $(".facebook_login").html();
 			if (lt != "Logout") {
 				
-				try {
-					try {				
-						var appId = "370101043065651";
-		                facebookConnectPlugin.browserInit(appId);
-
-					} catch (e) {
-						alert(e);
-					}
+				try {					
 					var loggedin = false;
 					facebookConnectPlugin.getLoginStatus(
 						function(response){

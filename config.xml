@@ -46,7 +46,7 @@
     	<gap:plugin name="org.apache.cordova.device-orientation" />
     <!-- Core plugins -->
     
-    <gap:plugin name="com.phonegap.plugins.facebookconnect">
+    <gap:plugin name="com.phonegap.plugins.facebookconnect" source="plugins.cordova.io">
         <param name="APP_ID" value="370101043065651" />
         <param name="APP_NAME" value="CyberSoldier" />
 	</gap:plugin>
