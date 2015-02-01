@@ -11,7 +11,7 @@ var db;
  var path_to_process = "http://www.cybersoldier.com/app/"; 
  var uid = window.localStorage.getItem("user_id"); 
  var logedin_user_id = uid != null ? uid : 0;
- var gmc_regkeyvar = 0000;
+ var gmc_regkeyvar = 000;
  var apnregkeyen = 000;
 
  
@@ -117,9 +117,7 @@ $(function() {
 								//success
 								function (response) { 
 									
-									//alert(JSON.stringify(response));
 									var resp = JSON.parse(JSON.stringify(response));
-									//alert("Name : " +  resp.name);
 							
 									fbname = ""+resp.name;
 									fbid = ""+resp.id;
@@ -128,7 +126,7 @@ $(function() {
 									
 									/**
 									 * Get friends list.
-									
+									*/
 									facebookConnectPlugin.api( "/me/friends",[""],
 										//success
 										function (response) { 
@@ -153,7 +151,7 @@ $(function() {
 										}
 									);
 									
-									*/
+									
 							  
 								},
 								//fail
@@ -170,13 +168,9 @@ $(function() {
 							try{
 								pushNotification = window.plugins.pushNotification;
 						    	if (device.platform == 'android' || device.platform == 'Android') {
-									//$("#app-status-ul").append('<li>registering android</li>');
-						        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
+									pushNotification.register(pushSuccessHandler, pushErrorHandler, {"senderID":"305121912452","ecb":"onNotificationGCM"});		// required!
 								} else {
-									//Do some iphone magic
-									//$("#app-status-ul").append('<li>registering iOS</li>');
-						        	pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
-
+									pushNotification.register(pushSuccessHandler, pushErrorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
 						    	}
 						    }
 							catch(err) 
@@ -189,37 +183,11 @@ $(function() {
 					 
 					 },
 					 	//fail
-					function (response) { alert("Error first: " + JSON.stringify(response)) });
+					function (response) {
+						 alert("Error first: " + JSON.stringify(response))
+					});
 		                
 					
-					
-					/*FB.login(function(response) {
-						FB.api('/me', function(response) {
-							// alert('Good to see you, ' + response.name +
-							// '.');
-							fbname = response.name;
-							fbid = response.id;
-							doLogin(fbname, fbid, true);
-						});
-
-						FB.api('/me/friends', function(response) {
-							// Iterate through the array of friends object
-							// and create a checkbox for each one.
-								
-							var somestring = "";
-							var somestring2 = "";
-							for ( var i = 0; i < Math.min(response.data.length); i++) {
-								somestring2 += response.data[i].name + " " + response.data[i].id + "\n";
-								somestring += response.data[i].id;
-								if (i < Math.min(response.data.length) - 1)
-									somestring += ",";
-							}
-							window.localStorage.setItem("friends_csv", somestring);
-						});
-
-					}, {
-						scope : "email"
-					});*/
 				} catch (e) {
 					alert(e);
 				}
@@ -834,14 +802,10 @@ function doLogin(name, fbid) {
 	
 	var gcmregkeyen = ""
 	var apnregkeyen = "";
-	/*
-	if (device.platform == 'android' || device.platform == 'Android') {
-		gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
-	}
-	else{
-		apnregkeyen = window.localStorage.getItem("apnregkeyen") == null ? apn_regkeyvar : window.localStorage.getItem("apnregkeyen") ;
-	}
-	*/
+	
+	gcmregkeyen = window.localStorage.getItem("gcmregkeyen") == null ? gmc_regkeyvar : window.localStorage.getItem("gcmregkeyen") ;
+	apnregkeyen = window.localStorage.getItem("apnregkeyen") == null ? apn_regkeyvar : window.localStorage.getItem("apnregkeyen") ;
+	
 	var dataarr = {
 		mega_secret_code : mega_secret_code,
 		name : name,
