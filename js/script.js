@@ -108,11 +108,14 @@ $(function() {
 					
 					var loggedin = false;
 					facebookConnectPlugin.getLoginStatus(
-						function(response){"wokz: "+JSON.stringify(response)},
-						function(response){"wokz, not: "+JSON.stringify(response)}
+						function(response){
+							alert("wokz: "+JSON.stringify(response));
+						},
+						function(response){
+							alert("wokz, not: "+JSON.stringify(response));
+						}
 					);
 					
-					alert("fb login status");
 					facebookConnectPlugin.login( ["email"], 
 						//success
 					function (response) {
