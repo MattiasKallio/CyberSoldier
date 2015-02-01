@@ -36,6 +36,17 @@ $(function() {
 			try {				
 				var appId = "370101043065651";
                 facebookConnectPlugin.browserInit(appId);
+                
+                facebookConnectPlugin.logout(
+                	function(response){
+						loggedin = true;
+						alert("wokz: "+JSON.stringify(response));
+					},
+					function(response){
+						loggedin = true;
+						alert("wokz: "+JSON.stringify(response));
+					}
+				);
 
 			} catch (e) {
 				alert(e);
