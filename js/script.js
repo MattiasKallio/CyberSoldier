@@ -5,6 +5,7 @@ var last_is_fetched = false;
 var page_is_loading = false;
 var last_type_and_id = "";
 var db;
+var device;
 
  var fbid = ""; 
  var fbname = ""; 
