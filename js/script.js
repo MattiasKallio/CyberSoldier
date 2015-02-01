@@ -39,12 +39,10 @@ $(function() {
                 
                 facebookConnectPlugin.logout(
                 	function(response){
-						loggedin = true;
-						alert("wokz: "+JSON.stringify(response));
+						alert("logout: "+JSON.stringify(response));
 					},
 					function(response){
-						loggedin = true;
-						alert("wokz: "+JSON.stringify(response));
+						alert("logout fejl : "+JSON.stringify(response));
 					}
 				);
 
