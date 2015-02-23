@@ -9,6 +9,7 @@ var mega_secret_code = "0ed75fcaffd55c3326efccf12f3ae737";
 var db;
 var cuser_items = {};
 
+
 $(document).ready(function() {
 	
 	db = window.openDatabase("cybersoldier", "1.0", "CyberSoldier DB", 1000000);	
