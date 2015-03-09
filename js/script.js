@@ -43,7 +43,7 @@ $(function() {
                 facebookConnectPlugin.browserInit(appId);
 
 			} catch (e) {
-				alert(e);
+				alert("Fel 46: "+e);
 			}
 
 			/*
@@ -947,7 +947,7 @@ function onNotificationGCM(e) {
 	    	if ( e.regid.length > 0 ){
 				gmc_regkeyvar = e.regid;
 				window.localStorage.setItem("gcmregkeyen", gmc_regkeyvar);
-	            console.log("Regid " + gmc_regkeyvar);
+	            //console.log("Regid " + gmc_regkeyvar);
 	            //alert('registration id = '+gmc_regkeyvar);
 			}
 		break;
