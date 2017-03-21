@@ -38,24 +38,25 @@
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
 	<preference name="stay-in-webview" value="false" />
 
-    <!-- Plugins 
-		<gap:plugin name="org.apache.cordova.console" />
-		<gap:plugin name="org.apache.cordova.dialogs" />
-		<gap:plugin name="org.apache.cordova.device" />
-    	<gap:plugin name="org.apache.cordova.device-motion" />
-    	<gap:plugin name="org.apache.cordova.device-orientation" />
-    	-->
+   <plugin name="com.phonegap.plugins.facebookconnect" source="pgb" spec="0.8.0" />
+<plugin name="com.phonegap.plugins.pushplugin" source="pgb" spec="2.4.0" />
+<plugin name="org.apache.cordova.console" source="pgb" spec="0.2.11" />
+<plugin name="org.apache.cordova.device" source="pgb" spec="0.2.12" />
+<plugin name="org.apache.cordova.device-motion" source="pgb" spec="0.2.10" />
+<plugin name="org.apache.cordova.device-orientation" source="pgb" spec="0.3.9" />
+<plugin name="org.apache.cordova.dialogs" source="pgb" spec="0.2.10" />
+<plugin name="org.apache.cordova.inappbrowser" source="pgb" spec="0.5.2" />
     <!-- Core plugins -->
     
     <plugin spec="https://github.com/apache/cordova-plugin-device" source="git" />
 	<plugin spec="https://github.com/apache/cordova-plugin-network-information" source="git" />
 	<plugin spec="https://github.com/apache/cordova-plugin-geolocation" source="git" />
-	<plugin spec="https://github.com/Wizcorp/phonegap-facebook-plugin/" source="git" />
     
-    <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
+    <gap:plugin name="com.phonegap.plugins.facebookconnect">
         <param name="APP_ID" value="370101043065651" />
         <param name="APP_NAME" value="CyberSoldier" />
 	</gap:plugin>
+	
 	<gap:plugin name="com.phonegap.plugins.pushplugin" />
 	<gap:plugin name="org.apache.cordova.inappbrowser" />
 	
