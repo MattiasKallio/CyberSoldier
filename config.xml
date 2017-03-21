@@ -50,6 +50,7 @@
     <plugin spec="https://github.com/apache/cordova-plugin-device" source="git" />
 	<plugin spec="https://github.com/apache/cordova-plugin-network-information" source="git" />
 	<plugin spec="https://github.com/apache/cordova-plugin-geolocation" source="git" />
+	<plugin spec="https://github.com/phonegap-build/FacebookConnect" source="git" />
     
     <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.8.0">
         <param name="APP_ID" value="370101043065651" />
